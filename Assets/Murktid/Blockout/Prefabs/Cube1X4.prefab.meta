@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/AddressableAssetsData/link.xml.meta
+guid: 4b7ed6ff80b1135488ca871801528baa
+TextScriptImporter:
+========
 guid: 138fd1be884730e4db8261b3a182bb14
 PrefabImporter:
+>>>>>>>> a5abef31e47fde04cfa73f216a770907de165ada:Assets/Murktid/Blockout/Prefabs/Cube1X4.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
