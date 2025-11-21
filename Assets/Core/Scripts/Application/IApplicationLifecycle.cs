@@ -1,4 +1,4 @@
-namespace AutoZombie {
+namespace Murktid {
     public interface IApplicationLifecycle {
         public void Initialize();
         public void Tick();

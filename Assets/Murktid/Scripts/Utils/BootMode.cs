@@ -2,8 +2,8 @@ using System;
 using UnityEditor;
 using UnityEngine;
 
-namespace AutoZombie {
-
+namespace Murktid {
+#if UNITY_EDITOR
     public enum BootType {
         FullBoot,
         SceneBoot,
@@ -26,23 +26,24 @@ namespace AutoZombie {
 
         private void OnEnable() {
             if(!EditorPrefs.HasKey(BOOT_TYPE_KEY)) {
-                throw new NotImplementedException();
+                BootType = BootType.UnityDefault;
             }
         }
 
-        [MenuItem("AutoZombie/&Boot/&Full Boot...", false)]
+        [MenuItem("Murktid/&Boot/&Full Boot...", false)]
         private static void SetFullBoot() {
             BootType = BootType.FullBoot;
         }
 
-        [MenuItem("AutoZombie/&Boot/&Scene Boot...", false)]
+        [MenuItem("Murktid/&Boot/&Scene Boot...", false)]
         private static void SetSceneBoot() {
             BootType = BootType.SceneBoot;
         }
 
-        [MenuItem("AutoZombie/&Boot/&Unity Default No Boot...", false)]
+        [MenuItem("Murktid/&Boot/&Unity Default No Boot...", false)]
         private static void SetDefaultBoot() {
             BootType = BootType.UnityDefault;
         }
     }
+#endif
 }

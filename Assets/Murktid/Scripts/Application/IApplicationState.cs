@@ -1,4 +1,4 @@
-namespace AutoZombie {
+namespace Murktid {
     public enum ApplicationState {
         Invalid,
         Splash,

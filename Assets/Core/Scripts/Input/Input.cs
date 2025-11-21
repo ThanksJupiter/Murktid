@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace AutoZombie {
+namespace Murktid {
 
     public enum InputMode {
         None = 0,

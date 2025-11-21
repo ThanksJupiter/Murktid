@@ -3,15 +3,20 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace AutoZombie {
+namespace Murktid {
 
     public class EntryPoint : MonoBehaviour {
 
+        public AssetReferenceT<InitializerSettingsFile> initializerSettingsFile;
+
         [RuntimeInitializeOnLoadMethod]
         private static void Initialize() {
+            return;
+#if UNITY_EDITOR
             if(BootMode.BootType == BootType.UnityDefault) {
                 return;
             }
+#endif
 
             EntryPoint entryPoint = FindFirstObjectByType<EntryPoint>(FindObjectsInactive.Include);
             if(entryPoint == null) {

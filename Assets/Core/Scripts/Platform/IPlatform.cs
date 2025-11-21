@@ -1,6 +1,6 @@
 using System.Collections;
 
-namespace AutoZombie {
+namespace Murktid {
 
     public enum DevicePlatform {
         Desktop,
