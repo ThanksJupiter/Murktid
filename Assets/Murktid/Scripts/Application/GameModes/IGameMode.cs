@@ -4,7 +4,7 @@ namespace Murktid {
 
     public enum GameMode {
         Invalid,
-        AutoZombie
+        Murktid
     }
 
     public interface IGameMode {

@@ -7,5 +7,6 @@ namespace Murktid {
     public class BootstrapSettings : ScriptableObject {
         public AssetReference menuScene;
         public GameModeSettings gameModeSettings;
+        public AssetReferenceT<MenuPrefabsContainer> menuPrefabsContainer;
     }
 }

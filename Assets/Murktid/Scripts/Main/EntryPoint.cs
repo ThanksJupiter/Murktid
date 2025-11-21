@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -9,15 +10,23 @@ namespace Murktid {
 
         public AssetReferenceT<InitializerSettingsFile> initializerSettingsFile;
 
+        // Globals
+        private IPlatform platform;
+        private ApplicationData applicationData;
+        private Dictionary<ApplicationState, IApplicationState> applicationStates;
+
+        // Settings
+        private InitializerSettingsFile initializerSettings;
+        private BootstrapSettings bootstrapSettings;
+        private MenuApplicationStateData menuApplicationStateData;
+
         [RuntimeInitializeOnLoadMethod]
         private static void Initialize() {
-            return;
 #if UNITY_EDITOR
             if(BootMode.BootType == BootType.UnityDefault) {
                 return;
             }
 #endif
-
             EntryPoint entryPoint = FindFirstObjectByType<EntryPoint>(FindObjectsInactive.Include);
             if(entryPoint == null) {
                 AsyncOperationHandle<GameObject> handler = Addressables.InstantiateAsync("Initializer");
@@ -38,7 +47,47 @@ namespace Murktid {
                 yield return null;
             }
 
+            applicationData = new ApplicationData {
+                platformSelector = new PlatformSelector(PlatformSelector.GetDevicePlatform(), PlatformSelector.GetPlatformDefaultInputMode()),
+            };
+            applicationData.ChangeApplicationState(activeSceneReference.applicationState);
 
+            AsyncOperationHandle<InitializerSettingsFile> initSettingsHandle = Addressables.LoadAssetAsync<InitializerSettingsFile>(initializerSettingsFile);
+            yield return new WaitUntil(() => initSettingsHandle.IsDone);
+            initializerSettings = initSettingsHandle.Result;
+
+            yield return CreatePlatformFactory();
+
+            AsyncOperationHandle<BootstrapSettings> bootstrapSettingsHandle = Addressables.LoadAssetAsync<BootstrapSettings>(initializerSettings.bootstrapAssetReference);
+            yield return new WaitUntil(() => bootstrapSettingsHandle.IsDone);
+            bootstrapSettings = bootstrapSettingsHandle.Result;
+
+            menuApplicationStateData = new MenuApplicationStateData();
+            CreateApplicationStates();
+        }
+
+        private IEnumerator CreatePlatformFactory() {
+            platform = null;
+            DevicePlatform devicePlatform = applicationData.platformSelector.devicePlatform;
+            platform = devicePlatform switch {
+                DevicePlatform.Desktop => new DesktopPlatform(initializerSettings.desktopPlatformSettings),
+                //DevicePlatform.Android => new AndroidPlatform(initializerSettings.androidPlatformSettings),
+                _ => platform
+            };
+
+            if(!Equals(applicationData.platformSelector.devicePlatform, DevicePlatform.Desktop) &&
+                PlatformSelector.GetPlatformDefaultInputMode() == InputMode.Desktop) {
+                platform = new DesktopPlatform(initializerSettings.desktopPlatformSettings);
+            }
+            yield return platform?.Initialize(applicationData);
+        }
+
+        private void CreateApplicationStates() {
+            applicationStates = new Dictionary<ApplicationState, IApplicationState> {
+                //[ApplicationState.Splash] = new SplashApplicationState(bootstrapSettings, applicationData),
+                [ApplicationState.MainMenu] = new MainMenuApplicationState(applicationData, menuApplicationStateData, bootstrapSettings),
+                [ApplicationState.GameMode] = new GameModeApplicationState(applicationData, bootstrapSettings.gameModeSettings),
+            };
         }
     }
 }

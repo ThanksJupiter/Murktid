@@ -3,11 +3,11 @@ using UnityEngine.AddressableAssets;
 
 namespace Murktid {
 
-    //[CreateAssetMenu("Murktid/Settings/General/InitializerSettingsFile", fileName = "InitializerSettingsFile")]
+    [CreateAssetMenu(menuName = "Murktid/Settings/General/InitializerSettingsFile", fileName = "InitializerSettingsFile")]
     public class InitializerSettingsFile : ScriptableObject {
         public AssetReferenceT<DesktopPlatformSettings> desktopPlatformSettings;
+        //public AssetReferenceT<AndroidPlatformSettings> androidPlatformSettings;
         //public AssetReferenceT<>
-        //public AssetReferenceT<>
-        //public AssetReferenceT<>
+        public AssetReferenceT<BootstrapSettings> bootstrapAssetReference;
     }
 }
