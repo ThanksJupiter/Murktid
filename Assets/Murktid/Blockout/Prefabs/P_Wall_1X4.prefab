@@ -51,10 +51,10 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: e67a3b83a34e76a409dc397ce11d4ddc, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 84d307a3c4864a741ac7e99e5635a9ee, type: 2}
+      objectReference: {fileID: 2100000, guid: 21ca8723c11d2d34abf1e9e595b0942a, type: 2}
     - target: {fileID: 919132149155446097, guid: e67a3b83a34e76a409dc397ce11d4ddc, type: 3}
       propertyPath: m_Name
-      value: Wall_1X4 (1)
+      value: P_Wall_1X4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
