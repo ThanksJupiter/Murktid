@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e33fc83f2f9abd44db7e37e1e425d52c, type: 3}
+  m_Name: DesktopInputSettings
+  m_EditorClassIdentifier: Assembly-CSharp::Murktid.DesktopInputSettings
+  inputMode: 0
+  debugMenu:
+    m_Name: Debug Menu
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 522dd946-63c2-4ee0-8dad-322c241784be
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  movementAction:
+    m_Name: Movement
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 47f6301b-d3b7-4867-bfbb-aed399e99353
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  lookAction:
+    m_Name: Look
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 014615b5-ec31-4199-a94d-99ff8a29f36d
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  primaryAction:
+    m_Name: Primary
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: f7127dd7-4448-4fd0-b415-62b6c0a72c41
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: fc20adc8-715f-4d07-bd32-ee687926fc2c
+      m_Path: <Mouse>/leftButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Primary
+      m_Flags: 0
+    m_Flags: 0
+  secondaryAction:
+    m_Name: Secondary
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: c59a000d-54dd-4912-90ad-3259df8da2a1
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 88dc508c-4e63-496f-a6e0-b878a262359b
+      m_Path: <Mouse>/rightButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Secondary
+      m_Flags: 0
+    m_Flags: 0

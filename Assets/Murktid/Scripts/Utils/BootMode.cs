@@ -20,7 +20,7 @@ namespace Murktid {
             get => (BootType)EditorPrefs.GetInt(BOOT_TYPE_KEY);
             private set {
                 EditorPrefs.SetInt(BOOT_TYPE_KEY, (int)value);
-                Debug.Log($"$Boot mode {BootType} set");
+                Debug.Log($"Boot mode {BootType} set");
             }
         }
 
