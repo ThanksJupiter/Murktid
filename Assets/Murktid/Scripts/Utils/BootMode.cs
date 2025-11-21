@@ -2,7 +2,7 @@ using System;
 using UnityEditor;
 using UnityEngine;
 
-namespace AutoZombie {
+namespace Murktid {
 
     public enum BootType {
         FullBoot,

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace AutoZombie {
+namespace Murktid {
 
     public class PlatformSelector {
         public readonly DevicePlatform devicePlatform;
