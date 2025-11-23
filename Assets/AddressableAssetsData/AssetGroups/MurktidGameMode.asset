@@ -10,18 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: BaseScenes
+  m_Name: MurktidGameMode
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
-  m_GroupName: BaseScenes
-  m_GUID: b0a739858d5cc314c829d8dd3c59fc31
+  m_GroupName: MurktidGameMode
+  m_GUID: 9b6756e8e7d6fd6468953f9c80703a74
   m_SerializeEntries:
-  - m_GUID: 6370aa5576e1dd14bb84fb57086eb377
-    m_Address: MainMenu
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b4e7140678e8b994f85c6aed01a90074
-    m_Address: Initializer
+  - m_GUID: ac83af388a6d849498a393b9e2a23cf1
+    m_Address: Assets/Murktid/MurktidGameMode
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -29,5 +24,5 @@ MonoBehaviour:
   m_Settings: {fileID: 11400000, guid: 65c49f4d307841c4b8dd7249f662d5e9, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 82c1c1cdfc6756b49ac0d5d528035824, type: 2}
-    - {fileID: 11400000, guid: 0bcd572e5dcaff84d991bae14cf05d48, type: 2}
+    - {fileID: 11400000, guid: 2ea01b47b18ba514892ed3ed94452b4a, type: 2}
+    - {fileID: 11400000, guid: ed2c2b637560ce641ae804c24c62cea1, type: 2}

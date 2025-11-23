@@ -9,17 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 092683658da483842a8b4c9e6591a1c6, type: 3}
-  m_Name: InitializerSettingsFile
-  m_EditorClassIdentifier: Assembly-CSharp::Murktid.InitializerSettingsFile
-  desktopPlatformSettings:
-    m_AssetGUID: bed6c40445e818a4cbd321ea47b2f0ce
+  m_Script: {fileID: 11500000, guid: c0c15e959f1f3744cbb15ba697140ebb, type: 3}
+  m_Name: BootstrapSettings
+  m_EditorClassIdentifier: Assembly-CSharp::Murktid.BootstrapSettings
+  menuScene:
+    m_AssetGUID: 6370aa5576e1dd14bb84fb57086eb377
     m_SubObjectName: 
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
-  bootstrapAssetReference:
-    m_AssetGUID: d5cf8e054d4a02743ba781c49b5980b2
+  gameModeSettings: {fileID: 11400000, guid: 0ced1167861040a41881ed67069e29cc, type: 2}
+  menuPrefabsContainer:
+    m_AssetGUID: a418ed0fed598894d9d263f677d5afeb
     m_SubObjectName: 
     m_SubObjectType: 
     m_SubObjectGUID: 

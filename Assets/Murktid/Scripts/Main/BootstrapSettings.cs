@@ -3,7 +3,7 @@ using UnityEngine.AddressableAssets;
 
 namespace Murktid {
 
-    [CreateAssetMenu(fileName = "BootstrapSettings", menuName = "Scriptable Objects/BootstrapSettings")]
+    [CreateAssetMenu(fileName = "BootstrapSettings", menuName = "Murktid/Settings/General/BootstrapSettings")]
     public class BootstrapSettings : ScriptableObject {
         public AssetReference menuScene;
         public GameModeSettings gameModeSettings;

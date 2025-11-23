@@ -64,6 +64,8 @@ namespace Murktid {
 
             menuApplicationStateData = new MenuApplicationStateData();
             CreateApplicationStates();
+            ApplicationStateRunner applicationStateRunner = gameObject.AddComponent<ApplicationStateRunner>();
+            applicationStateRunner.Initialize(applicationStates, applicationData, platform);
         }
 
         private IEnumerator CreatePlatformFactory() {
@@ -84,7 +86,7 @@ namespace Murktid {
 
         private void CreateApplicationStates() {
             applicationStates = new Dictionary<ApplicationState, IApplicationState> {
-                //[ApplicationState.Splash] = new SplashApplicationState(bootstrapSettings, applicationData),
+                [ApplicationState.Splash] = new SplashApplicationState(bootstrapSettings, applicationData),
                 [ApplicationState.MainMenu] = new MainMenuApplicationState(applicationData, menuApplicationStateData, bootstrapSettings),
                 [ApplicationState.GameMode] = new GameModeApplicationState(applicationData, bootstrapSettings.gameModeSettings),
             };

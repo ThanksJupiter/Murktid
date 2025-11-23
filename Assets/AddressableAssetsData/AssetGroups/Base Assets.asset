@@ -20,6 +20,21 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a3e57721bef265149bdb7696368e8868
+    m_Address: Assets/Murktid/Prefabs/MainMenuCanvas.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a418ed0fed598894d9d263f677d5afeb
+    m_Address: Assets/Core/Settings/MainMenuPrefabsContainer.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d5cf8e054d4a02743ba781c49b5980b2
+    m_Address: BootstrapSettings
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 65c49f4d307841c4b8dd7249f662d5e9, type: 2}
   m_SchemaSet:

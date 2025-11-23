@@ -63,7 +63,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -726,6 +726,7 @@ GameObject:
   - component: {fileID: 8756589357423661791}
   - component: {fileID: 1888962613274691928}
   - component: {fileID: 4816411341253776631}
+  - component: {fileID: 8148038227280396419}
   m_Layer: 5
   m_Name: MainMenuCanvas
   m_TagString: Untagged
@@ -816,6 +817,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &8148038227280396419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4793412908375523184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47fb57a01b41b8947aee6687d64ec443, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Murktid.MainMenuReference
+  playButton: {fileID: 8724726135095292721}
+  optionsButton: {fileID: 6344347476742723402}
+  exitButton: {fileID: 2897884625184354828}
 --- !u!1 &5686782941635885630
 GameObject:
   m_ObjectHideFlags: 0
