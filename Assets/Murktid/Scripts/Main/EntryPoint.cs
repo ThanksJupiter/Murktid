@@ -22,6 +22,7 @@ namespace Murktid {
 
         [RuntimeInitializeOnLoadMethod]
         private static void Initialize() {
+            return;
 #if UNITY_EDITOR
             if(BootMode.BootType == BootType.UnityDefault) {
                 return;
