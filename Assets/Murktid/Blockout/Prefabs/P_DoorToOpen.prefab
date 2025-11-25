@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 8656451632062177660}
   - component: {fileID: 4760601988043226428}
   - component: {fileID: 8729232679717853638}
+  - component: {fileID: 7504479100681643578}
   m_Layer: 0
-  m_Name: P_DoorOpeing
+  m_Name: P_DoorToOpen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -89,3 +90,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7504479100681643578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8434941827623457668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98823913762f2f84f9ce71622020a7c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DoorBehaviour
+  _isDoorOpen: 0
+  _doorSpeed: 3
