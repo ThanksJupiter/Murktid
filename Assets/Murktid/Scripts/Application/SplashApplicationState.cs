@@ -24,13 +24,13 @@ namespace Murktid {
             applicationData.ChangeApplicationState(ApplicationState.MainMenu);
             return ApplicationState.Splash;
 
-            Keyboard keyboard = Keyboard.current;
+            /*Keyboard keyboard = Keyboard.current;
             if(keyboard.anyKey.wasPressedThisFrame) {
                 Debug.Log($"any key pressed");
                 applicationData.ChangeApplicationState(ApplicationState.MainMenu);
             }
 
-            return ApplicationState.Splash;
+            return ApplicationState.Splash;*/
         }
         public void LateTick() {
 

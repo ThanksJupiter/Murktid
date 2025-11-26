@@ -4,8 +4,10 @@ namespace Murktid {
 
     public class ApplicationData {
         public PlatformSelector platformSelector;
+        public CursorHandler cursorHandler = new();
         public ApplicationState ActiveApplicationState { get; private set; }
         public GameMode ActiveGameMode { get; private set; }
+        public IInput Input { get; private set; }
 
         public void ChangeApplicationState(ApplicationState applicationState) {
             ActiveApplicationState = applicationState;
@@ -17,6 +19,10 @@ namespace Murktid {
             }
 
             ActiveGameMode = gameMode;
+        }
+
+        public void ChangeInput(IInput input) {
+            Input = input;
         }
     }
 }

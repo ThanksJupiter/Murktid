@@ -8,9 +8,10 @@ namespace Murktid {
     }
 
     public interface IPlatform {
-        IEnumerator Initialize(object applicationData);
+        IEnumerator Initialize(ApplicationData applicationData);
         IApplicationLifecycle InputHandler();
         void Tick();
+        void LateTick();
         void Dispose();
         void OnApplicationQuit();
     }

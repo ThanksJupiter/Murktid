@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2afa81c6e1741b74992d760bbfc4c244, type: 3}
+  m_Name: MurktidPlayerData
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerData
+  playerReferencePrefab: {fileID: 154935534918106331, guid: ca48815d5b31f21479be24db1db8932d, type: 3}
+  playerCameraPrefab: {fileID: 5862843785441496230, guid: 79723fc41e4554548acf337b241f1b1d, type: 3}

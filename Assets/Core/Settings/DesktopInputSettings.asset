@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e33fc83f2f9abd44db7e37e1e425d52c, type: 3}
   m_Name: DesktopInputSettings
   m_EditorClassIdentifier: Assembly-CSharp::Murktid.DesktopInputSettings
-  inputMode: 0
+  inputMode: 1
   debugMenu:
     m_Name: Debug Menu
     m_Type: 0
@@ -29,7 +29,47 @@ MonoBehaviour:
     m_Id: 47f6301b-d3b7-4867-bfbb-aed399e99353
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 2D Vector
+      m_Id: f704147b-446f-4b28-91d9-ec449477a94b
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Movement
+      m_Flags: 4
+    - m_Name: up
+      m_Id: 96da7169-3dcc-4111-b30a-0ce6965857b1
+      m_Path: <Keyboard>/w
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Movement
+      m_Flags: 8
+    - m_Name: down
+      m_Id: 946b8dee-2899-40ec-9849-fdc37c7a6011
+      m_Path: <Keyboard>/s
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Movement
+      m_Flags: 8
+    - m_Name: left
+      m_Id: c63efa48-19dd-405e-a50c-b74fe9691df5
+      m_Path: <Keyboard>/a
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Movement
+      m_Flags: 8
+    - m_Name: right
+      m_Id: 117a9773-4b5c-4c62-b75b-c80524ba8479
+      m_Path: <Keyboard>/d
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Movement
+      m_Flags: 8
     m_Flags: 0
   lookAction:
     m_Name: Look
@@ -38,12 +78,20 @@ MonoBehaviour:
     m_Id: 014615b5-ec31-4199-a94d-99ff8a29f36d
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 6154e0fb-d0ea-4870-bbdd-3b4defeeead0
+      m_Path: <Mouse>/delta
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Look
+      m_Flags: 0
     m_Flags: 0
   primaryAction:
     m_Name: Primary
-    m_Type: 0
-    m_ExpectedControlType: 
+    m_Type: 1
+    m_ExpectedControlType: Button
     m_Id: f7127dd7-4448-4fd0-b415-62b6c0a72c41
     m_Processors: 
     m_Interactions: 
@@ -59,8 +107,8 @@ MonoBehaviour:
     m_Flags: 0
   secondaryAction:
     m_Name: Secondary
-    m_Type: 0
-    m_ExpectedControlType: 
+    m_Type: 1
+    m_ExpectedControlType: Button
     m_Id: c59a000d-54dd-4912-90ad-3259df8da2a1
     m_Processors: 
     m_Interactions: 

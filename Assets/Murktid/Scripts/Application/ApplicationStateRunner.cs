@@ -52,6 +52,7 @@ namespace Murktid {
             }
 
             currentState.LateTick();
+            platform.LateTick();
         }
 
         private void ChangeApplicationState(ApplicationState newApplicationState) {

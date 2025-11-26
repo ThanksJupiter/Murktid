@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Murktid {
 
@@ -14,7 +15,7 @@ namespace Murktid {
 
         public void Initialize() {
             if(mainMenuReference == null) {
-                mainMenuReference = GameObject.Instantiate(menuPrefabsContainer.mainMenuReference);
+                mainMenuReference = Object.Instantiate(menuPrefabsContainer.mainMenuReference);
             }
 
             mainMenuReference.exitButton.onClick.AddListener(Application.Quit);
@@ -23,6 +24,7 @@ namespace Murktid {
         }
 
         public void Tick() { }
-        public void Dispose() { }
+        public void LateTick() { }
+         public void Dispose() { }
     }
 }

@@ -9,12 +9,13 @@ namespace Murktid {
         private readonly AssetReference assetReference;
 
         private DesktopPlatformSettings desktopPlatformSettings;
+        private IApplicationLifecycle input;
 
         public DesktopPlatform(AssetReference assetReference) {
             this.assetReference = assetReference;
         }
 
-        public IEnumerator Initialize(object applicationData) {
+        public IEnumerator Initialize(ApplicationData applicationData) {
             if(platform != null) {
                 yield return platform.Initialize(applicationData);
             }
@@ -28,11 +29,19 @@ namespace Murktid {
         public IApplicationLifecycle InputHandler() {
             DesktopInput inputHandler = new DesktopInput((DesktopInputSettings)desktopPlatformSettings.inputSettings);
             inputHandler.Initialize();
+            input = inputHandler;
             return inputHandler;
         }
 
-        public void Tick() { }
-        public void Dispose() { }
+        public void Tick() {
+            input?.Tick();
+        }
+        public void LateTick() {
+            input?.LateTick();
+        }
+        public void Dispose() {
+            input?.Dispose();
+        }
         public void OnApplicationQuit() { }
     }
 }

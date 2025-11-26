@@ -12,6 +12,7 @@ namespace Murktid {
 
         // Globals
         private IPlatform platform;
+        private InputSettings input;
         private ApplicationData applicationData;
         private Dictionary<ApplicationState, IApplicationState> applicationStates;
 
@@ -22,7 +23,6 @@ namespace Murktid {
 
         [RuntimeInitializeOnLoadMethod]
         private static void Initialize() {
-            return;
 #if UNITY_EDITOR
             if(BootMode.BootType == BootType.UnityDefault) {
                 return;
@@ -58,6 +58,8 @@ namespace Murktid {
             initializerSettings = initSettingsHandle.Result;
 
             yield return CreatePlatformFactory();
+
+            applicationData.ChangeInput((IInput)platform.InputHandler());
 
             AsyncOperationHandle<BootstrapSettings> bootstrapSettingsHandle = Addressables.LoadAssetAsync<BootstrapSettings>(initializerSettings.bootstrapAssetReference);
             yield return new WaitUntil(() => bootstrapSettingsHandle.IsDone);

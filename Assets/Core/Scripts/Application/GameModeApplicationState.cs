@@ -19,7 +19,7 @@ namespace Murktid {
 
         public void EnterApplicationState() {
             if(applicationData.ActiveGameMode == GameMode.Invalid) {
-                SceneReference sceneReference = Object.FindObjectOfType<SceneReference>();
+                SceneReference sceneReference = Object.FindFirstObjectByType<SceneReference>();
                 if(gameModeSettings.gameModeData.Any(g => g.gameMode == sceneReference.gameMode)) {
                     applicationData.ChangeGameModeState(sceneReference.gameMode);
                 }

@@ -15,8 +15,8 @@ MonoBehaviour:
   m_GroupName: MurktidGameMode
   m_GUID: 9b6756e8e7d6fd6468953f9c80703a74
   m_SerializeEntries:
-  - m_GUID: ac83af388a6d849498a393b9e2a23cf1
-    m_Address: Assets/Murktid/MurktidGameMode
+  - m_GUID: 5f490801389405443867c32e2c3bfd4b
+    m_Address: Assets/Murktid/GameModes/MurktidGameMode
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
