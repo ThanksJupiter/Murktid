@@ -13,8 +13,8 @@ namespace Murktid {
         public bool IsGameModeInitialized { get; private set; }
         public void EnterGameMode() {
             MurktidGameReference gameModeReference = Object.FindFirstObjectByType<MurktidGameReference>();
-            PlayerReference playerReference = Object.Instantiate(gameModeReference.gameData.playerData.playerReferencePrefab);
-            PlayerCamera playerCamera = Object.Instantiate(gameModeReference.gameData.playerData.playerCameraPrefab);
+            PlayerReference playerReference = Object.Instantiate(gameModeReference.gameData.playerData.playerReferencePrefab, gameModeReference.playerSpawnTransform.position, gameModeReference.playerSpawnTransform.rotation);
+            PlayerCamera playerCamera = Object.Instantiate(gameModeReference.gameData.playerData.playerCameraPrefab, gameModeReference.playerSpawnTransform.position, gameModeReference.playerSpawnTransform.rotation);
             playerMachine = new PlayerMachine(playerReference, applicationData);
             playerMachine.context.input = applicationData.Input;
             playerMachine.context.camera = playerCamera;

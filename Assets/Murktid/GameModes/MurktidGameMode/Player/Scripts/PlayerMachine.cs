@@ -32,14 +32,14 @@ namespace Murktid {
         }
 
         private void UpdateCameraPositionAndRotation() {
-            context.camera.TargetVerticalAngle -= (context.input.Look.value.y * context.camera.rotationSpeed);
+            context.camera.TargetVerticalAngle -= (context.input.Look.value.y * context.settings.rotationSpeed);
             context.camera.TargetVerticalAngle = Mathf.Clamp(context.camera.TargetVerticalAngle,
-                context.camera.minVerticalAngle, context.camera.maxVerticalAngle);
+                context.settings.minVerticalLookAngle, context.settings.maxVerticalLookAngle);
             Quaternion verticalRotation = Quaternion.Euler(context.camera.TargetVerticalAngle, 0f, 0f);
 
             Quaternion rotationFromInput = Quaternion.Euler(context.motor.CharacterUp *
                 (context.input.Look.value.x *
-                    context.camera.rotationSpeed));
+                    context.settings.rotationSpeed));
             context.camera.PlanarDirection = rotationFromInput * context.camera.PlanarDirection;
             context.camera.PlanarDirection = Vector3.Cross(context.motor.CharacterUp,
                 Vector3.Cross(context.camera.PlanarDirection, context.motor.CharacterUp));
@@ -51,8 +51,8 @@ namespace Murktid {
             context.camera.transform.rotation = targetRotation;
 
             context.camera.transform.position = Vector3.Lerp(context.camera.transform.position,
-                context.transform.position + Vector3.up * context.camera.cameraHeight,
-                1f - Mathf.Exp(-context.camera.followSharpness * Time.deltaTime));
+                context.transform.position + Vector3.up * context.settings.cameraHeight,
+                1f - Mathf.Exp(-context.settings.cameraFollowSharpness * Time.deltaTime));
         }
 
         public void UpdateRotation(ref Quaternion currentRotation, float deltaTime) {
@@ -63,7 +63,7 @@ namespace Murktid {
 
             Quaternion rotationFromInput = Quaternion.Euler(context.motor.CharacterUp *
                 (context.input.Look.value.x *
-                    context.camera.rotationSpeed));
+                    context.settings.rotationSpeed));
             context.camera.PlanarDirection = rotationFromInput * context.camera.PlanarDirection;
             context.camera.PlanarDirection = Vector3.Cross(context.motor.CharacterUp,
                 Vector3.Cross(context.camera.PlanarDirection, context.motor.CharacterUp));

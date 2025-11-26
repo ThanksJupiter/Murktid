@@ -153,7 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Murktid.PlayerCamera
   camera: {fileID: 8760678640079704250}
   cameraHeight: 1.645
-  rotationSpeed: 0.25
+  rotationSpeed: 0.15
   minVerticalAngle: -85
   maxVerticalAngle: 85
   followSharpness: 1000

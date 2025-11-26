@@ -205,7 +205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Murktid.PlayerReference
   context:
     motor: {fileID: 5909914946943697484}
-    camera: {fileID: 1150124084817926422}
+    camera: {fileID: 0}
     transform: {fileID: 63668025682278971}
     settings: {fileID: 11400000, guid: 51c806197badd08409060abb058ff003, type: 2}
 --- !u!54 &5740912720274539414
