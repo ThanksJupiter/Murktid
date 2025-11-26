@@ -1,4 +1,3 @@
-/*
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,7 +28,7 @@ namespace Murktid {
         }
 
         public virtual void Setup_Internal(AbilityComponent owningAbilityComponent) {
-            Owner = owningAbilityComponent.transform;
+            //Owner = owningAbilityComponent.transform;
             OwningAbilityComponent = owningAbilityComponent;
             Setup();
         }
@@ -76,4 +75,3 @@ namespace Murktid {
         protected virtual void OnDrawGizmosSelected() {}
     }
 }
-*/
