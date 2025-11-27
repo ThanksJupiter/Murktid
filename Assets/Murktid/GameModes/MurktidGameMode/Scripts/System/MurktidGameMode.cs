@@ -33,8 +33,12 @@ namespace Murktid {
         }
 
         private void InitializeDefaultStateMachine(MurktidGameReference gameModeReference) {
-            PlayerReference playerReference = Object.Instantiate(gameModeReference.gameData.playerData.playerReferencePrefab, gameModeReference.playerSpawnTransform.position, gameModeReference.playerSpawnTransform.rotation);
-            PlayerCameraReference playerCameraReference = Object.Instantiate(gameModeReference.gameData.playerData.playerCameraReferencePrefab, gameModeReference.playerSpawnTransform.position, gameModeReference.playerSpawnTransform.rotation);
+
+            Vector3 spawnPosition = gameModeReference.GetSpawnPosition();
+            Quaternion spawnRotation = gameModeReference.GetSpawnRotation();
+
+            PlayerReference playerReference = Object.Instantiate(gameModeReference.gameData.playerData.playerReferencePrefab, spawnPosition, spawnRotation);
+            PlayerCameraReference playerCameraReference = Object.Instantiate(gameModeReference.gameData.playerData.playerCameraReferencePrefab, spawnPosition, spawnRotation);
 
             PlayerMachine playerMachine = new(playerReference.context) {
                 Context = {
@@ -48,8 +52,12 @@ namespace Murktid {
         }
 
         private void InitializeAbilityStateMachine(MurktidGameReference gameModeReference) {
-            PlayerReference playerReference = Object.Instantiate(gameModeReference.gameData.playerData.playerReferencePrefab, gameModeReference.playerSpawnTransform.position, gameModeReference.playerSpawnTransform.rotation);
-            PlayerCameraReference playerCameraReference = Object.Instantiate(gameModeReference.gameData.playerData.playerCameraReferencePrefab, gameModeReference.playerSpawnTransform.position, gameModeReference.playerSpawnTransform.rotation);
+
+            Vector3 spawnPosition = gameModeReference.GetSpawnPosition();
+            Quaternion spawnRotation = gameModeReference.GetSpawnRotation();
+
+            PlayerReference playerReference = Object.Instantiate(gameModeReference.gameData.playerData.playerReferencePrefab, spawnPosition, spawnRotation);
+            PlayerCameraReference playerCameraReference = Object.Instantiate(gameModeReference.gameData.playerData.playerCameraReferencePrefab, spawnPosition, spawnRotation);
 
             PlayerController playerController = new(playerReference.context) {
                 Context = {
