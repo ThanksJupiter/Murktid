@@ -127,6 +127,51 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EquipPrimaryWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""2b9a3022-f1f3-4bf1-92b5-778bb903ef7c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EquipSecondaryWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""404adfed-d38f-4c3e-8728-5e7780b1d457"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""61bb23b6-ab68-4bad-bada-e17efc90b99d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Sprint"",
+                    ""type"": ""Button"",
+                    ""id"": ""748e668d-6a4b-435a-b8f6-85f39cb0682e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""2d511afa-95d2-416d-9f23-8b7f3f0cb556"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -217,6 +262,61 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""SecondaryAction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d9081157-8c30-47de-a8b7-f10842f041c6"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EquipPrimaryWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""be0e0fa0-5fa6-4267-8e8e-d139e0a4dd25"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EquipSecondaryWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""47d1f310-cbe0-4219-bc1d-19ad894d02ec"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""25572d41-f419-4242-a434-1b7a2e007395"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8751f68a-9608-426e-b0f5-779f0b73841c"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -229,6 +329,11 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Character_Look = m_Character.FindAction("Look", throwIfNotFound: true);
         m_Character_PrimaryAction = m_Character.FindAction("PrimaryAction", throwIfNotFound: true);
         m_Character_SecondaryAction = m_Character.FindAction("SecondaryAction", throwIfNotFound: true);
+        m_Character_EquipPrimaryWeapon = m_Character.FindAction("EquipPrimaryWeapon", throwIfNotFound: true);
+        m_Character_EquipSecondaryWeapon = m_Character.FindAction("EquipSecondaryWeapon", throwIfNotFound: true);
+        m_Character_SwitchWeapon = m_Character.FindAction("SwitchWeapon", throwIfNotFound: true);
+        m_Character_Sprint = m_Character.FindAction("Sprint", throwIfNotFound: true);
+        m_Character_Jump = m_Character.FindAction("Jump", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
@@ -313,6 +418,11 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Character_Look;
     private readonly InputAction m_Character_PrimaryAction;
     private readonly InputAction m_Character_SecondaryAction;
+    private readonly InputAction m_Character_EquipPrimaryWeapon;
+    private readonly InputAction m_Character_EquipSecondaryWeapon;
+    private readonly InputAction m_Character_SwitchWeapon;
+    private readonly InputAction m_Character_Sprint;
+    private readonly InputAction m_Character_Jump;
     /// <summary>
     /// Provides access to input actions defined in input action map "Character".
     /// </summary>
@@ -340,6 +450,26 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Character/SecondaryAction".
         /// </summary>
         public InputAction @SecondaryAction => m_Wrapper.m_Character_SecondaryAction;
+        /// <summary>
+        /// Provides access to the underlying input action "Character/EquipPrimaryWeapon".
+        /// </summary>
+        public InputAction @EquipPrimaryWeapon => m_Wrapper.m_Character_EquipPrimaryWeapon;
+        /// <summary>
+        /// Provides access to the underlying input action "Character/EquipSecondaryWeapon".
+        /// </summary>
+        public InputAction @EquipSecondaryWeapon => m_Wrapper.m_Character_EquipSecondaryWeapon;
+        /// <summary>
+        /// Provides access to the underlying input action "Character/SwitchWeapon".
+        /// </summary>
+        public InputAction @SwitchWeapon => m_Wrapper.m_Character_SwitchWeapon;
+        /// <summary>
+        /// Provides access to the underlying input action "Character/Sprint".
+        /// </summary>
+        public InputAction @Sprint => m_Wrapper.m_Character_Sprint;
+        /// <summary>
+        /// Provides access to the underlying input action "Character/Jump".
+        /// </summary>
+        public InputAction @Jump => m_Wrapper.m_Character_Jump;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -378,6 +508,21 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @SecondaryAction.started += instance.OnSecondaryAction;
             @SecondaryAction.performed += instance.OnSecondaryAction;
             @SecondaryAction.canceled += instance.OnSecondaryAction;
+            @EquipPrimaryWeapon.started += instance.OnEquipPrimaryWeapon;
+            @EquipPrimaryWeapon.performed += instance.OnEquipPrimaryWeapon;
+            @EquipPrimaryWeapon.canceled += instance.OnEquipPrimaryWeapon;
+            @EquipSecondaryWeapon.started += instance.OnEquipSecondaryWeapon;
+            @EquipSecondaryWeapon.performed += instance.OnEquipSecondaryWeapon;
+            @EquipSecondaryWeapon.canceled += instance.OnEquipSecondaryWeapon;
+            @SwitchWeapon.started += instance.OnSwitchWeapon;
+            @SwitchWeapon.performed += instance.OnSwitchWeapon;
+            @SwitchWeapon.canceled += instance.OnSwitchWeapon;
+            @Sprint.started += instance.OnSprint;
+            @Sprint.performed += instance.OnSprint;
+            @Sprint.canceled += instance.OnSprint;
+            @Jump.started += instance.OnJump;
+            @Jump.performed += instance.OnJump;
+            @Jump.canceled += instance.OnJump;
         }
 
         /// <summary>
@@ -401,6 +546,21 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @SecondaryAction.started -= instance.OnSecondaryAction;
             @SecondaryAction.performed -= instance.OnSecondaryAction;
             @SecondaryAction.canceled -= instance.OnSecondaryAction;
+            @EquipPrimaryWeapon.started -= instance.OnEquipPrimaryWeapon;
+            @EquipPrimaryWeapon.performed -= instance.OnEquipPrimaryWeapon;
+            @EquipPrimaryWeapon.canceled -= instance.OnEquipPrimaryWeapon;
+            @EquipSecondaryWeapon.started -= instance.OnEquipSecondaryWeapon;
+            @EquipSecondaryWeapon.performed -= instance.OnEquipSecondaryWeapon;
+            @EquipSecondaryWeapon.canceled -= instance.OnEquipSecondaryWeapon;
+            @SwitchWeapon.started -= instance.OnSwitchWeapon;
+            @SwitchWeapon.performed -= instance.OnSwitchWeapon;
+            @SwitchWeapon.canceled -= instance.OnSwitchWeapon;
+            @Sprint.started -= instance.OnSprint;
+            @Sprint.performed -= instance.OnSprint;
+            @Sprint.canceled -= instance.OnSprint;
+            @Jump.started -= instance.OnJump;
+            @Jump.performed -= instance.OnJump;
+            @Jump.canceled -= instance.OnJump;
         }
 
         /// <summary>
@@ -469,5 +629,40 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSecondaryAction(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "EquipPrimaryWeapon" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnEquipPrimaryWeapon(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "EquipSecondaryWeapon" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnEquipSecondaryWeapon(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SwitchWeapon" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSwitchWeapon(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Sprint" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSprint(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Jump" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnJump(InputAction.CallbackContext context);
     }
 }

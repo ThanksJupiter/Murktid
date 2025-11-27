@@ -16,6 +16,12 @@ namespace Murktid {
         public Input<Vector2> Look { get; set; } = new();
         public Input<bool> PrimaryAction { get; set; } = new();
         public Input<bool> SecondaryAction { get; set; } = new();
+        public Input<bool> Jump { get; set; } = new();
+        public Input<bool> Crouch { get; set; } = new();
+        public Input<bool> Sprint { get; set; } = new();
+        public Input<bool> EquipPrimaryWeapon { get; set; } = new();
+        public Input<bool> EquipSecondaryWeapon { get; set; } = new();
+        public Input<bool> SwitchWeapon { get; set; } = new();
 
         public void Initialize() { }
         public void Tick() { }
@@ -31,6 +37,15 @@ namespace Murktid {
 
             Look.wasPressedThisFrame = false;
             Look.wasReleasedThisFrame = false;
+
+            EquipPrimaryWeapon.wasPressedThisFrame = false;
+            EquipPrimaryWeapon.wasReleasedThisFrame = false;
+
+            EquipSecondaryWeapon.wasPressedThisFrame = false;
+            EquipSecondaryWeapon.wasReleasedThisFrame = false;
+
+            SwitchWeapon.wasPressedThisFrame = false;
+            SwitchWeapon.wasReleasedThisFrame = false;
         }
         public void Dispose() { }
 
@@ -70,6 +85,52 @@ namespace Murktid {
             } else if(context.canceled) {
                 SecondaryAction.value = false;
                 SecondaryAction.wasReleasedThisFrame = true;
+            }
+        }
+        public void OnEquipPrimaryWeapon(InputAction.CallbackContext context) {
+            if(context.performed) {
+                EquipPrimaryWeapon.value = true;
+                EquipPrimaryWeapon.wasPressedThisFrame = true;
+            } else if(context.canceled) {
+                EquipPrimaryWeapon.value = false;
+                EquipPrimaryWeapon.wasReleasedThisFrame = true;
+            }
+        }
+        public void OnEquipSecondaryWeapon(InputAction.CallbackContext context) {
+            if(context.performed) {
+                EquipSecondaryWeapon.value = true;
+                EquipSecondaryWeapon.wasPressedThisFrame = true;
+            } else if(context.canceled) {
+                EquipSecondaryWeapon.value = false;
+                EquipSecondaryWeapon.wasReleasedThisFrame = true;
+            }
+        }
+        public void OnSwitchWeapon(InputAction.CallbackContext context) {
+            if(context.performed) {
+                SwitchWeapon.value = true;
+                SwitchWeapon.wasPressedThisFrame = true;
+            } else if(context.canceled) {
+                SwitchWeapon.value = false;
+                SwitchWeapon.wasReleasedThisFrame = true;
+            }
+        }
+        public void OnSprint(InputAction.CallbackContext context) {
+            if(context.performed) {
+                Sprint.value = true;
+                Sprint.wasPressedThisFrame = true;
+            } else if(context.canceled) {
+                Sprint.value = false;
+                Sprint.wasReleasedThisFrame = true;
+            }
+        }
+        public void OnJump(InputAction.CallbackContext context) {
+            if(context.performed) {
+                Jump.pressedTimestamp = Time.time;
+                Jump.value = true;
+                Jump.wasPressedThisFrame = true;
+            } else if(context.canceled) {
+                Jump.value = false;
+                Jump.wasReleasedThisFrame = true;
             }
         }
     }

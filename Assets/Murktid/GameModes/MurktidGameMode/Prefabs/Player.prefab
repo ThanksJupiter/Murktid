@@ -205,8 +205,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Murktid.PlayerReference
   context:
     motor: {fileID: 5909914946943697484}
-    camera: {fileID: 0}
+    cameraReference: {fileID: 0}
     transform: {fileID: 63668025682278971}
+    playerWeaponData:
+      currentWeaponType: 0
+      currentPrimaryWeapon: {fileID: 0}
+      currentSecondaryWeapon: {fileID: 0}
+      currentWeapon: {fileID: 0}
+      defaultPrimaryWeaponReferencePrefab: {fileID: 8167284465626660704, guid: 681c20cf9d39e534db97e3012853d1c5, type: 3}
+      defaultSecondaryWeaponReferencePrefab: {fileID: 6286142227818441737, guid: 97603ee0c3376d64b8819d4b1e43d7e9, type: 3}
     settings: {fileID: 11400000, guid: 51c806197badd08409060abb058ff003, type: 2}
 --- !u!54 &5740912720274539414
 Rigidbody:

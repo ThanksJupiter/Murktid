@@ -7,7 +7,7 @@ namespace Murktid {
         public T value;
         public bool wasPressedThisFrame;
         public bool wasReleasedThisFrame;
-        public double pressedTimestamp;
+        public float pressedTimestamp;
 
         public bool IsPressed =>
             value switch {
@@ -23,5 +23,9 @@ namespace Murktid {
         public Input<Vector2> Look { get; set; }
         public Input<bool> PrimaryAction { get; set; }
         public Input<bool> SecondaryAction { get; set; }
+        public Input<bool> Jump { get; set; }
+        public Input<bool> Crouch { get; set; }
+        public Input<bool> Sprint { get; set; }
+        public Input<bool> SwitchWeapon { get; set; }
     }
 }
