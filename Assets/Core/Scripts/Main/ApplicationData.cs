@@ -4,7 +4,7 @@ namespace Murktid {
 
     public class ApplicationData {
         public PlatformSelector platformSelector;
-        public CursorHandler cursorHandler = new();
+        public readonly CursorHandler cursorHandler = new();
         public ApplicationState ActiveApplicationState { get; private set; }
         public GameMode ActiveGameMode { get; private set; }
         public IInput Input { get; private set; }

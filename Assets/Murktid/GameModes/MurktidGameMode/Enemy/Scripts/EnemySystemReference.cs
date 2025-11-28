@@ -1,16 +1,10 @@
+using Unity.AI.Navigation;
 using UnityEngine;
 
-public class EnemySystemReference : MonoBehaviour
-{
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+namespace Murktid {
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public class EnemySystemReference : MonoBehaviour {
+        public NavMeshSurface navMeshSurface;
+        public EnemyReference enemyReferencePrefab;
     }
 }

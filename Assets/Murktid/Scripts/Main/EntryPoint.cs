@@ -59,8 +59,6 @@ namespace Murktid {
 
             yield return CreatePlatformFactory();
 
-            applicationData.ChangeInput((IInput)platform.InputHandler());
-
             AsyncOperationHandle<BootstrapSettings> bootstrapSettingsHandle = Addressables.LoadAssetAsync<BootstrapSettings>(initializerSettings.bootstrapAssetReference);
             yield return new WaitUntil(() => bootstrapSettingsHandle.IsDone);
             bootstrapSettings = bootstrapSettingsHandle.Result;
