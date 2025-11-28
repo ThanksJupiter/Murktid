@@ -18,15 +18,6 @@ namespace Murktid {
             ShouldSpawnAtEditorCamera = enabled;
             EditorCameraPosition = position;
             EditorCameraRotation = rotation;
-
-            /*EditorPrefs.SetFloat(editorCameraPosition + "x", position.x);
-            EditorPrefs.SetFloat(editorCameraPosition + "y", position.y);
-            EditorPrefs.SetFloat(editorCameraPosition + "z", position.z);
-
-            EditorPrefs.SetFloat(editorCameraRotation + "x", rotation.x);
-            EditorPrefs.SetFloat(editorCameraRotation + "y", rotation.y);
-            EditorPrefs.SetFloat(editorCameraRotation + "z", rotation.z);
-            EditorPrefs.SetFloat(editorCameraRotation + "w", rotation.w);*/
         }
 
         private static bool shouldSpawnAtEditorCamera;
