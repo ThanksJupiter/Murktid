@@ -23,6 +23,7 @@ namespace Murktid {
             AsyncOperationHandle<DesktopPlatformSettings> handle = Addressables.LoadAssetAsync<DesktopPlatformSettings>(assetReference);
             yield return new WaitUntil(() => handle.IsDone);
             desktopPlatformSettings = handle.Result;
+            applicationData.ChangeInput((IInput)InputHandler());
             Debug.Log($"Device Platform {desktopPlatformSettings.devicePlatform} initialized");
         }
 

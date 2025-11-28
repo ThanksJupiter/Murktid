@@ -28,8 +28,8 @@ namespace Murktid {
                     break;
             }
 
-            EnemySystemReference enemySystemReference = Object.FindFirstObjectByType<EnemySystemReference>();
-            enemySystem = new(enemySystemReference);
+            enemySystem = new();
+            enemySystem?.Initialize();
 
             applicationData.cursorHandler.PushState(CursorHandler.CursorState.Locked, this);
             IsGameModeInitialized = true;
@@ -75,7 +75,10 @@ namespace Murktid {
 
         public void Tick() {
             player?.SetInput();
-            player?.Tick(Time.deltaTime);
+
+            float deltaTime = Time.deltaTime;
+            player?.Tick(deltaTime);
+            enemySystem?.Tick(deltaTime);
         }
         public void LateTick() {
 

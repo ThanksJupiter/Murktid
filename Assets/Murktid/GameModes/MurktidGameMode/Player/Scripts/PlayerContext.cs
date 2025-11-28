@@ -25,6 +25,7 @@ namespace Murktid {
         public Vector3 CharacterUp => motor.CharacterUp;
         public Vector3 GroundNormal => motor.GroundingStatus.GroundNormal;
         public float TimeSinceGrounded => Time.time - movementData.lastGroundedTimestamp;
+
         public float ActiveMoveSpeed {
             get => movementData.activeMoveSpeed;
             set => movementData.activeMoveSpeed = value;
