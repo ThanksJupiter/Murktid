@@ -11,8 +11,8 @@ namespace Murktid {
 
         public AbilityComponent AbilityComponent { get; private set; }
 
-        public StateMachine(AbilityComponent playerAbilityComponent) {
-            AbilityComponent = playerAbilityComponent;
+        public StateMachine(AbilityComponent abilityComponent) {
+            AbilityComponent = abilityComponent;
         }
 
         public void PushState<T>() where T : State, new() {

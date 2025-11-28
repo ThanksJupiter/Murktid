@@ -8,7 +8,6 @@ namespace Murktid {
     [System.Serializable]
     public class PlayerContext {
         [Get] public KinematicCharacterMotor motor;
-        [FormerlySerializedAs("camera")]
         [HideInInspector] public PlayerCameraReference cameraReference;
         [Get] public Transform transform;
         public PlayerMovementData movementData = new();

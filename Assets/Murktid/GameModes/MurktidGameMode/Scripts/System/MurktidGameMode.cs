@@ -8,6 +8,7 @@ namespace Murktid {
         private readonly ApplicationData applicationData;
 
         private IMurktidPlayer player;
+        private EnemySystem enemySystem;
 
         public MurktidGameMode(ApplicationData applicationData) {
             this.applicationData = applicationData;
@@ -15,7 +16,6 @@ namespace Murktid {
         public bool IsGameModeInitialized { get; private set; }
         public void EnterGameMode() {
             MurktidGameReference gameModeReference = Object.FindFirstObjectByType<MurktidGameReference>();
-
             switch(gameModeReference.gameData.playerType) {
 
                 case PlayerType.DefaultStateMachine:
@@ -27,6 +27,9 @@ namespace Murktid {
                 default:
                     break;
             }
+
+            EnemySystemReference enemySystemReference = Object.FindFirstObjectByType<EnemySystemReference>();
+            enemySystem = new(enemySystemReference);
 
             applicationData.cursorHandler.PushState(CursorHandler.CursorState.Locked, this);
             IsGameModeInitialized = true;
