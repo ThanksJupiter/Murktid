@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Murktid.MurktidGameData
   playerData: {fileID: 11400000, guid: f8a9d7a27a75a5e4f8187baf4d554a0c, type: 2}
   playerType: 1
+  bulletReferencePrefab: {fileID: 8820975704584491633, guid: 9325b6e05640c4a43a91202a933d4a10, type: 3}

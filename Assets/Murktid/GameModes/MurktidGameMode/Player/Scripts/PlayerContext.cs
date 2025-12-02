@@ -10,10 +10,21 @@ namespace Murktid {
         [Get] public KinematicCharacterMotor motor;
         [HideInInspector] public PlayerCameraReference cameraReference;
         [Get] public Transform transform;
+        public PlayerAnimatorBridge animatorBridge;
         public PlayerMovementData movementData = new();
-        public PlayerWeaponData playerWeaponData = new();
+        public PlayerEquipmentData playerEquipmentData = new();
         public PlayerSettings settings;
         public IInput input;
+
+        public BulletSystem bulletSystem;
+        public LayerMask attackLayerMask;
+        public ShotgunCrosshair shotgunCrosshair;
+
+        [Header("Debug Recoil")]
+        public bool hasRecoil = false;
+
+        public float recoilOffset = 0f;
+        public float recoilReturnSpeed = 5f;
 
         // Accessors
         public KinematicCharacterMotor Motor => motor;

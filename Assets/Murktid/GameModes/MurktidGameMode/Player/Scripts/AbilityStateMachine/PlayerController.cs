@@ -17,6 +17,9 @@ namespace Murktid {
         }
 
         public void Initialize() {
+
+            Context.animatorBridge = new(Context.cameraReference.animator);
+
             StateMachine.PushState<StateDefault>();
             Context.ActiveMoveSpeed = Context.settings.defaultMoveSpeed;
             playerMovementController.Initialize(Context, playerAbilityComponent);

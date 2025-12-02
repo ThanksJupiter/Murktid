@@ -15,14 +15,12 @@ namespace Murktid {
             return false;
         }
 
-        protected override void OnActivate()
-        {
+        protected override void OnActivate() {
             //CursorHandler.PushState(CursorHandler.CursorState.Locked, this);
             Context.cameraReference.PlanarDirection = Context.cameraReference.transform.forward;
         }
 
-        protected override void OnDeactivate()
-        {
+        protected override void OnDeactivate() {
             //CursorHandler.ClearInstigator(this);
         }
 
@@ -30,7 +28,7 @@ namespace Murktid {
             Context.cameraReference.TargetVerticalAngle -= (Context.input.Look.value.y * Context.settings.rotationSpeed);
             Context.cameraReference.TargetVerticalAngle = Mathf.Clamp(Context.cameraReference.TargetVerticalAngle,
                 Context.settings.minVerticalLookAngle, Context.settings.maxVerticalLookAngle);
-            Quaternion verticalRotation = Quaternion.Euler(Context.cameraReference.TargetVerticalAngle, 0f, 0f);
+            Quaternion verticalRotation = Quaternion.Euler(Context.cameraReference.TargetVerticalAngle - Context.recoilOffset, 0f, 0f);
 
             Quaternion rotationFromInput = Quaternion.Euler(Context.CharacterUp *
                 (Context.input.Look.value.x *

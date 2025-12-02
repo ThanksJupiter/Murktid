@@ -11,5 +11,6 @@ namespace Murktid {
     public class MurktidGameData : ScriptableObject {
         public PlayerData playerData;
         public PlayerType playerType = PlayerType.DefaultStateMachine;
+        public BulletReference bulletReferencePrefab;
     }
 }

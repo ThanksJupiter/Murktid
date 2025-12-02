@@ -4,7 +4,7 @@ namespace Murktid {
 
     public class AbilitySecondaryWeaponEquipped : PlayerAbility {
         public override bool ShouldActivate() {
-            if(Context.playerWeaponData.currentWeaponType != WeaponType.Secondary) {
+            if(Context.playerEquipmentData.currentWeaponType != WeaponType.Secondary) {
                 return false;
             }
 
@@ -12,7 +12,7 @@ namespace Murktid {
         }
 
         public override bool ShouldDeactivate() {
-            if(Context.playerWeaponData.currentWeaponType == WeaponType.Secondary) {
+            if(Context.playerEquipmentData.currentWeaponType == WeaponType.Secondary) {
                 return false;
             }
 
@@ -23,28 +23,40 @@ namespace Murktid {
 
             // animate the previous one down ._.
 
-            if(Context.playerWeaponData.currentWeapon != null) {
-                Context.playerWeaponData.currentWeapon.gameObject.SetActive(false);
+            if(Context.playerEquipmentData.currentWeapon != null) {
+                Context.playerEquipmentData.currentWeapon.gameObject.SetActive(false);
             }
 
-            if(Context.playerWeaponData.currentSecondaryWeapon == null) {
-                Context.playerWeaponData.currentSecondaryWeapon = Object.Instantiate(
-                    Context.playerWeaponData.defaultSecondaryWeaponReferencePrefab,
+            if(Context.playerEquipmentData.currentSecondaryWeapon == null) {
+                Context.playerEquipmentData.currentSecondaryWeapon = Object.Instantiate(
+                    Context.playerEquipmentData.defaultSecondaryWeaponReferencePrefab,
                     Context.cameraReference.weaponHolder);
 
-                Context.playerWeaponData.currentWeapon = Context.playerWeaponData.currentSecondaryWeapon;
+                Context.playerEquipmentData.currentWeapon = Context.playerEquipmentData.currentSecondaryWeapon;
             }
             else {
-                Context.playerWeaponData.currentWeapon = Context.playerWeaponData.currentSecondaryWeapon;
-                Context.playerWeaponData.currentWeapon.gameObject.SetActive(true);
+                Context.playerEquipmentData.currentWeapon = Context.playerEquipmentData.currentSecondaryWeapon;
+                Context.playerEquipmentData.currentWeapon.gameObject.SetActive(true);
             }
 
-            Context.playerWeaponData.currentPrimaryWeapon.transform.localPosition =
+            if(Context.input.SecondaryAction.IsPressed) {
+                Context.shotgunCrosshair.SetIsADS();
+            }
+            else {
+                Context.shotgunCrosshair.Show();
+                Context.shotgunCrosshair.SetIsHipfire();
+            }
+
+            Context.playerEquipmentData.currentPrimaryWeapon.transform.localPosition =
                 Context.cameraReference.tmpShotgunTransform.localPosition;
-            Context.playerWeaponData.currentPrimaryWeapon.transform.localRotation =
+            Context.playerEquipmentData.currentPrimaryWeapon.transform.localRotation =
                 Context.cameraReference.tmpShotgunTransform.localRotation;
 
             // animate the stuff in
+        }
+
+        protected override void OnDeactivate() {
+            Context.shotgunCrosshair.Hide();
         }
     }
 }

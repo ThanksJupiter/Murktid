@@ -22,6 +22,9 @@ namespace Murktid {
             abilityComponent.AddDefaultAbility<AbilityPrimaryWeaponEquipped>();
             abilityComponent.AddDefaultAbility<AbilitySecondaryWeaponEquipped>();
             abilityComponent.AddDefaultAbility<AbilitySwitchWeapon>();
+            abilityComponent.AddDefaultAbility<AbilityAimDownSights>();
+            abilityComponent.AddDefaultAbility<AbilityFireSecondaryWeapon>();
+            abilityComponent.AddDefaultAbility<AbilityRecoil>();
         }
 
         protected override void Tick(float deltaTime) {

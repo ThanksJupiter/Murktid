@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -8,7 +7,8 @@ namespace Murktid {
         private readonly ApplicationData applicationData;
 
         private IMurktidPlayer player;
-        private EnemySystem enemySystem;
+        private EnemySystem enemySystem = new();
+        private BulletSystem bulletSystem = new();
 
         public MurktidGameMode(ApplicationData applicationData) {
             this.applicationData = applicationData;
@@ -28,8 +28,8 @@ namespace Murktid {
                     break;
             }
 
-            enemySystem = new();
             enemySystem?.Initialize();
+            bulletSystem.Initialize(gameModeReference);
 
             applicationData.cursorHandler.PushState(CursorHandler.CursorState.Locked, this);
             IsGameModeInitialized = true;
@@ -65,7 +65,8 @@ namespace Murktid {
             PlayerController playerController = new(playerReference.context) {
                 Context = {
                     input = applicationData.Input,
-                    cameraReference = playerCameraReference
+                    cameraReference = playerCameraReference,
+                    bulletSystem = bulletSystem
                 }
             };
 
@@ -78,6 +79,7 @@ namespace Murktid {
 
             float deltaTime = Time.deltaTime;
             player?.Tick(deltaTime);
+            bulletSystem?.Tick(deltaTime);
             enemySystem?.Tick(deltaTime);
         }
         public void LateTick() {

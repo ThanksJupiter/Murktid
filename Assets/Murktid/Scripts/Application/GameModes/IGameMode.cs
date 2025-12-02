@@ -4,7 +4,7 @@ namespace Murktid {
 
     public enum GameMode {
         Invalid,
-        Murktid
+        Murktid,
     }
 
     public interface IGameMode {

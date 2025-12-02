@@ -9,7 +9,7 @@ namespace Murktid {
     }
 
     [System.Serializable]
-    public class PlayerWeaponData {
+    public class PlayerEquipmentData {
         public WeaponType currentWeaponType = WeaponType.Primary;
 
         [HideInInspector]

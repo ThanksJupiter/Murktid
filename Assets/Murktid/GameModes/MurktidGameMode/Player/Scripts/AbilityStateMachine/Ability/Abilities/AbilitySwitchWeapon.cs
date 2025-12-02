@@ -24,18 +24,18 @@ namespace Murktid {
         }
 
         protected override void Tick(float deltaTime) {
-            switch(Context.playerWeaponData.currentWeaponType) {
+            switch(Context.playerEquipmentData.currentWeaponType) {
 
                 case WeaponType.Primary:
-                    Context.playerWeaponData.currentWeaponType = WeaponType.Secondary;
+                    Context.playerEquipmentData.currentWeaponType = WeaponType.Secondary;
                     hasSwitchedWeapon = true;
                     break;
                 case WeaponType.Secondary:
-                    Context.playerWeaponData.currentWeaponType = WeaponType.Primary;
+                    Context.playerEquipmentData.currentWeaponType = WeaponType.Primary;
                     hasSwitchedWeapon = true;
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    break;
             }
         }
     }

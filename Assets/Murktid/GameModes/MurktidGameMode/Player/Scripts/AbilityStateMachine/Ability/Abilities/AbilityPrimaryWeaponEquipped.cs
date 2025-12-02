@@ -4,7 +4,7 @@ namespace Murktid {
 
     public class AbilityPrimaryWeaponEquipped : PlayerAbility {
         public override bool ShouldActivate() {
-            if(Context.playerWeaponData.currentWeaponType != WeaponType.Primary) {
+            if(Context.playerEquipmentData.currentWeaponType != WeaponType.Primary) {
                 return false;
             }
 
@@ -12,7 +12,7 @@ namespace Murktid {
         }
 
         public override bool ShouldDeactivate() {
-            if(Context.playerWeaponData.currentWeaponType == WeaponType.Primary) {
+            if(Context.playerEquipmentData.currentWeaponType == WeaponType.Primary) {
                 return false;
             }
 
@@ -23,25 +23,25 @@ namespace Murktid {
 
             // animate the previous one down ._.
 
-            if(Context.playerWeaponData.currentWeapon != null) {
-                Context.playerWeaponData.currentWeapon.gameObject.SetActive(false);
+            if(Context.playerEquipmentData.currentWeapon != null) {
+                Context.playerEquipmentData.currentWeapon.gameObject.SetActive(false);
             }
 
-            if(Context.playerWeaponData.currentPrimaryWeapon == null) {
-                Context.playerWeaponData.currentPrimaryWeapon = Object.Instantiate(
-                    Context.playerWeaponData.defaultPrimaryWeaponReferencePrefab,
+            if(Context.playerEquipmentData.currentPrimaryWeapon == null) {
+                Context.playerEquipmentData.currentPrimaryWeapon = Object.Instantiate(
+                    Context.playerEquipmentData.defaultPrimaryWeaponReferencePrefab,
                     Context.cameraReference.weaponHolder);
 
-                Context.playerWeaponData.currentWeapon = Context.playerWeaponData.currentPrimaryWeapon;
+                Context.playerEquipmentData.currentWeapon = Context.playerEquipmentData.currentPrimaryWeapon;
             }
             else {
-                Context.playerWeaponData.currentWeapon = Context.playerWeaponData.currentPrimaryWeapon;
-                Context.playerWeaponData.currentWeapon.gameObject.SetActive(true);
+                Context.playerEquipmentData.currentWeapon = Context.playerEquipmentData.currentPrimaryWeapon;
+                Context.playerEquipmentData.currentWeapon.gameObject.SetActive(true);
             }
 
-            Context.playerWeaponData.currentPrimaryWeapon.transform.localPosition =
+            Context.playerEquipmentData.currentPrimaryWeapon.transform.localPosition =
                 Context.cameraReference.tmpHammerTransform.localPosition;
-            Context.playerWeaponData.currentPrimaryWeapon.transform.localRotation =
+            Context.playerEquipmentData.currentPrimaryWeapon.transform.localRotation =
                 Context.cameraReference.tmpHammerTransform.localRotation;
 
             // animate the stuff in
