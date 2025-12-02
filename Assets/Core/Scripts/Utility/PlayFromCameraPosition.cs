@@ -4,13 +4,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Murktid {
+#if UNITY_EDITOR
     public static class SpawnPositionData {
         private const string spawnAtEditorCameraPosition = "spawnAtEditorCameraPosition";
         private const string editorCameraPosition = "editorCameraPosition";
         private const string editorCameraRotation = "editorCameraRotation";
 
-        public static Vector3 With(this Vector3 origin, float? x = null, float? y = null, float? z = null)
-        {
+        public static Vector3 With(this Vector3 origin, float? x = null, float? y = null, float? z = null) {
             return new Vector3(x ?? origin.x, y ?? origin.y, z ?? origin.z);
         }
 
@@ -21,6 +21,7 @@ namespace Murktid {
         }
 
         private static bool shouldSpawnAtEditorCamera;
+
         public static bool ShouldSpawnAtEditorCamera {
             get => EditorPrefs.GetBool(spawnAtEditorCameraPosition);
             set {
@@ -30,6 +31,7 @@ namespace Murktid {
         }
 
         private static Vector3 cameraPosition;
+
         public static Vector3 EditorCameraPosition {
             get {
                 Vector3 position = new() {
@@ -49,6 +51,7 @@ namespace Murktid {
         }
 
         private static Quaternion cameraRotation;
+
         public static Quaternion EditorCameraRotation {
             get {
                 Quaternion rotation = new() {
@@ -83,14 +86,6 @@ namespace Murktid {
             EditorGUILayout.TextField("SceneViewCameraAngle", "" + SpawnPositionData.EditorCameraRotation);
             EditorGUILayout.TextField("Press C to spawn at camera position");
 
-            if(SceneView.currentDrawingSceneView != null) {
-                Debug.Log("hello");
-            }
-
-            if(Keyboard.current.cKey.wasPressedThisFrame) {
-
-            }
-
             if(GUI.Button(new Rect(10, 70, 200, 30), "Set Spawn Position")) {
                 SpawnAtSceneCameraPosition();
             }
@@ -109,4 +104,5 @@ namespace Murktid {
             EditorApplication.EnterPlaymode();
         }
     }
+#endif
 }
