@@ -8,7 +8,7 @@ namespace Murktid {
         }
 
         public override bool ShouldActivate() {
-            if(Context.hasTarget) {
+            if(Context.HasTarget) {
                 return false;
             }
 
@@ -16,15 +16,34 @@ namespace Murktid {
         }
 
         public override bool ShouldDeactivate() {
-            if(!Context.hasTarget) {
+            if(!Context.HasTarget) {
                 return false;
             }
 
             return true;
         }
 
+        protected override void OnActivate() {
+            Context.animatorBridge.IsIdle = true;
+        }
+
+        protected override void OnDeactivate() {
+            Context.animatorBridge.IsIdle = false;
+        }
+
         protected override void Tick(float deltaTime) {
-            
+            Collider[] overlappedColliders = Physics.OverlapSphere(Context.transform.position, Context.settings.aggroRange, Context.playerMask);
+
+            for(int i = 0; i < overlappedColliders.Length; i++) {
+                Collider collider = overlappedColliders[i];
+
+                if(!collider.TryGetComponent(out PlayerReference player)) {
+                    continue;
+                }
+
+                Context.targetPlayer = player;
+                return;
+            }
         }
     }
 }

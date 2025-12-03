@@ -33,7 +33,7 @@ namespace Murktid {
             //return false;
         }
 
-        private float fireRateTimestamp = -float.MaxValue;
+        private float fireRateTimestamp = float.MinValue;
 
         protected override void Tick(float deltaTime) {
             if(Time.time >= fireRateTimestamp) {

@@ -8,12 +8,12 @@ namespace Murktid {
         public StateMachine StateMachine { get; private set; }
 
         private readonly PlayerMovementController playerMovementController = new();
-        public PlayerAbilityComponent playerAbilityComponent;
+        public PlayerAbilityComponent abilityComponent;
 
         public PlayerController(PlayerContext context) {
             Context = context;
-            playerAbilityComponent = new(Context);
-            StateMachine = new(playerAbilityComponent);
+            abilityComponent = new(Context);
+            StateMachine = new(abilityComponent);
         }
 
         public void Initialize() {
@@ -22,7 +22,7 @@ namespace Murktid {
 
             StateMachine.PushState<StateDefault>();
             Context.ActiveMoveSpeed = Context.settings.defaultMoveSpeed;
-            playerMovementController.Initialize(Context, playerAbilityComponent);
+            playerMovementController.Initialize(Context, abilityComponent);
         }
         public void SetInput() {
             /*Vector3 moveInputVector = new(Context.input.Move.value.x, 0f, Context.input.Move.value.y);

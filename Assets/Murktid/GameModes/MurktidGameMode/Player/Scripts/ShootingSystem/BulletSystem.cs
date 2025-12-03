@@ -98,7 +98,7 @@ namespace Murktid {
 
         private void OnBulletHitTarget(BulletReference bullet, ITarget target) {
             target.Hit(bullet.data.damage);
-            bullet.data.speed = 0f;
+            //bullet.data.speed = 0f;
             bullet.data.bulletDespawnTimestamp = Time.time + 2f;
             bullet.hitParticleSystem.Play();
         }

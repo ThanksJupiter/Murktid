@@ -9,8 +9,27 @@ namespace Murktid {
         [Get] public NavMeshAgent agent;
         [Get] public Rigidbody rigidbody;
         [Get] public Transform transform;
+        public GameObject gameObject;
         public EnemySettings settings;
+        public LayerMask playerMask;
+        public EnemyAnimatorBridge animatorBridge;
 
-        public bool hasTarget;
+        // Target
+        public bool HasTarget => targetPlayer != null;
+        public PlayerReference targetPlayer = null;
+
+        // prototype behaviour
+        public EnemyPrototypeBehaviour enemyPrototypeBehaviour;
+        public bool isDead = false;
+
+        public bool IsTargetWithinAttackRange {
+            get {
+                if(!HasTarget) {
+                    return false;
+                }
+
+                return Vector3.Distance(transform.position, targetPlayer.transform.position) < settings.attackRange;
+            }
+        }
     }
 }

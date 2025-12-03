@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Murktid.EnemySettings
   defaultMoveSpeed: 10
   aggroRange: 15
+  attackRange: 2.1
+  attackRate: 3
