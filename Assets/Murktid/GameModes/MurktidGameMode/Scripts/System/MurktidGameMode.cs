@@ -62,11 +62,11 @@ namespace Murktid {
             PlayerReference playerReference = Object.Instantiate(gameModeReference.gameData.playerData.playerReferencePrefab, spawnPosition, spawnRotation);
             PlayerCameraReference playerCameraReference = Object.Instantiate(gameModeReference.gameData.playerData.playerCameraReferencePrefab, spawnPosition, spawnRotation);
 
-            PlayerController playerController = new(playerReference.context) {
+            PlayerController playerController = new(playerReference) {
                 Context = {
                     input = applicationData.Input,
                     cameraReference = playerCameraReference,
-                    bulletSystem = bulletSystem
+                    bulletSystem = bulletSystem,
                 }
             };
 
@@ -75,12 +75,12 @@ namespace Murktid {
         }
 
         public void Tick() {
-            player?.SetInput();
+            player.SetInput();
 
             float deltaTime = Time.deltaTime;
-            player?.Tick(deltaTime);
-            bulletSystem?.Tick(deltaTime);
-            enemySystem?.Tick(deltaTime);
+            player.Tick(deltaTime);
+            bulletSystem.Tick(deltaTime);
+            enemySystem.Tick(deltaTime);
         }
         public void LateTick() {
 
@@ -89,7 +89,7 @@ namespace Murktid {
             applicationData.cursorHandler.ClearInstigator(this);
         }
         public void Dispose() {
-
+            player?.Dispose();
         }
     }
 }

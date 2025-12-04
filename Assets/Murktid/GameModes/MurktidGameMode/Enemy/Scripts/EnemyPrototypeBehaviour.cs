@@ -20,6 +20,7 @@ namespace Murktid {
         public BoxCollider leftArmBoxCollider;
         public BoxCollider rightArmBoxCollider;
 
+        public Transform transform;
         public float explodeVelocity = 5f;
 
         public void SetIdleMaterials() {
@@ -56,9 +57,14 @@ namespace Murktid {
             leftArmRigidbody.constraints = RigidbodyConstraints.None;
             rightArmRigidbody.constraints = RigidbodyConstraints.None;
 
-            eyeRigidbody.linearVelocity = explodeForce;
-            leftArmRigidbody.linearVelocity = explodeForce;
-            rightArmRigidbody.linearVelocity = explodeForce;
+            Vector3 outwardDirection = eyeRigidbody.transform.position - transform.position;
+            eyeRigidbody.linearVelocity = explodeForce + outwardDirection;
+
+            outwardDirection = leftArmRigidbody.transform.position - transform.position;
+            leftArmRigidbody.linearVelocity = explodeForce + outwardDirection;
+
+            outwardDirection = rightArmRigidbody.transform.position - transform.position;
+            rightArmRigidbody.linearVelocity = explodeForce + outwardDirection;
         }
     }
 }

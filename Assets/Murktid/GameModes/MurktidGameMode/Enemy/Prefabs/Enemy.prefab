@@ -395,6 +395,7 @@ MonoBehaviour:
     agent: {fileID: 8510702593742695692}
     rigidbody: {fileID: 6961462211043072729}
     transform: {fileID: 5582527454473085412}
+    gameObject: {fileID: 0}
     settings: {fileID: 11400000, guid: 0ff1778b9f7b7c047be25ed22acc7cba, type: 2}
     playerMask:
       serializedVersion: 2
@@ -413,7 +414,9 @@ MonoBehaviour:
       eyeBoxCollider: {fileID: 7015676750554649897}
       leftArmBoxCollider: {fileID: 3162258535261011779}
       rightArmBoxCollider: {fileID: 729622477667890113}
+      transform: {fileID: 5582527454473085412}
       explodeVelocity: 5
+    isDead: 0
   animator: {fileID: 8291900484082644197}
 --- !u!195 &8510702593742695692
 NavMeshAgent:

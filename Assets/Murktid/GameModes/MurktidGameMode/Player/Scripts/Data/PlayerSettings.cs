@@ -12,6 +12,9 @@ public class PlayerSettings : ScriptableObject {
     public float rotationSpeed = .15f;
     public float movementSharpness = 10f;
 
+    [Header("Health")]
+    public float maxHealth = 100f;
+
     [Header("Jump")]
     public float jumpForce = 5f;
     public bool allowJumpingWhenSliding = true;

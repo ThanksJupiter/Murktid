@@ -14,6 +14,7 @@ namespace Murktid {
         public PlayerMovementData movementData = new();
         public PlayerEquipmentData playerEquipmentData = new();
         public PlayerSettings settings;
+        public PlayerHealth health;
         public IInput input;
 
         public BulletSystem bulletSystem;

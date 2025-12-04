@@ -36,6 +36,9 @@ namespace Murktid {
         public void Tick(float deltaTime) {
             UpdateCameraPositionAndRotation();
         }
+        public void Dispose() {
+
+        }
 
         private void UpdateCameraPositionAndRotation() {
             context.cameraReference.TargetVerticalAngle -= (context.input.Look.value.y * context.settings.rotationSpeed);

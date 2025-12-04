@@ -59,7 +59,7 @@ namespace Murktid {
                 for(int i = 0; i < overlappedColliders.Length; i++) {
                     Collider collider = overlappedColliders[i];
                     if(collider.TryGetComponent(out PlayerReference playerReference)) {
-                        Debug.Log($"hit player");
+                        playerReference.context.health.TakeDamage(10f);
                     }
                 }
             }

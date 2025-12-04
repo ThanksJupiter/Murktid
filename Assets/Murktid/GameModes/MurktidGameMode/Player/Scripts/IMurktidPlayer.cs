@@ -8,4 +8,5 @@ public interface IMurktidPlayer
     void Initialize();
     void SetInput();
     void Tick(float deltaTime);
+    void Dispose();
 }

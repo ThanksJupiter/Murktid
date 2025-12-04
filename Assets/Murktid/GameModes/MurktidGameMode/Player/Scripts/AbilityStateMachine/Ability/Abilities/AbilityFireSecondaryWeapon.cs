@@ -61,7 +61,7 @@ namespace Murktid {
                 // spawn bullet
                 SpawnBulletData spawnBulletData = new() {
                     //spawnPosition = Context.playerEquipmentData.currentWeapon.weaponData.firePoint.position,
-                    spawnPosition = ray.origin + direction,
+                    spawnPosition = ray.origin,
                     spawnRotation = Quaternion.LookRotation(ray.direction),
                     initialVelocity = Context.playerEquipmentData.currentWeapon.weaponData.bulletVelocity,
                     layerMask = Context.attackLayerMask,

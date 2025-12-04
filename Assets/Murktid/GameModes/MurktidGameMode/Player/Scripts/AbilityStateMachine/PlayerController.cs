@@ -10,20 +10,21 @@ namespace Murktid {
         private readonly PlayerMovementController playerMovementController = new();
         public PlayerAbilityComponent abilityComponent;
 
-        public PlayerController(PlayerContext context) {
-            Context = context;
+        public PlayerController(PlayerReference playerReference) {
+            Context = playerReference.context;
             abilityComponent = new(Context);
             StateMachine = new(abilityComponent);
+            Context.health = new(playerReference.healthDisplayReference, playerReference.context.settings);
         }
 
         public void Initialize() {
-
             Context.animatorBridge = new(Context.cameraReference.animator);
 
             StateMachine.PushState<StateDefault>();
             Context.ActiveMoveSpeed = Context.settings.defaultMoveSpeed;
             playerMovementController.Initialize(Context, abilityComponent);
         }
+
         public void SetInput() {
             /*Vector3 moveInputVector = new(Context.input.Move.value.x, 0f, Context.input.Move.value.y);
             Vector3 cameraPlanarDirection = Vector3.ProjectOnPlane(Context.cameraReference.transform.rotation * Vector3.forward, Context.motor.CharacterUp).normalized;
@@ -37,6 +38,10 @@ namespace Murktid {
         }
         public void Tick(float deltaTime) {
             StateMachine.Tick(deltaTime);
+        }
+
+        public void Dispose() {
+            Context.health.OnDestroy();
         }
     }
 }

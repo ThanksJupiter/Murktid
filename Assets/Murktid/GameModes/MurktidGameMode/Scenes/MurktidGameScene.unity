@@ -1467,6 +1467,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2082417318704085570, guid: ca48815d5b31f21479be24db1db8932d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2082417318704085570, guid: ca48815d5b31f21479be24db1db8932d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2480933045674355184, guid: ca48815d5b31f21479be24db1db8932d, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1980,6 +1988,7 @@ MonoBehaviour:
       eyeBoxCollider: {fileID: 0}
       leftArmBoxCollider: {fileID: 0}
       rightArmBoxCollider: {fileID: 0}
+      transform: {fileID: 0}
       explodeVelocity: 5
     isDead: 0
   animator: {fileID: 0}
