@@ -5,6 +5,7 @@ public class DoorBehaviour : MonoBehaviour {
     Vector3 _doorClosedPos;
     Vector3 _doorOpenPos;
     public float _doorSpeed = 3f;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake() {
         _doorClosedPos = transform.position;
