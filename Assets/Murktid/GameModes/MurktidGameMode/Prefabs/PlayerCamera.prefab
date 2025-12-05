@@ -154,6 +154,8 @@ MonoBehaviour:
   camera: {fileID: 8760678640079704250}
   animator: {fileID: 8428734968016940410}
   weaponHolder: {fileID: 8248544615285609220}
+  defaultPrimaryWeaponReference: {fileID: 0}
+  defaultSecondaryWeaponReference: {fileID: 6433743885468441505}
   tmpHammerTransform: {fileID: 8518223050572733867}
   tmpShotgunTransform: {fileID: 5228828290922610246}
 --- !u!1 &5487309638919002889
@@ -310,7 +312,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6237058982729769856, guid: 97603ee0c3376d64b8819d4b1e43d7e9, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -322,6 +324,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5108600765693757934, guid: 97603ee0c3376d64b8819d4b1e43d7e9, type: 3}
   m_PrefabInstance: {fileID: 1041988430525069224}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6433743885468441505 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6286142227818441737, guid: 97603ee0c3376d64b8819d4b1e43d7e9, type: 3}
+  m_PrefabInstance: {fileID: 1041988430525069224}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 751c9895702ad7640a447567106ecdc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerWeaponReference
 --- !u!1001 &2106354871319616672
 PrefabInstance:
   m_ObjectHideFlags: 0

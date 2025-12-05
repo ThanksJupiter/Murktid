@@ -19,5 +19,8 @@ namespace Murktid {
 
         public float recoil = 10f;
         public float fireRate = .25f;
+
+        public int loadedBullets = 2;
+        public int maxLoadedBullets = 2;
     }
 }

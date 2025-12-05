@@ -23,6 +23,11 @@ namespace Murktid {
             StateMachine.PushState<StateDefault>();
             Context.ActiveMoveSpeed = Context.settings.defaultMoveSpeed;
             playerMovementController.Initialize(Context, abilityComponent);
+
+            if(Context.cameraReference.defaultSecondaryWeaponReference != null) {
+                Context.playerEquipmentData.currentSecondaryWeapon = Context.cameraReference.defaultSecondaryWeaponReference;
+                Context.playerEquipmentData.currentSecondaryWeapon.gameObject.SetActive(false);
+            }
         }
 
         public void SetInput() {

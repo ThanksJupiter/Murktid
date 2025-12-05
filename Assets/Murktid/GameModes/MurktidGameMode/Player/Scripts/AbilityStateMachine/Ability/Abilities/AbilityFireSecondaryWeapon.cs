@@ -15,6 +15,10 @@ namespace Murktid {
                 return false;
             }
 
+            if(Context.playerEquipmentData.currentWeapon.weaponData.loadedBullets <= 0) {
+                return false;
+            }
+
             return true;
         }
 
@@ -39,14 +43,26 @@ namespace Murktid {
             if(Time.time >= fireRateTimestamp) {
                 didShoot = true;
             }
+
+            if(Context.animatorBridge.IsInRangedFireLayer && didShoot) {
+                Context.animatorBridge.Shoot = false;
+            }
         }
 
         protected override void OnActivate() {
-
             fireRateTimestamp = Time.time + Context.playerEquipmentData.currentWeapon.weaponData.fireRate;
             didShoot = false;
+            Context.animatorBridge.Shoot = true;
 
             Context.recoilOffset += Context.playerEquipmentData.currentWeapon.weaponData.recoil;
+
+            bool bothBarrels = !Context.input.SecondaryAction.IsPressed && Context.playerEquipmentData.currentWeapon.weaponData.loadedBullets >= 2;
+            if(bothBarrels) {
+                Context.playerEquipmentData.currentWeapon.weaponData.loadedBullets -= 2;
+            }
+            else {
+                Context.playerEquipmentData.currentWeapon.weaponData.loadedBullets -= 1;
+            }
 
             Vector3 origin = Context.cameraReference.transform.position;
             Vector3 direction = Context.cameraReference.transform.forward;
@@ -58,34 +74,48 @@ namespace Murktid {
                 Ray ray = Context.shotgunCrosshair.GetPelletScreenPointRay(i, Context.cameraReference.camera);
                 //Debug.DrawRay(ray.origin, ray.direction * maxDistance, Color.red, 5f);
 
-                // spawn bullet
-                SpawnBulletData spawnBulletData = new() {
-                    //spawnPosition = Context.playerEquipmentData.currentWeapon.weaponData.firePoint.position,
-                    spawnPosition = ray.origin,
-                    spawnRotation = Quaternion.LookRotation(ray.direction),
-                    initialVelocity = Context.playerEquipmentData.currentWeapon.weaponData.bulletVelocity,
-                    layerMask = Context.attackLayerMask,
-                    damage = damage
-                };
+                if(bothBarrels) {
+                    // spawn two pellets per ray with left / right offset
+                    Debug.Log($"Ray origin: {ray.origin}");
+                    Debug.DrawRay(ray.origin + -Context.motor.CharacterRight * .1f, ray.direction * radius, Color.blue, 5f);
+                    Debug.DrawRay(ray.origin + Context.motor.CharacterRight * .1f, ray.direction * radius, Color.red, 5f);
 
-                Context.bulletSystem.SpawnBullet(spawnBulletData);
+                    SpawnBulletData spawnFirstBulletData = new() {
+                        spawnPosition = ray.origin + -Context.motor.CharacterRight * .1f,
+                        spawnRotation = Quaternion.LookRotation(ray.direction),
+                        initialVelocity = Context.playerEquipmentData.currentWeapon.weaponData.bulletVelocity,
+                        layerMask = Context.attackLayerMask,
+                        damage = damage
+                    };
 
-                /*RaycastHit[] hits = Physics.RaycastAll(ray, maxDistance, Context.attackLayerMask);
-                for(int j = 0; j < hits.Length; j++) {
-                    if(!hits[j].transform.TryGetComponent(out ITarget target)) {
-                        continue;
-                    }
+                    Context.bulletSystem.SpawnBullet(spawnFirstBulletData);
 
-                    target.Hit(damage);
-                    Context.shotgunCrosshair.DisplayPelletHit(i);
-                }*/
+                    SpawnBulletData spawnSecondBulletData = new() {
+                        spawnPosition = ray.origin + Context.motor.CharacterRight * .1f,
+                        spawnRotation = Quaternion.LookRotation(ray.direction),
+                        initialVelocity = Context.playerEquipmentData.currentWeapon.weaponData.bulletVelocity,
+                        layerMask = Context.attackLayerMask,
+                        damage = damage
+                    };
+
+                    Context.bulletSystem.SpawnBullet(spawnSecondBulletData);
+                }
+                else {
+                    SpawnBulletData spawnBulletData = new() {
+                        spawnPosition = ray.origin,
+                        spawnRotation = Quaternion.LookRotation(ray.direction),
+                        initialVelocity = Context.playerEquipmentData.currentWeapon.weaponData.bulletVelocity,
+                        layerMask = Context.attackLayerMask,
+                        damage = damage
+                    };
+
+                    Context.bulletSystem.SpawnBullet(spawnBulletData);
+                }
             }
+        }
 
-            // shooty
-            // take a boolie from the pool
-            // bring it in
-            // find out what it hits
-            // Bullet bullet = BulletPool.GetBullet(shooty data)
+        protected override void OnDeactivate() {
+            Context.animatorBridge.Shoot = false;
         }
     }
 }

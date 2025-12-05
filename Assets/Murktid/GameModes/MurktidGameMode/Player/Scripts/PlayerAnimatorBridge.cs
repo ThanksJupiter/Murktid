@@ -15,9 +15,35 @@ namespace Murktid {
             set => animator.SetBool(Param.isAds, value);
         }
 
+        public bool Shoot
+        {
+            get => animator.GetBool(Param.shoot);
+            set => animator.SetBool(Param.shoot, value);
+        }
+
+        public bool Reload
+        {
+            get => animator.GetBool(Param.reload);
+            set => animator.SetBool(Param.reload, value);
+        }
+
+        public bool IsInRangedLayer => animator.GetCurrentAnimatorStateInfo(Layer.ranged).shortNameHash != Param.empty;
+        public bool IsInRangedFireLayer => animator.GetCurrentAnimatorStateInfo(Layer.rangedFire).shortNameHash != Param.empty;
+        public bool IsInMeleeLayer => animator.GetCurrentAnimatorStateInfo(Layer.melee).shortNameHash != Param.empty;
+
+        public static class Layer
+        {
+            public static readonly int unarmed = 0;
+            public static readonly int ranged = 1;
+            public static readonly int rangedFire = 2;
+            public static readonly int melee = 3;
+        }
+
         private static class Param {
             public static readonly int empty = Animator.StringToHash("Empty");
             public static readonly int isAds = Animator.StringToHash("IsADS");
+            public static readonly int shoot = Animator.StringToHash("Shoot");
+            public static readonly int reload = Animator.StringToHash("Reload");
         }
     }
 }

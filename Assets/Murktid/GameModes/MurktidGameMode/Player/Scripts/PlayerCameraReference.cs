@@ -9,6 +9,9 @@ namespace Murktid {
         public float TargetVerticalAngle { get; set; }
         public Transform weaponHolder;
 
+        public PlayerWeaponReference defaultPrimaryWeaponReference;
+        public PlayerWeaponReference defaultSecondaryWeaponReference;
+
         public Transform tmpHammerTransform;
         public Transform tmpShotgunTransform;
     }

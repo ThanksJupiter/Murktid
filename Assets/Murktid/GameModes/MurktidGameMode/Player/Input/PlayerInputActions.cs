@@ -172,6 +172,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""38238705-2f74-4c26-94ae-c92bb81051f3"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -317,6 +326,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""61320961-9cbf-45ec-88fe-798783a0f773"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -334,6 +354,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Character_SwitchWeapon = m_Character.FindAction("SwitchWeapon", throwIfNotFound: true);
         m_Character_Sprint = m_Character.FindAction("Sprint", throwIfNotFound: true);
         m_Character_Jump = m_Character.FindAction("Jump", throwIfNotFound: true);
+        m_Character_Reload = m_Character.FindAction("Reload", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
@@ -423,6 +444,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Character_SwitchWeapon;
     private readonly InputAction m_Character_Sprint;
     private readonly InputAction m_Character_Jump;
+    private readonly InputAction m_Character_Reload;
     /// <summary>
     /// Provides access to input actions defined in input action map "Character".
     /// </summary>
@@ -470,6 +492,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Character/Jump".
         /// </summary>
         public InputAction @Jump => m_Wrapper.m_Character_Jump;
+        /// <summary>
+        /// Provides access to the underlying input action "Character/Reload".
+        /// </summary>
+        public InputAction @Reload => m_Wrapper.m_Character_Reload;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -523,6 +549,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @Reload.started += instance.OnReload;
+            @Reload.performed += instance.OnReload;
+            @Reload.canceled += instance.OnReload;
         }
 
         /// <summary>
@@ -561,6 +590,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @Reload.started -= instance.OnReload;
+            @Reload.performed -= instance.OnReload;
+            @Reload.canceled -= instance.OnReload;
         }
 
         /// <summary>
@@ -664,5 +696,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnJump(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Reload" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnReload(InputAction.CallbackContext context);
     }
 }

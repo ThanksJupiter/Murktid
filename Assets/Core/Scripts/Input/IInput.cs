@@ -27,5 +27,6 @@ namespace Murktid {
         public Input<bool> Crouch { get; set; }
         public Input<bool> Sprint { get; set; }
         public Input<bool> SwitchWeapon { get; set; }
+        public Input<bool> Reload { get; set; }
     }
 }

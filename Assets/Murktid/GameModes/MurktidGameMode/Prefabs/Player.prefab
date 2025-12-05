@@ -924,7 +924,7 @@ MonoBehaviour:
     shotgunCrosshair: {fileID: 355171689747465979}
     hasRecoil: 0
     recoilOffset: 0
-    recoilReturnSpeed: 5
+    recoilReturnSpeed: 3
   healthDisplayReference: {fileID: 8150369274562770242}
   ammoDisplayReference: {fileID: 0}
 --- !u!54 &5740912720274539414
