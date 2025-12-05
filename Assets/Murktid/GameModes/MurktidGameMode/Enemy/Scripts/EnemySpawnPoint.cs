@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Murktid {
@@ -7,5 +8,10 @@ namespace Murktid {
         public GameObject mesh;
         public int enemiesToSpawn = 1;
         public float spawnRadius = 2f;
+
+        private void OnDrawGizmosSelected() {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, spawnRadius);
+        }
     }
 }
