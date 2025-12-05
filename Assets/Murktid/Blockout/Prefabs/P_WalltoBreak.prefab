@@ -125,4 +125,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 310157663ba3dad47ac565ba1be296d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BreakableWall
-  brokenVersionPrefab: {fileID: 0}
+  brokenVersionPrefab: {fileID: 7081729196051608874, guid: 61176b68849f4b54787abfb9bc6d5cfe, type: 3}
