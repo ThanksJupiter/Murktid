@@ -32,11 +32,18 @@ namespace Murktid {
 
         private void SpawnInitialEnemies() {
             foreach(EnemySpawnPoint spawnPoint in spawnPoints) {
-                EnemyReference spawnedEnemyReference = Object.Instantiate(enemyReferencePrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
-                EnemyController enemyController = new EnemyController(spawnedEnemyReference.context);
-                enemyController.Initialize(spawnedEnemyReference);
-                activeEnemies.Add(enemyController);
-                spawnPoint.mesh.SetActive(false);
+                for(int i = 0; i < spawnPoint.enemiesToSpawn; i++) {
+                    Vector3 spawnPosition = new(
+                        spawnPoint.transform.position.x + Random.Range(-spawnPoint.spawnRadius, spawnPoint.spawnRadius),
+                        0f,
+                        spawnPoint.transform.position.z + Random.Range(-spawnPoint.spawnRadius, spawnPoint.spawnRadius));
+
+                    EnemyReference spawnedEnemyReference = Object.Instantiate(enemyReferencePrefab, spawnPosition, spawnPoint.transform.rotation);
+                    EnemyController enemyController = new(spawnedEnemyReference.context);
+                    enemyController.Initialize(spawnedEnemyReference);
+                    activeEnemies.Add(enemyController);
+                    spawnPoint.mesh.SetActive(false);
+                }
             }
         }
 
