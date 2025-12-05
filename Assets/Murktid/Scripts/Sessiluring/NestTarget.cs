@@ -4,17 +4,25 @@ namespace Murktid {
 
     public class NestTarget : MonoBehaviour, ITarget {
 
-        [SerializeField] private Transform healthBarPivot;
+       [SerializeField] private Transform healthBarPivot;
        [SerializeField] private Vector3 healthBarOffset = new Vector3 (0f, 2f, 0f);
 
         [SerializeField] private float maxHealth = 500f;
         private float currentHealth;
 
+        [SerializeField] private NestTentacle[] tentacle;
         [SerializeField] private BreakableWall[] wallsToBreak;
-        
+              
 
         private void Awake() {
             currentHealth = maxHealth;
+                    }
+
+        private bool AllTentaclesDestroyed() {
+            foreach(var t in tentacle) {
+                if(t != null) return false;
+            }
+            return true;
         }
 
         private void UpdateHealthBar() {
@@ -28,6 +36,10 @@ namespace Murktid {
         }
 
         public void Hit(float damage) {
+
+            if(!AllTentaclesDestroyed()) {
+                return;
+            } 
 
             currentHealth -= damage;
             UpdateHealthBar();
@@ -49,5 +61,6 @@ namespace Murktid {
             Destroy(gameObject);
 
         }
+        
     }
 }
