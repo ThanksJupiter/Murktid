@@ -76,7 +76,6 @@ namespace Murktid {
 
                 if(bothBarrels) {
                     // spawn two pellets per ray with left / right offset
-                    Debug.Log($"Ray origin: {ray.origin}");
                     Debug.DrawRay(ray.origin + -Context.motor.CharacterRight * .1f, ray.direction * radius, Color.blue, 5f);
                     Debug.DrawRay(ray.origin + Context.motor.CharacterRight * .1f, ray.direction * radius, Color.red, 5f);
 

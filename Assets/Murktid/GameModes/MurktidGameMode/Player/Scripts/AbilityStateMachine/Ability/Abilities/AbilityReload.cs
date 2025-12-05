@@ -29,10 +29,9 @@ namespace Murktid {
         }
 
         protected override void OnActivate() {
-            Debug.Log($"Activating Ability Reload");
             hasReloaded = false;
             Context.animatorBridge.Reload = true;
-            reloadTimestamp = Time.time + 1.75f;
+            reloadTimestamp = Time.time + 1.9f;
         }
 
         protected override void Tick(float deltaTime) {
