@@ -16,6 +16,10 @@ namespace Murktid {
                 return false;
             }
 
+            if(Context.input.Move.value.y <= 0f) {
+                return false;
+            }
+
             float jumpInputTimestamp = Context.input.Jump.pressedTimestamp;
             float timeSinceJumpPressed = Time.time - jumpInputTimestamp;
             bool wantsToJump = timeSinceJumpPressed < Context.settings.jumpPostGroundingGraceTime ||
