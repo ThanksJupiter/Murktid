@@ -7,10 +7,22 @@ public class PlayerSettings : ScriptableObject {
     [Header("Locomotion")]
     public float defaultMoveSpeed = 6f;
     public float sprintMoveSpeed = 12f;
+    public float sprintSlideSpeed = 18f;
 
     // mouse sensitivity basically, TODO do something about this (make editable in options)
     public float rotationSpeed = .15f;
     public float movementSharpness = 10f;
+    public float dodgeSlideMovementSharpness = 1f;
+
+    [Header("Dodge")]
+    public float dodgeSpeed = 16f;
+    public float dodgeDuration = .5f;
+
+    [Header("Crouch")]
+    public float standingCapsuleHeight = 2f;
+    public float crouchingCapsuleHeight = 1f;
+    public float capsuleRadius = .5f;
+    public float capsuleHeightLerpSpeed = 5f;
 
     [Header("Health")]
     public float maxHealth = 100f;
@@ -29,7 +41,9 @@ public class PlayerSettings : ScriptableObject {
     public float drag = .1f;
 
     [Header("Camera Settings")]
-    public float cameraHeight = 1.645f;
+    public float cameraHeightLerpSpeed = 5f;
+    public float standingCameraHeight = 1.645f;
+    public float crouchingCameraHeight = .9f;
     public float minVerticalLookAngle = -85f;
     public float maxVerticalLookAngle = 85f;
     public float cameraFollowSharpness = 1000f;

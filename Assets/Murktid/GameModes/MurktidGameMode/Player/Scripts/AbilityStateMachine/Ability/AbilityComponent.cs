@@ -15,12 +15,12 @@ namespace Murktid {
         }
 
         public void BlockAbility(AbilityTag blockingTag, object instigator) {
-            if(blockers.TryGetValue(instigator, out HashSet<AbilityTag> abilityTags)) {
+            if(!blockers.TryGetValue(instigator, out HashSet<AbilityTag> abilityTags)) {
                 abilityTags = new HashSet<AbilityTag>();
                 blockers.Add(instigator, abilityTags);
             }
 
-            abilityTags?.Add(blockingTag);
+            abilityTags.Add(blockingTag);
             blockedTags.Add(blockingTag);
 
             foreach(Ability ability in currentAbilities) {
@@ -56,7 +56,7 @@ namespace Murktid {
             blockedTags.Clear();
             foreach((_, HashSet<AbilityTag> blockedTags) in blockers) {
                 foreach(AbilityTag blockedTag in blockedTags) {
-                    blockedTags.Add(blockedTag);
+                    this.blockedTags.Add(blockedTag);
                 }
             }
         }

@@ -14,8 +14,8 @@ namespace Murktid {
 
         public void EquipNewWeapon(PlayerWeaponData newWeaponData) {
             if(currentWeaponData != null) {
-                currentWeaponData.loadedBullets.Dispose();
-                currentWeaponData.maxLoadedBullets.Dispose();
+                currentWeaponData.loadedBullets.OnCompleted();
+                currentWeaponData.maxLoadedBullets.OnCompleted();
             }
 
             currentWeaponData = newWeaponData;

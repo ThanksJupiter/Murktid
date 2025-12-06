@@ -17,12 +17,11 @@ namespace Murktid {
         }
 
         public override bool ShouldDeactivate() {
-
-            if(Context.IsGrounded) {
+            if(!Context.IsGrounded) {
                 return true;
             }
 
-            if(Context.input.Sprint.value) {
+            if(Context.input.Sprint.IsPressed) {
                 return false;
             }
 
@@ -31,10 +30,12 @@ namespace Murktid {
 
         protected override void OnActivate() {
             Context.ActiveMoveSpeed = Context.settings.sprintMoveSpeed;
+            Context.IsSprinting = true;
         }
 
         protected override void OnDeactivate() {
             Context.ActiveMoveSpeed = Context.settings.defaultMoveSpeed;
+            Context.IsSprinting = false;
         }
     }
 }

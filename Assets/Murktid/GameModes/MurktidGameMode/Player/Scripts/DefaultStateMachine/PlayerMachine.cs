@@ -60,7 +60,7 @@ namespace Murktid {
             context.cameraReference.transform.rotation = targetRotation;
 
             context.cameraReference.transform.position = Vector3.Lerp(context.cameraReference.transform.position,
-                context.transform.position + Vector3.up * context.settings.cameraHeight,
+                context.transform.position + Vector3.up * context.settings.standingCameraHeight,
                 1f - Mathf.Exp(-context.settings.cameraFollowSharpness * Time.deltaTime));
         }
 

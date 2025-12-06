@@ -15,6 +15,10 @@ namespace Murktid {
             abilityComponent.AddDefaultAbility<AbilityGroundMovement>();
             abilityComponent.AddDefaultAbility<AbilityJump>();
             abilityComponent.AddDefaultAbility<AbilitySprint>();
+            abilityComponent.AddDefaultAbility<AbilitySprintSlide>();
+            abilityComponent.AddDefaultAbility<AbilityCrouch>();
+            abilityComponent.AddDefaultAbility<AbilityDodge>();
+            abilityComponent.AddDefaultAbility<AbilityDodgeSlide>();
             abilityComponent.AddDefaultAbility<AbilityLook>();
             abilityComponent.AddDefaultAbility<AbilityAirMovement>();
             abilityComponent.AddDefaultAbility<AbilityFalling>();

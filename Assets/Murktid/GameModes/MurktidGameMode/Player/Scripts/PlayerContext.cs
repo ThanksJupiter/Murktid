@@ -43,5 +43,13 @@ namespace Murktid {
             get => movementData.activeMoveSpeed;
             set => movementData.activeMoveSpeed = value;
         }
+        public float CapsuleHeight { get; set; }
+        public float TargetCapsuleHeight { get; set; }
+        public float TargetCameraHeight { get; set; }
+        public bool IsSprinting { get; set; }
+        public bool IsSprintSliding { get; set; }
+        public bool IsDodging { get; set; }
+        public bool IsDodgeSliding { get; set; }
+        public Vector3 DodgeDirection { get; set; }
     }
 }

@@ -23,6 +23,7 @@ namespace Murktid {
         public Input<Vector2> Look { get; set; }
         public Input<bool> PrimaryAction { get; set; }
         public Input<bool> SecondaryAction { get; set; }
+        public Input<bool> Dodge { get; set; }
         public Input<bool> Jump { get; set; }
         public Input<bool> Crouch { get; set; }
         public Input<bool> Sprint { get; set; }

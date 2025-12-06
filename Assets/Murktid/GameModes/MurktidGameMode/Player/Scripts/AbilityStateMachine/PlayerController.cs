@@ -27,6 +27,8 @@ namespace Murktid {
 
             StateMachine.PushState<StateDefault>();
             Context.ActiveMoveSpeed = Context.settings.defaultMoveSpeed;
+            Context.TargetCameraHeight = Context.settings.standingCameraHeight;
+            Context.TargetCapsuleHeight = Context.settings.standingCapsuleHeight;
             playerMovementController.Initialize(Context, abilityComponent);
 
             if(Context.cameraReference.defaultSecondaryWeaponReference != null) {
@@ -49,6 +51,10 @@ namespace Murktid {
             Context.movementData.moveInputVector = cameraPlanarRotation * moveInputVector;*/
         }
         public void Tick(float deltaTime) {
+
+            Context.CapsuleHeight = Mathf.Lerp(Context.CapsuleHeight, Context.TargetCapsuleHeight, 1f - Mathf.Exp(-Context.settings.capsuleHeightLerpSpeed * deltaTime));
+            Context.motor.SetCapsuleDimensions(Context.settings.capsuleRadius, Context.CapsuleHeight, Context.CapsuleHeight * .5f);
+
             StateMachine.Tick(deltaTime);
         }
 

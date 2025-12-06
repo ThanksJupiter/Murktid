@@ -16,6 +16,7 @@ namespace Murktid {
         public Input<Vector2> Look { get; set; } = new();
         public Input<bool> PrimaryAction { get; set; } = new();
         public Input<bool> SecondaryAction { get; set; } = new();
+        public Input<bool> Dodge { get; set; } = new();
         public Input<bool> Jump { get; set; } = new();
         public Input<bool> Crouch { get; set; } = new();
         public Input<bool> Sprint { get; set; } = new();
@@ -27,17 +28,29 @@ namespace Murktid {
         public void Initialize() { }
         public void Tick() { }
         public void LateTick() {
+            Move.wasPressedThisFrame = false;
+            Move.wasReleasedThisFrame = false;
+
+            Look.wasPressedThisFrame = false;
+            Look.wasReleasedThisFrame = false;
+
             PrimaryAction.wasPressedThisFrame = false;
             PrimaryAction.wasReleasedThisFrame = false;
 
             SecondaryAction.wasPressedThisFrame = false;
             SecondaryAction.wasReleasedThisFrame = false;
 
-            Move.wasPressedThisFrame = false;
-            Move.wasReleasedThisFrame = false;
+            Dodge.wasPressedThisFrame = false;
+            Dodge.wasReleasedThisFrame = false;
 
-            Look.wasPressedThisFrame = false;
-            Look.wasReleasedThisFrame = false;
+            Jump.wasPressedThisFrame = false;
+            Jump.wasReleasedThisFrame = false;
+
+            Crouch.wasPressedThisFrame = false;
+            Crouch.wasReleasedThisFrame = false;
+
+            Sprint.wasPressedThisFrame = false;
+            Sprint.wasReleasedThisFrame = false;
 
             EquipPrimaryWeapon.wasPressedThisFrame = false;
             EquipPrimaryWeapon.wasReleasedThisFrame = false;
@@ -125,6 +138,16 @@ namespace Murktid {
             } else if(context.canceled) {
                 Sprint.value = false;
                 Sprint.wasReleasedThisFrame = true;
+            }
+        }
+        public void OnDodge(InputAction.CallbackContext context) {
+            if(context.performed) {
+                Dodge.pressedTimestamp = Time.time;
+                Dodge.value = true;
+                Dodge.wasPressedThisFrame = true;
+            } else if(context.canceled) {
+                Dodge.value = false;
+                Dodge.wasReleasedThisFrame = true;
             }
         }
         public void OnJump(InputAction.CallbackContext context) {
