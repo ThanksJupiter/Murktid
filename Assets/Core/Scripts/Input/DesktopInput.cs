@@ -1,15 +1,28 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Murktid {
 
-    public class DesktopInput : IApplicationLifecycle, IInput, PlayerInputActions.ICharacterActions {
+    public class DesktopInput : IApplicationLifecycle, IInput, PlayerInputActions.ICharacterActions, PlayerInputActions.ICoolCharacterActions {
 
         private readonly PlayerInputActions inputActions = new();
 
         public DesktopInput(DesktopInputSettings inputSettings) {
-            inputActions.Character.SetCallbacks(this);
-            inputActions.Character.Enable();
+
+            switch(inputSettings.inputType) {
+
+                case InputType.Default:
+                    inputActions.Character.SetCallbacks(this);
+                    inputActions.Character.Enable();
+                    break;
+                case InputType.Cool:
+                    inputActions.CoolCharacter.SetCallbacks(this);
+                    inputActions.CoolCharacter.Enable();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         public Input<Vector2> Move { get; set; } = new();
