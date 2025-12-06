@@ -46,16 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 751c9895702ad7640a447567106ecdc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerWeaponReference
-  weaponData:
-    firePoint: {fileID: 8150899751689612775}
-    ADSDamage: 10
-    ADSRange: 25
-    ADSRadius: 0.5
-    hipfireDamage: 25
-    hipfireRange: 15
-    hipfireRadius: 5
-    recoil: 6
-    fireRate: 0.1
+  config: {fileID: 11400000, guid: bab1e8dcddb42bf48b94de3dc5e55f0a, type: 2}
+  firePoint: {fileID: 8150899751689612775}
 --- !u!1 &8654332707861419694
 GameObject:
   m_ObjectHideFlags: 0

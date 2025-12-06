@@ -12,12 +12,12 @@ namespace Murktid {
                 return false;
             }
 
-            if(Context.playerEquipmentData.currentWeapon.weaponData.loadedBullets >= Context.playerEquipmentData.currentWeapon.weaponData.maxLoadedBullets) {
+            if(Context.playerEquipmentData.CurrentWeapon.LoadedBullets >= Context.playerEquipmentData.CurrentWeapon.MaxLoadedBullets) {
                 return false;
             }
 
             // if try to shoot with 0 bullets
-            bool emptyReload = Context.playerEquipmentData.currentWeapon.weaponData.loadedBullets <= 0 &&
+            bool emptyReload = Context.playerEquipmentData.CurrentWeapon.LoadedBullets <= 0 &&
                 Context.recoilOffset <= 1f;
 
             bool reloadInput = Context.input.Reload.wasPressedThisFrame || emptyReload;
@@ -36,7 +36,8 @@ namespace Murktid {
 
         protected override void Tick(float deltaTime) {
             if(Time.time >= reloadTimestamp) {
-                Context.playerEquipmentData.currentWeapon.weaponData.loadedBullets = Context.playerEquipmentData.currentWeapon.weaponData.maxLoadedBullets;
+                Context.playerEquipmentData.CurrentWeapon.Reload();
+                //Context.playerEquipmentData.CurrentWeapon.LoadedBullets = Context.playerEquipmentData.CurrentWeapon.MaxLoadedBullets;
                 hasReloaded = true;
             }
 

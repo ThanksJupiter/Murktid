@@ -1,3 +1,4 @@
+using R3;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -10,14 +11,15 @@ namespace Murktid {
 
     [System.Serializable]
     public class PlayerEquipmentData {
+
         public WeaponType currentWeaponType = WeaponType.Primary;
+        public PlayerWeaponData CurrentWeapon { get => currentWeapon.Value; set => currentWeapon.Value = value; }
+        public ReactiveProperty<PlayerWeaponData> currentWeapon = new ReactiveProperty<PlayerWeaponData>();
 
         [HideInInspector]
-        public PlayerWeaponReference currentPrimaryWeapon;
+        public PlayerWeaponData currentPrimaryWeapon;
         [HideInInspector]
-        public PlayerWeaponReference currentSecondaryWeapon;
-
-        public PlayerWeaponReference currentWeapon = null;
+        public PlayerWeaponData currentSecondaryWeapon;
 
         [Header("Defaults")]
         public PlayerWeaponReference defaultPrimaryWeaponReferencePrefab;

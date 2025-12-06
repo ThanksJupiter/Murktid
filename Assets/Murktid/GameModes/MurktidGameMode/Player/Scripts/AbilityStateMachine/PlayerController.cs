@@ -10,11 +10,16 @@ namespace Murktid {
         private readonly PlayerMovementController playerMovementController = new();
         public PlayerAbilityComponent abilityComponent;
 
+        private PlayerWeaponSystem weaponSystem;
+
         public PlayerController(PlayerReference playerReference) {
             Context = playerReference.context;
             abilityComponent = new(Context);
             StateMachine = new(abilityComponent);
             Context.health = new(playerReference.healthDisplayReference, playerReference.context.settings);
+            Context.ammoDisplay = new(playerReference);
+            weaponSystem = new();
+            weaponSystem.Initialize(playerReference);
         }
 
         public void Initialize() {
@@ -25,8 +30,10 @@ namespace Murktid {
             playerMovementController.Initialize(Context, abilityComponent);
 
             if(Context.cameraReference.defaultSecondaryWeaponReference != null) {
-                Context.playerEquipmentData.currentSecondaryWeapon = Context.cameraReference.defaultSecondaryWeaponReference;
-                Context.playerEquipmentData.currentSecondaryWeapon.gameObject.SetActive(false);
+
+                PlayerWeaponData newWeaponData = new(Context.cameraReference.defaultSecondaryWeaponReference);
+                Context.playerEquipmentData.currentSecondaryWeapon = newWeaponData;
+                Context.playerEquipmentData.currentSecondaryWeapon.reference.gameObject.SetActive(false);
             }
         }
 

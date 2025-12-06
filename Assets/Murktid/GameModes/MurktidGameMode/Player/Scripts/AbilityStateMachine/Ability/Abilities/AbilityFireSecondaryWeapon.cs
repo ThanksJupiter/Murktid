@@ -15,7 +15,7 @@ namespace Murktid {
                 return false;
             }
 
-            if(Context.playerEquipmentData.currentWeapon.weaponData.loadedBullets <= 0) {
+            if(Context.playerEquipmentData.CurrentWeapon.LoadedBullets <= 0) {
                 return false;
             }
 
@@ -50,39 +50,35 @@ namespace Murktid {
         }
 
         protected override void OnActivate() {
-            fireRateTimestamp = Time.time + Context.playerEquipmentData.currentWeapon.weaponData.fireRate;
+            fireRateTimestamp = Time.time + Context.playerEquipmentData.CurrentWeapon.config.fireRate;
             didShoot = false;
             Context.animatorBridge.Shoot = true;
 
-            Context.recoilOffset += Context.playerEquipmentData.currentWeapon.weaponData.recoil;
+            Context.recoilOffset += Context.playerEquipmentData.CurrentWeapon.config.recoil;
 
-            bool bothBarrels = !Context.input.SecondaryAction.IsPressed && Context.playerEquipmentData.currentWeapon.weaponData.loadedBullets >= 2;
+            bool bothBarrels = !Context.input.SecondaryAction.IsPressed && Context.playerEquipmentData.CurrentWeapon.HasLoadedAmmo(2);
             if(bothBarrels) {
-                Context.playerEquipmentData.currentWeapon.weaponData.loadedBullets -= 2;
+                Context.playerEquipmentData.CurrentWeapon.ConsumeAmmo(2);
             }
             else {
-                Context.playerEquipmentData.currentWeapon.weaponData.loadedBullets -= 1;
+                Context.playerEquipmentData.CurrentWeapon.ConsumeAmmo(1);
             }
 
             Vector3 origin = Context.cameraReference.transform.position;
             Vector3 direction = Context.cameraReference.transform.forward;
-            float maxDistance = Context.playerEquipmentData.currentWeapon.weaponData.ADSRange;
-            float radius = Context.playerEquipmentData.currentWeapon.weaponData.ADSRadius;
-            float damage = Context.playerEquipmentData.currentWeapon.weaponData.ADSDamage;
+            float maxDistance = Context.playerEquipmentData.CurrentWeapon.config.ADSRange;
+            float radius = Context.playerEquipmentData.CurrentWeapon.config.ADSRadius;
+            float damage = Context.playerEquipmentData.CurrentWeapon.config.ADSDamage;
 
             for(int i = 0; i < Context.shotgunCrosshair.PelletAmount; i++) {
                 Ray ray = Context.shotgunCrosshair.GetPelletScreenPointRay(i, Context.cameraReference.camera);
-                //Debug.DrawRay(ray.origin, ray.direction * maxDistance, Color.red, 5f);
 
+                // spawn double pellets with origin offset left / right
                 if(bothBarrels) {
-                    // spawn two pellets per ray with left / right offset
-                    Debug.DrawRay(ray.origin + -Context.motor.CharacterRight * .1f, ray.direction * radius, Color.blue, 5f);
-                    Debug.DrawRay(ray.origin + Context.motor.CharacterRight * .1f, ray.direction * radius, Color.red, 5f);
-
                     SpawnBulletData spawnFirstBulletData = new() {
                         spawnPosition = ray.origin + -Context.motor.CharacterRight * .1f,
                         spawnRotation = Quaternion.LookRotation(ray.direction),
-                        initialVelocity = Context.playerEquipmentData.currentWeapon.weaponData.bulletVelocity,
+                        initialVelocity = Context.playerEquipmentData.CurrentWeapon.config.bulletVelocity,
                         layerMask = Context.attackLayerMask,
                         damage = damage
                     };
@@ -92,7 +88,7 @@ namespace Murktid {
                     SpawnBulletData spawnSecondBulletData = new() {
                         spawnPosition = ray.origin + Context.motor.CharacterRight * .1f,
                         spawnRotation = Quaternion.LookRotation(ray.direction),
-                        initialVelocity = Context.playerEquipmentData.currentWeapon.weaponData.bulletVelocity,
+                        initialVelocity = Context.playerEquipmentData.CurrentWeapon.config.bulletVelocity,
                         layerMask = Context.attackLayerMask,
                         damage = damage
                     };
@@ -103,7 +99,7 @@ namespace Murktid {
                     SpawnBulletData spawnBulletData = new() {
                         spawnPosition = ray.origin,
                         spawnRotation = Quaternion.LookRotation(ray.direction),
-                        initialVelocity = Context.playerEquipmentData.currentWeapon.weaponData.bulletVelocity,
+                        initialVelocity = Context.playerEquipmentData.CurrentWeapon.config.bulletVelocity,
                         layerMask = Context.attackLayerMask,
                         damage = damage
                     };

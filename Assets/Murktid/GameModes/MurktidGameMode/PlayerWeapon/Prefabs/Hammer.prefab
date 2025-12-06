@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 751c9895702ad7640a447567106ecdc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerWeaponReference
+  config: {fileID: 11400000, guid: 1b86509b2dcc72d44b71548eca9abd47, type: 2}
+  firePoint: {fileID: 0}
 --- !u!1001 &2566828857503540144
 PrefabInstance:
   m_ObjectHideFlags: 0

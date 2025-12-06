@@ -1,26 +1,62 @@
+using R3;
 using UnityEngine;
 
 namespace Murktid {
 
-    [System.Serializable]
     public class PlayerWeaponData {
+        public int LoadedBullets { get => loadedBullets.Value; set => loadedBullets.Value = value; }
+        public int MaxLoadedBullets { get => maxLoadedBullets.Value; set => maxLoadedBullets.Value = value; }
 
-        public Transform firePoint;
-        public float bulletVelocity = 50f;
+        public ReactiveProperty<int> loadedBullets;
+        public ReactiveProperty<int> maxLoadedBullets;
+        public ReactiveProperty<int> bulletsInReserve;
+        public ReactiveProperty<int> maxBulletsInReserve;
 
-        // damage
-        public float ADSDamage = 10f;
-        public float ADSRange = 25f;
-        public float ADSRadius = .5f;
+        public PlayerWeaponConfig config;
+        public PlayerWeaponReference reference;
 
-        public float hipfireDamage = 25f;
-        public float hipfireRange = 15f;
-        public float hipfireRadius = 5f;
+        public PlayerWeaponData(PlayerWeaponReference weaponReference) {
+            reference = weaponReference;
+            config = weaponReference.config;
 
-        public float recoil = 10f;
-        public float fireRate = .25f;
+            loadedBullets = new ReactiveProperty<int>(weaponReference.config.maxLoadedBullets);
+            maxLoadedBullets = new ReactiveProperty<int>(weaponReference.config.maxLoadedBullets);
+            bulletsInReserve = new ReactiveProperty<int>(weaponReference.config.maxBulletsInReserve);
+            maxBulletsInReserve = new ReactiveProperty<int>(weaponReference.config.maxBulletsInReserve);
+        }
 
-        public int loadedBullets = 2;
-        public int maxLoadedBullets = 2;
+        public void ConsumeAmmo(int amount) {
+            loadedBullets.Value -= amount;
+        }
+
+        public bool HasLoadedAmmo(int checkThreshold = 0) {
+
+            if(checkThreshold == 0) {
+                return loadedBullets.Value > 0;
+            }
+
+            return loadedBullets.Value >= checkThreshold;
+        }
+
+        public bool HasAmmoInReserve(int checkThreshold = 0) {
+            if(checkThreshold == 0) {
+                return bulletsInReserve.Value > 0;
+            }
+
+            return bulletsInReserve.Value >= checkThreshold;
+        }
+
+        public void Reload() {
+            int bulletsToLoad = maxLoadedBullets.Value - loadedBullets.Value;
+
+            if(bulletsInReserve.Value >= bulletsToLoad) {
+                loadedBullets.Value += bulletsToLoad;
+                bulletsInReserve.Value -= bulletsToLoad;
+                return;
+            }
+
+            loadedBullets.Value += bulletsInReserve.Value;
+            bulletsInReserve.Value = 0;
+        }
     }
 }

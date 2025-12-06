@@ -137,6 +137,16 @@ namespace Murktid {
                 Jump.wasReleasedThisFrame = true;
             }
         }
+        public void OnCrouch(InputAction.CallbackContext context) {
+            if(context.performed) {
+                Crouch.pressedTimestamp = Time.time;
+                Crouch.value = true;
+                Crouch.wasPressedThisFrame = true;
+            } else if(context.canceled) {
+                Crouch.value = false;
+                Crouch.wasReleasedThisFrame = true;
+            }
+        }
         public void OnReload(InputAction.CallbackContext context) {
             if(context.performed) {
                 Reload.pressedTimestamp = Time.time;

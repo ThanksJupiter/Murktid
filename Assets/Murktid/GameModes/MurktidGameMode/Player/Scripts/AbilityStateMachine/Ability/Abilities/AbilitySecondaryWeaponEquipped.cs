@@ -23,20 +23,23 @@ namespace Murktid {
 
             // animate the previous one down ._.
 
-            if(Context.playerEquipmentData.currentWeapon != null) {
-                Context.playerEquipmentData.currentWeapon.gameObject.SetActive(false);
+            if(Context.playerEquipmentData.CurrentWeapon != null) {
+                Context.playerEquipmentData.CurrentWeapon.reference.gameObject.SetActive(false);
             }
 
             if(Context.playerEquipmentData.currentSecondaryWeapon == null) {
-                Context.playerEquipmentData.currentSecondaryWeapon = Object.Instantiate(
-                    Context.playerEquipmentData.defaultSecondaryWeaponReferencePrefab,
+
+                PlayerWeaponReference newWeaponReference = Object.Instantiate(
+                    Context.playerEquipmentData.defaultPrimaryWeaponReferencePrefab,
                     Context.cameraReference.weaponHolder);
 
-                Context.playerEquipmentData.currentWeapon = Context.playerEquipmentData.currentSecondaryWeapon;
+                PlayerWeaponData newWeaponData = new(newWeaponReference);
+                Context.playerEquipmentData.currentSecondaryWeapon = newWeaponData;
+                Context.playerEquipmentData.CurrentWeapon = Context.playerEquipmentData.currentSecondaryWeapon;
             }
             else {
-                Context.playerEquipmentData.currentWeapon = Context.playerEquipmentData.currentSecondaryWeapon;
-                Context.playerEquipmentData.currentWeapon.gameObject.SetActive(true);
+                Context.playerEquipmentData.CurrentWeapon = Context.playerEquipmentData.currentSecondaryWeapon;
+                Context.playerEquipmentData.CurrentWeapon.reference.gameObject.SetActive(true);
             }
 
             if(Context.input.SecondaryAction.IsPressed) {
@@ -47,9 +50,9 @@ namespace Murktid {
                 Context.shotgunCrosshair.SetIsHipfire();
             }
 
-            Context.playerEquipmentData.currentPrimaryWeapon.transform.localPosition =
+            Context.playerEquipmentData.currentPrimaryWeapon.reference.transform.localPosition =
                 Context.cameraReference.tmpShotgunTransform.localPosition;
-            Context.playerEquipmentData.currentPrimaryWeapon.transform.localRotation =
+            Context.playerEquipmentData.currentPrimaryWeapon.reference.transform.localRotation =
                 Context.cameraReference.tmpShotgunTransform.localRotation;
 
             // animate the stuff in

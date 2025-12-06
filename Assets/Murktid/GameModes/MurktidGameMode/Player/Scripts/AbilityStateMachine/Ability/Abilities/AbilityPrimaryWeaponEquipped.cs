@@ -23,25 +23,28 @@ namespace Murktid {
 
             // animate the previous one down ._.
 
-            if(Context.playerEquipmentData.currentWeapon != null) {
-                Context.playerEquipmentData.currentWeapon.gameObject.SetActive(false);
+            if(Context.playerEquipmentData.CurrentWeapon != null) {
+                Context.playerEquipmentData.CurrentWeapon.reference.gameObject.SetActive(false);
             }
 
             if(Context.playerEquipmentData.currentPrimaryWeapon == null) {
-                Context.playerEquipmentData.currentPrimaryWeapon = Object.Instantiate(
+
+                PlayerWeaponReference newWeaponReference = Object.Instantiate(
                     Context.playerEquipmentData.defaultPrimaryWeaponReferencePrefab,
                     Context.cameraReference.weaponHolder);
 
-                Context.playerEquipmentData.currentWeapon = Context.playerEquipmentData.currentPrimaryWeapon;
+                PlayerWeaponData newWeaponData = new(newWeaponReference);
+                Context.playerEquipmentData.currentPrimaryWeapon = newWeaponData;
+                Context.playerEquipmentData.CurrentWeapon = Context.playerEquipmentData.currentPrimaryWeapon;
             }
             else {
-                Context.playerEquipmentData.currentWeapon = Context.playerEquipmentData.currentPrimaryWeapon;
-                Context.playerEquipmentData.currentWeapon.gameObject.SetActive(true);
+                Context.playerEquipmentData.CurrentWeapon = Context.playerEquipmentData.currentPrimaryWeapon;
+                Context.playerEquipmentData.CurrentWeapon.reference.gameObject.SetActive(true);
             }
 
-            Context.playerEquipmentData.currentPrimaryWeapon.transform.localPosition =
+            Context.playerEquipmentData.currentPrimaryWeapon.reference.transform.localPosition =
                 Context.cameraReference.tmpHammerTransform.localPosition;
-            Context.playerEquipmentData.currentPrimaryWeapon.transform.localRotation =
+            Context.playerEquipmentData.currentPrimaryWeapon.reference.transform.localRotation =
                 Context.cameraReference.tmpHammerTransform.localRotation;
 
             // animate the stuff in

@@ -17,6 +17,7 @@ namespace Murktid {
         public PlayerHealth health;
         public IInput input;
 
+        public AmmoDisplay ammoDisplay;
         public BulletSystem bulletSystem;
         public LayerMask attackLayerMask;
         public ShotgunCrosshair shotgunCrosshair;
