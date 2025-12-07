@@ -400,6 +400,9 @@ MonoBehaviour:
     playerMask:
       serializedVersion: 2
       m_Bits: 64
+    enemyMask:
+      serializedVersion: 2
+      m_Bits: 128
     targetPlayer: {fileID: 0}
     enemyPrototypeBehaviour:
       eyeMeshRenderer: {fileID: 5654192099807567538}

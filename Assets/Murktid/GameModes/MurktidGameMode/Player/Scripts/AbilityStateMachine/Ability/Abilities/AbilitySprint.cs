@@ -13,6 +13,10 @@ namespace Murktid {
                 return false;
             }
 
+            if(Context.input.Move.value.y <= 0f) {
+                return false;
+            }
+
             return true;
         }
 
@@ -31,11 +35,13 @@ namespace Murktid {
         protected override void OnActivate() {
             Context.ActiveMoveSpeed = Context.settings.sprintMoveSpeed;
             Context.IsSprinting = true;
+            Context.CurrentFOVTarget = Context.settings.sprintFOV;
         }
 
         protected override void OnDeactivate() {
             Context.ActiveMoveSpeed = Context.settings.defaultMoveSpeed;
             Context.IsSprinting = false;
+            Context.CurrentFOVTarget = Context.settings.defaultFOV;
         }
     }
 }

@@ -13,6 +13,7 @@ public class PlayerSettings : ScriptableObject {
     public float rotationSpeed = .15f;
     public float movementSharpness = 10f;
     public float dodgeSlideMovementSharpness = 1f;
+    public float sprintSlideMovementSharpness = 3f;
 
     [Header("Dodge")]
     public float dodgeSpeed = 16f;
@@ -47,4 +48,7 @@ public class PlayerSettings : ScriptableObject {
     public float minVerticalLookAngle = -85f;
     public float maxVerticalLookAngle = 85f;
     public float cameraFollowSharpness = 1000f;
+    public float defaultFOV = 70f;
+    public float sprintFOV = 80f;
+    public float FOVLerpSpeed = 5f;
 }

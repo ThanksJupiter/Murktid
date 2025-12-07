@@ -12,6 +12,7 @@ namespace Murktid {
         public GameObject gameObject;
         public EnemySettings settings;
         public LayerMask playerMask;
+        public LayerMask enemyMask;
         public EnemyAnimatorBridge animatorBridge;
         public EnemyHealth health;
 
