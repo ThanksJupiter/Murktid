@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: EnemySettings
   m_EditorClassIdentifier: Assembly-CSharp::Murktid.EnemySettings
   defaultMoveSpeed: 10
+  maxHealth: 100
   aggroRange: 15
   attackRange: 2.1
   attackRate: 3
+  rotateToTargetRate: 3

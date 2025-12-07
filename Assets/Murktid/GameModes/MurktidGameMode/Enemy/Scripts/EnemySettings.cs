@@ -6,6 +6,9 @@ namespace Murktid {
     public class EnemySettings : ScriptableObject {
         public float defaultMoveSpeed = 10f;
 
+        [Header("Health")]
+        public float maxHealth = 50f;
+
         [Header("Combat")]
         public float aggroRange = 15f;
         public float attackRange = 2.1f;

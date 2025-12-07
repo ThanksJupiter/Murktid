@@ -13,6 +13,7 @@ namespace Murktid {
         public EnemySettings settings;
         public LayerMask playerMask;
         public EnemyAnimatorBridge animatorBridge;
+        public EnemyHealth health;
 
         // Target
         public bool HasTarget => targetPlayer != null;

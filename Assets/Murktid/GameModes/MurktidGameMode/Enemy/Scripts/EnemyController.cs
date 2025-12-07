@@ -17,6 +17,7 @@ namespace Murktid {
         public void Initialize(EnemyReference enemyReference) {
             Context.animatorBridge = new(enemyReference.animator);
             Context.gameObject = enemyReference.gameObject;
+            Context.health = new(enemyReference);
             StateMachine.PushState<EnemyStateDefault>();
         }
 

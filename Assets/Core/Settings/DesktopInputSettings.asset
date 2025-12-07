@@ -22,6 +22,7 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+  inputType: 1
   movementAction:
     m_Name: Movement
     m_Type: 0

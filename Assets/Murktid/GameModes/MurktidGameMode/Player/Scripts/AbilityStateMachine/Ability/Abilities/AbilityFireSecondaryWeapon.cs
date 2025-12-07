@@ -69,6 +69,7 @@ namespace Murktid {
             float maxDistance = Context.playerEquipmentData.CurrentWeapon.config.ADSRange;
             float radius = Context.playerEquipmentData.CurrentWeapon.config.ADSRadius;
             float damage = Context.playerEquipmentData.CurrentWeapon.config.ADSDamage;
+            float randomSpeedModifier = Context.playerEquipmentData.CurrentWeapon.config.bulletVelocityRandomize;
 
             for(int i = 0; i < Context.shotgunCrosshair.PelletAmount; i++) {
                 Ray ray = Context.shotgunCrosshair.GetPelletScreenPointRay(i, Context.cameraReference.camera);
@@ -78,7 +79,7 @@ namespace Murktid {
                     SpawnBulletData spawnFirstBulletData = new() {
                         spawnPosition = ray.origin + -Context.motor.CharacterRight * .1f,
                         spawnRotation = Quaternion.LookRotation(ray.direction),
-                        initialVelocity = Context.playerEquipmentData.CurrentWeapon.config.bulletVelocity,
+                        initialVelocity = Context.playerEquipmentData.CurrentWeapon.config.bulletVelocity + Random.Range(-randomSpeedModifier, randomSpeedModifier),
                         layerMask = Context.attackLayerMask,
                         damage = damage
                     };
@@ -88,7 +89,7 @@ namespace Murktid {
                     SpawnBulletData spawnSecondBulletData = new() {
                         spawnPosition = ray.origin + Context.motor.CharacterRight * .1f,
                         spawnRotation = Quaternion.LookRotation(ray.direction),
-                        initialVelocity = Context.playerEquipmentData.CurrentWeapon.config.bulletVelocity,
+                        initialVelocity = Context.playerEquipmentData.CurrentWeapon.config.bulletVelocity + Random.Range(-randomSpeedModifier, randomSpeedModifier),
                         layerMask = Context.attackLayerMask,
                         damage = damage
                     };
@@ -99,7 +100,7 @@ namespace Murktid {
                     SpawnBulletData spawnBulletData = new() {
                         spawnPosition = ray.origin,
                         spawnRotation = Quaternion.LookRotation(ray.direction),
-                        initialVelocity = Context.playerEquipmentData.CurrentWeapon.config.bulletVelocity,
+                        initialVelocity = Context.playerEquipmentData.CurrentWeapon.config.bulletVelocity + Random.Range(-randomSpeedModifier, randomSpeedModifier),
                         layerMask = Context.attackLayerMask,
                         damage = damage
                     };

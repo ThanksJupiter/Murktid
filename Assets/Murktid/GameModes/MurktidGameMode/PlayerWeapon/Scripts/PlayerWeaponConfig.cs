@@ -7,6 +7,7 @@ namespace Murktid {
     public class PlayerWeaponConfig : ScriptableObject {
 
         public float bulletVelocity = 50f;
+        public float bulletVelocityRandomize = 10f;
 
         // damage
         public float ADSDamage = 10f;

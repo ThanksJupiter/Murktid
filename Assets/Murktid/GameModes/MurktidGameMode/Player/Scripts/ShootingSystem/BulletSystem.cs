@@ -91,9 +91,13 @@ namespace Murktid {
                 return true;
             }
 
+            bullet.hitParticleSystem.Play();
+            //bullet.data.shouldBeReturnedToPool = true;
+            bullet.data.speed = 0f;
+            bullet.data.bulletDespawnTimestamp = Time.time + 2f;
             // hit walls & get recycled
 
-            return false;
+            return true;
         }
 
         private void OnBulletHitTarget(BulletReference bullet, ITarget target) {
