@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0cbbe61b16a6cd4698a0a5d4e701623, type: 3}
   m_Name: PlayerSettings
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovementSettings
-  defaultMoveSpeed: 5
-  sprintMoveSpeed: 7
+  defaultMoveSpeed: 4
+  sprintMoveSpeed: 5.5
   sprintSlideSpeed: 12
   rotationSpeed: 0.15
   movementSharpness: 10
-  dodgeSlideMovementSharpness: 3
-  dodgeSpeed: 14
+  dodgeSlideMovementSharpness: 5
+  sprintSlideMovementSharpness: 3
+  dodgeSpeed: 12
   dodgeDuration: 0.15
   standingCapsuleHeight: 2
   crouchingCapsuleHeight: 1

@@ -27,6 +27,12 @@ namespace Murktid {
             set => animator.SetBool(Param.reload, value);
         }
 
+        public bool IsSprinting
+        {
+            get => animator.GetBool(Param.isSprinting);
+            set => animator.SetBool(Param.isSprinting, value);
+        }
+
         public bool IsInRangedLayer => animator.GetCurrentAnimatorStateInfo(Layer.ranged).shortNameHash != Param.empty;
         public bool IsInRangedFireLayer => animator.GetCurrentAnimatorStateInfo(Layer.rangedFire).shortNameHash != Param.empty;
         public bool IsInMeleeLayer => animator.GetCurrentAnimatorStateInfo(Layer.melee).shortNameHash != Param.empty;
@@ -44,6 +50,7 @@ namespace Murktid {
             public static readonly int isAds = Animator.StringToHash("IsADS");
             public static readonly int shoot = Animator.StringToHash("Shoot");
             public static readonly int reload = Animator.StringToHash("Reload");
+            public static readonly int isSprinting = Animator.StringToHash("IsSprinting");
         }
     }
 }

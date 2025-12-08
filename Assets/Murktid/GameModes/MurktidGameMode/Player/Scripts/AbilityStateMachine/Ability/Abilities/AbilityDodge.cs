@@ -4,6 +4,7 @@ namespace Murktid {
 
     public class AbilityDodge : PlayerAbility {
 
+        private bool setVelocity = true;
         private bool hasDodged = false;
         private float dodgeCompleteTimestamp = float.MinValue;
 
@@ -24,6 +25,7 @@ namespace Murktid {
         }
 
         protected override void OnActivate() {
+            setVelocity = true;
             BlockAbility(AbilityTags.movement, this);
             hasDodged = false;
             dodgeCompleteTimestamp = Time.time + Context.settings.dodgeDuration;
@@ -57,6 +59,12 @@ namespace Murktid {
         public override void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime) {
             if (!Context.IsGrounded)
             {
+                return;
+            }
+
+            if(setVelocity) {
+                currentVelocity = Context.DodgeDirection * Context.settings.sprintSlideSpeed;
+                setVelocity = false;
                 return;
             }
 

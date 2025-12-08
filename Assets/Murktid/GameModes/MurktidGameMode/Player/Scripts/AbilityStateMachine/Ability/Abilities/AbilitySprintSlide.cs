@@ -31,11 +31,12 @@ namespace Murktid {
             BlockAbility(AbilityTags.movement, this);
             Context.IsSprintSliding = true;
             Context.DodgeDirection = Context.motor.Velocity.normalized;
-
+            //Context.CurrentFOVTarget = Context.settings.sprintFOV;
         }
 
         protected override void OnDeactivate() {
             UnblockAbilitiesByInstigator(this);
+            //Context.CurrentFOVTarget = Context.settings.defaultFOV;
         }
 
         public override void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime) {
@@ -62,7 +63,7 @@ namespace Murktid {
             Vector3 targetMovementVelocity = reorientedInput * Context.settings.sprintMoveSpeed;
 
             // Smooth movement Velocity
-            currentVelocity = Vector3.Lerp(currentVelocity, targetMovementVelocity, 1f - Mathf.Exp(-Context.settings.dodgeSlideMovementSharpness * deltaTime));
+            currentVelocity = Vector3.Lerp(currentVelocity, targetMovementVelocity, 1f - Mathf.Exp(-Context.settings.sprintSlideMovementSharpness * deltaTime));
 
             if(currentVelocity.magnitude <= Context.settings.sprintMoveSpeed + 1) {
                 Context.IsSprintSliding = false;

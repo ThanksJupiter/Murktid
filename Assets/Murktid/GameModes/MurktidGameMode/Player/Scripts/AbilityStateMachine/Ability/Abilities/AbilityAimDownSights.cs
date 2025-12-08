@@ -16,6 +16,11 @@ namespace Murktid {
         }
 
         public override bool ShouldDeactivate() {
+
+            if(Context.IsSprinting) {
+                return true;
+            }
+
             if(!Context.input.SecondaryAction.IsPressed) {
                 return true;
             }
@@ -28,11 +33,13 @@ namespace Murktid {
         }
 
         protected override void OnActivate() {
+            Context.IsAimingDownSights = true;
             Context.animatorBridge.IsADS = true;
             Context.shotgunCrosshair.SetIsADS();
         }
 
         protected override void OnDeactivate() {
+            Context.IsAimingDownSights = false;
             Context.animatorBridge.IsADS = false;
             Context.shotgunCrosshair.SetIsHipfire();
         }

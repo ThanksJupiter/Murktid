@@ -23,6 +23,7 @@ namespace Murktid {
             abilityComponent.AddDefaultAbility<AbilityAirMovement>();
             abilityComponent.AddDefaultAbility<AbilityFalling>();
             abilityComponent.AddDefaultAbility<AbilityMoveCamera>();
+            abilityComponent.AddDefaultAbility<AbilityAdjustFOV>();
             abilityComponent.AddDefaultAbility<AbilityPrimaryWeaponEquipped>();
             abilityComponent.AddDefaultAbility<AbilitySecondaryWeaponEquipped>();
             abilityComponent.AddDefaultAbility<AbilitySwitchWeapon>();
