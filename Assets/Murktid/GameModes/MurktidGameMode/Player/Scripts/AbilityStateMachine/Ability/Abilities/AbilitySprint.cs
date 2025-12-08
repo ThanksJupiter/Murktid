@@ -9,6 +9,18 @@ namespace Murktid {
                 return false;
             }
 
+            if(Context.IsShooting) {
+                return false;
+            }
+
+            if(Context.IsReloading) {
+                return false;
+            }
+
+            if(Context.IsAimingDownSights) {
+                return false;
+            }
+
             if(!Context.input.Sprint.value) {
                 return false;
             }
@@ -21,7 +33,20 @@ namespace Murktid {
         }
 
         public override bool ShouldDeactivate() {
+
             if(!Context.IsGrounded) {
+                return true;
+            }
+
+            if(Context.IsShooting) {
+                return true;
+            }
+
+            if(Context.IsReloading) {
+                return true;
+            }
+
+            if(Context.IsAimingDownSights) {
                 return true;
             }
 
@@ -35,12 +60,14 @@ namespace Murktid {
         protected override void OnActivate() {
             Context.ActiveMoveSpeed = Context.settings.sprintMoveSpeed;
             Context.IsSprinting = true;
+            Context.animatorBridge.IsSprinting = true;
             Context.CurrentFOVTarget = Context.settings.sprintFOV;
         }
 
         protected override void OnDeactivate() {
             Context.ActiveMoveSpeed = Context.settings.defaultMoveSpeed;
             Context.IsSprinting = false;
+            Context.animatorBridge.IsSprinting = false;
             Context.CurrentFOVTarget = Context.settings.defaultFOV;
         }
     }

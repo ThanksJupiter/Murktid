@@ -52,6 +52,7 @@ namespace Murktid {
         protected override void OnActivate() {
             fireRateTimestamp = Time.time + Context.playerEquipmentData.CurrentWeapon.config.fireRate;
             didShoot = false;
+            Context.IsShooting = true;
             Context.animatorBridge.Shoot = true;
 
             Context.recoilOffset += Context.playerEquipmentData.CurrentWeapon.config.recoil;
@@ -111,6 +112,7 @@ namespace Murktid {
         }
 
         protected override void OnDeactivate() {
+            Context.IsShooting = false;
             Context.animatorBridge.Shoot = false;
         }
     }

@@ -52,5 +52,8 @@ namespace Murktid {
         public bool IsDodgeSliding { get; set; }
         public Vector3 DodgeDirection { get; set; }
         public float CurrentFOVTarget { get; set; }
+        public bool IsAimingDownSights { get; set; }
+        public bool IsShooting { get; set; }
+        public bool IsReloading { get; set; }
     }
 }
