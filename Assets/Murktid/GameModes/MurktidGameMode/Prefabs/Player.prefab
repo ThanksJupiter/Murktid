@@ -1051,10 +1051,10 @@ MonoBehaviour:
     cameraReference: {fileID: 0}
     transform: {fileID: 63668025682278971}
     playerEquipmentData:
-      currentWeaponType: 0
-      defaultPrimaryWeaponReferencePrefab: {fileID: 8167284465626660704, guid: 681c20cf9d39e534db97e3012853d1c5, type: 3}
-      defaultSecondaryWeaponReferencePrefab: {fileID: 6286142227818441737, guid: 97603ee0c3376d64b8819d4b1e43d7e9, type: 3}
+      currentWeaponType: 1
     settings: {fileID: 11400000, guid: 51c806197badd08409060abb058ff003, type: 2}
+    defaultRangedWeaponReferencePrefab: {fileID: 4832492353339012550, guid: 968ae85f21dddf84fbe78bd2065c0515, type: 3}
+    defaultMeleeWeaponReferencePrefab: {fileID: 8167284465626660704, guid: 681c20cf9d39e534db97e3012853d1c5, type: 3}
     attackLayerMask:
       serializedVersion: 2
       m_Bits: 385
@@ -1064,7 +1064,6 @@ MonoBehaviour:
     recoilReturnSpeed: 3
   healthDisplayReference: {fileID: 8150369274562770242}
   ammoDisplayReference: {fileID: 209423725776924521}
-  defaultWeaponReferencePrefab: {fileID: 4832492353339012550, guid: 968ae85f21dddf84fbe78bd2065c0515, type: 3}
 --- !u!54 &5740912720274539414
 Rigidbody:
   m_ObjectHideFlags: 0

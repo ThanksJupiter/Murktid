@@ -11,9 +11,11 @@ namespace Murktid {
         public PlayerAbilityComponent abilityComponent;
 
         private PlayerWeaponSystem weaponSystem;
+        public PlayerWeaponSystem WeaponSystem => weaponSystem;
 
         public PlayerController(PlayerReference playerReference) {
             Context = playerReference.context;
+            Context.controller = this;
             abilityComponent = new(Context);
             StateMachine = new(abilityComponent);
             Context.health = new(playerReference.healthDisplayReference, playerReference.context.settings);
@@ -31,7 +33,7 @@ namespace Murktid {
             playerMovementController.Initialize(Context, abilityComponent);
 
             weaponSystem.Initialize(playerReference);
-            weaponSystem.InstantiateWeapon(playerReference.defaultWeaponReferencePrefab);
+            weaponSystem.InstantiateWeapon(Context.defaultRangedWeaponReferencePrefab);
         }
 
         public void SetInput() {

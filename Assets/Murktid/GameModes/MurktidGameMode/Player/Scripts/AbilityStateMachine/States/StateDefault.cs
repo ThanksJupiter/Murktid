@@ -26,9 +26,10 @@ namespace Murktid {
             abilityComponent.AddDefaultAbility<AbilityAdjustFOV>();
             //abilityComponent.AddDefaultAbility<AbilityPrimaryWeaponEquipped>();
             abilityComponent.AddDefaultAbility<AbilitySecondaryWeaponEquipped>();
-            //abilityComponent.AddDefaultAbility<AbilitySwitchWeapon>();
+            abilityComponent.AddDefaultAbility<AbilitySwitchWeapon>();
             abilityComponent.AddDefaultAbility<AbilityAimDownSights>();
             abilityComponent.AddDefaultAbility<AbilityFireSecondaryWeapon>();
+            abilityComponent.AddDefaultAbility<AbilityMeleeAttack>();
             abilityComponent.AddDefaultAbility<AbilityRecoil>();
             abilityComponent.AddDefaultAbility<AbilityReload>();
         }

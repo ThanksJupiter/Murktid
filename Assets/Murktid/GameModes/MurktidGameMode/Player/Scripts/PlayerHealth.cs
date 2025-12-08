@@ -22,7 +22,6 @@ namespace Murktid {
 
         private void UpdateHealthAlpha(float value) {
             healthAlpha.Value = value / maxHealth.Value;
-            Debug.Log($"Health Alpha: {healthAlpha.Value}");
         }
 
         public void TakeDamage(float damage) {

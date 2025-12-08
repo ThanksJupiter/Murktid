@@ -16,6 +16,11 @@ namespace Murktid {
         }
 
         public void InstantiateWeapon(PlayerWeaponReference referencePrefab) {
+
+            if(context.playerEquipmentData.CurrentWeapon != null) {
+                Object.Destroy(context.playerEquipmentData.CurrentWeapon.reference.gameObject);
+            }
+
             PlayerWeaponReference newWeaponReference = Object.Instantiate(referencePrefab, Vector3.zero, Quaternion.identity, context.cameraReference.transform);
             newWeaponReference.transform.localPosition = Vector3.zero;
             newWeaponReference.transform.localRotation = Quaternion.identity;

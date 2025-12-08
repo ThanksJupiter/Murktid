@@ -41,6 +41,8 @@ namespace Murktid {
         public bool IsInRangedFireLayer => animator.GetCurrentAnimatorStateInfo(Layer.rangedFire).shortNameHash != Param.empty;
         public bool IsInMeleeLayer => animator.GetCurrentAnimatorStateInfo(Layer.melee).shortNameHash != Param.empty;
 
+        public bool IsHitboxActive => animator.GetFloat("HitboxActive") > .1f;
+
         public static class Layer
         {
             public static readonly int unarmed = 0;

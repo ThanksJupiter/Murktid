@@ -17,6 +17,11 @@ namespace Murktid {
         public PlayerHealth health;
         public IInput input;
 
+        public PlayerWeaponReference defaultRangedWeaponReferencePrefab;
+        public PlayerWeaponReference defaultMeleeWeaponReferencePrefab;
+
+        public PlayerController controller;
+
         public AmmoDisplay ammoDisplay;
         public BulletSystem bulletSystem;
         public LayerMask attackLayerMask;
