@@ -21,6 +21,10 @@ namespace Murktid {
                 return false;
             }
 
+            if(Context.IsSprintSliding) {
+                return false;
+            }
+
             if(!Context.input.Sprint.value) {
                 return false;
             }
@@ -47,6 +51,10 @@ namespace Murktid {
             }
 
             if(Context.IsAimingDownSights) {
+                return true;
+            }
+
+            if(Context.IsSprintSliding) {
                 return true;
             }
 
