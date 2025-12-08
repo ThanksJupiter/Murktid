@@ -25,7 +25,7 @@ namespace Murktid {
             return true;
         }
 
-        private void UpdateHealthBar() {
+       /* private void UpdateHealthBar() {
             if(healthBarPivot == null) return;
 
             float normalized = currentHealth / maxHealth;
@@ -33,7 +33,7 @@ namespace Murktid {
 
            if (Camera.main != null)
                 healthBarPivot.LookAt(Camera.main.transform);
-        }
+        }*/
 
         public void Hit(float damage) {
 
@@ -42,10 +42,10 @@ namespace Murktid {
             } 
 
             currentHealth -= damage;
-            UpdateHealthBar();
+            /*UpdateHealthBar();
 
             if(currentHealth > 0f)
-                return;
+                return;*/
 
             //Debug.Log($"Hit: { gameObject.name } for { damage }");
             if(wallsToBreak != null) {
