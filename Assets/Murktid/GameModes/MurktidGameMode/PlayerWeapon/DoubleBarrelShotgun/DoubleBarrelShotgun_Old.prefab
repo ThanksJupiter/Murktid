@@ -9,9 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5108600765693757934}
-  - component: {fileID: 6286142227818441737}
   m_Layer: 0
-  m_Name: DoubleBarrelShotgun
+  m_Name: DoubleBarrelShotgun_Old
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,20 +33,6 @@ Transform:
   - {fileID: 8150899751689612775}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6286142227818441737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6237058982729769856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 751c9895702ad7640a447567106ecdc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerWeaponReference
-  config: {fileID: 11400000, guid: bab1e8dcddb42bf48b94de3dc5e55f0a, type: 2}
-  firePoint: {fileID: 8150899751689612775}
 --- !u!1 &8654332707861419694
 GameObject:
   m_ObjectHideFlags: 0

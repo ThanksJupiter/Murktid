@@ -3,9 +3,13 @@ using UnityEngine;
 namespace Murktid {
 
     public class PlayerAnimatorBridge {
-        private readonly Animator animator;
+        private Animator animator;
 
-        public PlayerAnimatorBridge(Animator animator) {
+        public PlayerAnimatorBridge(/*Animator animator*/) {
+            /*this.animator = animator;*/
+        }
+
+        public void SetAnimator(Animator animator) {
             this.animator = animator;
         }
 

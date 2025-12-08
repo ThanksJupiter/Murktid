@@ -7,7 +7,7 @@ namespace Murktid {
         private bool didShoot = false;
 
         public override bool ShouldActivate() {
-            if(Context.playerEquipmentData.currentWeaponType != WeaponType.Secondary) {
+            if(Context.playerEquipmentData.currentWeaponType != WeaponType.Ranged) {
                 return false;
             }
 

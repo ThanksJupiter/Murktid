@@ -8,7 +8,7 @@ namespace Murktid {
         private float reloadTimestamp = float.MinValue;
 
         public override bool ShouldActivate() {
-            if(Context.playerEquipmentData.currentWeaponType != WeaponType.Secondary) {
+            if(Context.playerEquipmentData.currentWeaponType != WeaponType.Ranged) {
                 return false;
             }
 

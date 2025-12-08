@@ -14,7 +14,7 @@ namespace Murktid {
             Context = context;
         }
 
-        public void Initialize() {
+        public void Initialize(PlayerReference playerReference) {
             context.motor.CharacterController = this;
             context.cameraReference.PlanarDirection = context.cameraReference.transform.forward;
             context.movementData.activeMoveSpeed = context.settings.defaultMoveSpeed;

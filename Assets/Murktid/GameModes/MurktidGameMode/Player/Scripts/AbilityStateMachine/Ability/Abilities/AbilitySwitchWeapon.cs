@@ -26,12 +26,12 @@ namespace Murktid {
         protected override void Tick(float deltaTime) {
             switch(Context.playerEquipmentData.currentWeaponType) {
 
-                case WeaponType.Primary:
-                    Context.playerEquipmentData.currentWeaponType = WeaponType.Secondary;
+                case WeaponType.Melee:
+                    Context.playerEquipmentData.currentWeaponType = WeaponType.Ranged;
                     hasSwitchedWeapon = true;
                     break;
-                case WeaponType.Secondary:
-                    Context.playerEquipmentData.currentWeaponType = WeaponType.Primary;
+                case WeaponType.Ranged:
+                    Context.playerEquipmentData.currentWeaponType = WeaponType.Melee;
                     hasSwitchedWeapon = true;
                     break;
                 default:

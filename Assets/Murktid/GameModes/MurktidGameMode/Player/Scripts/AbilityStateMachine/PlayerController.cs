@@ -19,11 +19,10 @@ namespace Murktid {
             Context.health = new(playerReference.healthDisplayReference, playerReference.context.settings);
             Context.ammoDisplay = new(playerReference);
             weaponSystem = new();
-            weaponSystem.Initialize(playerReference);
         }
 
-        public void Initialize() {
-            Context.animatorBridge = new(Context.cameraReference.animator);
+        public void Initialize(PlayerReference playerReference) {
+            Context.animatorBridge = new(/*Context.cameraReference.animator*/);
 
             StateMachine.PushState<StateDefault>();
             Context.ActiveMoveSpeed = Context.settings.defaultMoveSpeed;
@@ -31,12 +30,8 @@ namespace Murktid {
             Context.TargetCapsuleHeight = Context.settings.standingCapsuleHeight;
             playerMovementController.Initialize(Context, abilityComponent);
 
-            if(Context.cameraReference.defaultSecondaryWeaponReference != null) {
-
-                PlayerWeaponData newWeaponData = new(Context.cameraReference.defaultSecondaryWeaponReference);
-                Context.playerEquipmentData.currentSecondaryWeapon = newWeaponData;
-                Context.playerEquipmentData.currentSecondaryWeapon.reference.gameObject.SetActive(false);
-            }
+            weaponSystem.Initialize(playerReference);
+            weaponSystem.InstantiateWeapon(playerReference.defaultWeaponReferencePrefab);
         }
 
         public void SetInput() {

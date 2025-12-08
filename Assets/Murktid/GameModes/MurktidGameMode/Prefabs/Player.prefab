@@ -1064,6 +1064,7 @@ MonoBehaviour:
     recoilReturnSpeed: 3
   healthDisplayReference: {fileID: 8150369274562770242}
   ammoDisplayReference: {fileID: 209423725776924521}
+  defaultWeaponReferencePrefab: {fileID: 4832492353339012550, guid: 968ae85f21dddf84fbe78bd2065c0515, type: 3}
 --- !u!54 &5740912720274539414
 Rigidbody:
   m_ObjectHideFlags: 0

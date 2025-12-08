@@ -4,7 +4,7 @@ namespace Murktid {
 
     public class AbilityAimDownSights : PlayerAbility {
         public override bool ShouldActivate() {
-            if(Context.playerEquipmentData.currentWeaponType != WeaponType.Secondary) {
+            if(Context.playerEquipmentData.currentWeaponType != WeaponType.Ranged) {
                 return false;
             }
 
@@ -25,7 +25,7 @@ namespace Murktid {
                 return true;
             }
 
-            if(Context.playerEquipmentData.currentWeaponType != WeaponType.Secondary) {
+            if(Context.playerEquipmentData.currentWeaponType != WeaponType.Ranged) {
                 return true;
             }
 

@@ -51,7 +51,7 @@ namespace Murktid {
             };
 
             player = playerMachine;
-            player.Initialize();
+            player.Initialize(playerReference);
         }
 
         private void InitializeAbilityStateMachine(MurktidGameReference gameModeReference) {
@@ -71,7 +71,7 @@ namespace Murktid {
             };
 
             player = playerController;
-            player.Initialize();
+            player.Initialize(playerReference);
         }
 
         public void Tick() {

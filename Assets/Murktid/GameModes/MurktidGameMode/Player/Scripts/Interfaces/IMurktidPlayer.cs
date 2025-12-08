@@ -5,7 +5,7 @@ public interface IMurktidPlayer
 {
     public PlayerContext Context { get; }
 
-    void Initialize();
+    void Initialize(PlayerReference playerReference);
     void SetInput();
     void Tick(float deltaTime);
     void Dispose();

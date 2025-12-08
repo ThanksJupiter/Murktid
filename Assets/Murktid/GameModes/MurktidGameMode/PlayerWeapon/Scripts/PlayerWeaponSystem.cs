@@ -15,7 +15,16 @@ namespace Murktid {
             context.playerEquipmentData.currentWeapon.Subscribe(OnEquipNewWeapon);
         }
 
+        public void InstantiateWeapon(PlayerWeaponReference referencePrefab) {
+            PlayerWeaponReference newWeaponReference = Object.Instantiate(referencePrefab, Vector3.zero, Quaternion.identity, context.cameraReference.transform);
+            newWeaponReference.transform.localPosition = Vector3.zero;
+            newWeaponReference.transform.localRotation = Quaternion.identity;
+            PlayerWeaponData newWeaponData = new(newWeaponReference);
+            context.playerEquipmentData.currentWeapon.Value = newWeaponData;
+        }
+
         private void OnEquipNewWeapon(PlayerWeaponData weaponData) {
+            context.animatorBridge.SetAnimator(weaponData.reference.animator);
             ammoDisplay.EquipNewWeapon(weaponData);
         }
     }
