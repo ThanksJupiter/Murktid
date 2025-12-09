@@ -23,6 +23,10 @@ namespace Murktid {
         }
 
         public override bool ShouldDeactivate() {
+            if(Context.playerEquipmentData.currentWeaponType != WeaponType.Melee) {
+                return true;
+            }
+
             return didAttack;
         }
 
