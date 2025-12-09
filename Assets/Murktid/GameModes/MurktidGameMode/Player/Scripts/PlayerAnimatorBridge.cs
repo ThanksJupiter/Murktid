@@ -37,9 +37,16 @@ namespace Murktid {
             set => animator.SetBool(Param.isSprinting, value);
         }
 
+        public bool Sheathe
+        {
+            get => animator.GetBool(Param.sheathe);
+            set => animator.SetBool(Param.sheathe, value);
+        }
+
         public bool IsInRangedLayer => animator.GetCurrentAnimatorStateInfo(Layer.ranged).shortNameHash != Param.empty;
         public bool IsInRangedFireLayer => animator.GetCurrentAnimatorStateInfo(Layer.rangedFire).shortNameHash != Param.empty;
         public bool IsInMeleeLayer => animator.GetCurrentAnimatorStateInfo(Layer.melee).shortNameHash != Param.empty;
+        public bool IsInSheatheLayer => animator.GetCurrentAnimatorStateInfo(Layer.sheathe).shortNameHash != Param.empty;
 
         public bool IsHitboxActive => animator.GetFloat("HitboxActive") > .1f;
 
@@ -49,6 +56,7 @@ namespace Murktid {
             public static readonly int ranged = 1;
             public static readonly int rangedFire = 2;
             public static readonly int melee = 3;
+            public static readonly int sheathe = 4;
         }
 
         private static class Param {
@@ -56,6 +64,7 @@ namespace Murktid {
             public static readonly int isAds = Animator.StringToHash("IsADS");
             public static readonly int shoot = Animator.StringToHash("Shoot");
             public static readonly int reload = Animator.StringToHash("Reload");
+            public static readonly int sheathe = Animator.StringToHash("Sheathe");
             public static readonly int isSprinting = Animator.StringToHash("IsSprinting");
         }
     }

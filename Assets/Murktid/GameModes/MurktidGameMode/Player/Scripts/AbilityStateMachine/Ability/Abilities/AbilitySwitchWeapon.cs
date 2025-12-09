@@ -23,20 +23,31 @@ namespace Murktid {
             return true;
         }
 
+        protected override void OnActivate() {
+            Context.animatorBridge.Sheathe = true;
+            hasSwitchedWeapon = false;
+        }
+
         protected override void Tick(float deltaTime) {
-            switch(Context.playerEquipmentData.currentWeaponType) {
-                case WeaponType.Melee:
-                    Context.playerEquipmentData.currentWeaponType = WeaponType.Ranged;
-                    Context.controller.WeaponSystem.InstantiateWeapon(Context.defaultRangedWeaponReferencePrefab);
-                    hasSwitchedWeapon = true;
-                    break;
-                case WeaponType.Ranged:
-                    Context.playerEquipmentData.currentWeaponType = WeaponType.Melee;
-                    Context.controller.WeaponSystem.InstantiateWeapon(Context.defaultMeleeWeaponReferencePrefab);
-                    hasSwitchedWeapon = true;
-                    break;
-                default:
-                    break;
+            if(Context.animatorBridge.IsInSheatheLayer) {
+                Context.animatorBridge.Sheathe = false;
+            }
+
+            if(Context.animatorBridge.IsHitboxActive) {
+                switch(Context.playerEquipmentData.currentWeaponType) {
+                    case WeaponType.Melee:
+                        Context.playerEquipmentData.currentWeaponType = WeaponType.Ranged;
+                        Context.controller.WeaponSystem.InstantiateWeapon(Context.defaultRangedWeaponReferencePrefab);
+                        hasSwitchedWeapon = true;
+                        break;
+                    case WeaponType.Ranged:
+                        Context.playerEquipmentData.currentWeaponType = WeaponType.Melee;
+                        Context.controller.WeaponSystem.InstantiateWeapon(Context.defaultMeleeWeaponReferencePrefab);
+                        hasSwitchedWeapon = true;
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     }
