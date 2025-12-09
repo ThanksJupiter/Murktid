@@ -45,13 +45,12 @@ namespace Murktid {
             }
 
             if(Context.animatorBridge.IsHitboxActive) {
-                Debug.Log($"hitbox");
                 hasActivatedHitbox = true;
                 Context.animatorBridge.Shoot = false;
                 Vector3 spherePosition = Context.playerEquipmentData.CurrentWeapon.reference.firePoint.position;
                 Debug.DrawRay(spherePosition, Vector3.up, Color.red, 1f);
 
-                float sphereSize = 1f;
+                float sphereSize = 1.5f;
 
                 Collider[] overlappedColliders = Physics.OverlapSphere(spherePosition, sphereSize, Context.attackLayerMask);
                 for(int i = 0; i < overlappedColliders.Length; i++) {
