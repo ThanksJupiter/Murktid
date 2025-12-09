@@ -12,7 +12,8 @@ namespace Murktid {
 
         [SerializeField] private NestTentacle[] tentacle;
         [SerializeField] private BreakableWall[] wallsToBreak;
-              
+        [SerializeField] private BreakableRoot[] rootToBreak;
+
 
         private void Awake() {
             currentHealth = maxHealth;
@@ -51,6 +52,16 @@ namespace Murktid {
             if(wallsToBreak != null) {
 
                 foreach(var wall in wallsToBreak) {
+
+                    if(wall != null) {
+
+                        wall.Break();
+                    }
+                }
+            }
+            if(rootToBreak != null) {
+
+                foreach(var wall in rootToBreak) {
 
                     if(wall != null) {
 
