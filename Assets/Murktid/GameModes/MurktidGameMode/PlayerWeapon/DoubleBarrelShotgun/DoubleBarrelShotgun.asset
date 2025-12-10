@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: DoubleBarrelShotgun
   m_EditorClassIdentifier: Assembly-CSharp::Murktid.PlayerWeaponData
   bulletVelocity: 100
+  bulletVelocityRandomize: 10
+  shotgunBarrelSeparationMultiplier: 0.25
   ADSDamage: 25
   ADSRange: 25
   ADSRadius: 0.5
