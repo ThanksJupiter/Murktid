@@ -1,36 +1,54 @@
 using UnityEngine;
 
 public class DoorBehaviour : MonoBehaviour {
-    public bool _isDoorOpen = false;
-    Vector3 _doorClosedPos;
-    Vector3 _doorOpenPos;
-    public float _doorSpeed = 3f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Awake() {
-        _doorClosedPos = transform.position;
-        _doorOpenPos = new Vector3(transform.position.x, transform.position.y + 4f, transform.position.z);
+   /* [SerializeField] bool _isDoorOpen = false;*/
+
+    [SerializeField] float _openAngle = 90f;
+    [SerializeField] float _speed = 5f;
+
+    bool _isOpen = false;
+    Quaternion _closedRotation;     
+    Quaternion _openedRotation;
+
+    public bool IsOpen => _isOpen;
+
+    void Awake() {       
+        _closedRotation = transform.localRotation;
+       
+        _openedRotation = _closedRotation * Quaternion.Euler(0f, _openAngle, 0f);
     }
 
-    // Update is called once per frame
-    void Update() {
-        if(_isDoorOpen) {
-            OpenDoor();
-        }
-        else if(!_isDoorOpen) {
-            ClosedDoor();
-        }
+    public void Open() {
+        if(_isOpen) return;
+        _isOpen = true;
+        StopAllCoroutines();
+        StartCoroutine(RotateTo(_openedRotation));
     }
 
-    void OpenDoor() {
-        if(transform.position != _doorOpenPos) {
-            transform.position = Vector3.MoveTowards(transform.position, _doorOpenPos, _doorSpeed * Time.deltaTime);
-        }
+    public void Close() {
+        if(!_isOpen) return;
+        _isOpen = false;
+        StopAllCoroutines();
+        StartCoroutine(RotateTo(_closedRotation));
     }
 
-    void ClosedDoor() {
-        if(transform.position != _doorClosedPos) {
-            transform.position = Vector3.MoveTowards(transform.position, _doorClosedPos, _doorSpeed * Time.deltaTime);
-        }
+    public void Toggle() {
+        if(_isOpen) Close();
+        else Open();
     }
+
+
+    System.Collections.IEnumerator RotateTo(Quaternion targetRotation) {
+        Quaternion start = transform.localRotation;
+        float t = 0f;
+
+                
+        while(t < 1f) {
+            t += Time.deltaTime *( _speed * 0.5f);
+            transform.localRotation = Quaternion.Lerp(start, targetRotation, t);
+            yield return null;
+        }
+        transform.localRotation = targetRotation;
+        }  
 }

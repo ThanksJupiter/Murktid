@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class SwitchBehaviour : MonoBehaviour
+/*public class SwitchBehaviour : MonoBehaviour
 {
     [SerializeField] DoorBehaviour _doorBehaviour;
 
@@ -76,4 +76,4 @@ public class SwitchBehaviour : MonoBehaviour
         _isPressingSwitch = false;
     }
 }
-
+*/

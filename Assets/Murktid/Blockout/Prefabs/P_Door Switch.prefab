@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4532543124382660141}
   - component: {fileID: 7931430849204013012}
   - component: {fileID: 4580252864523455671}
-  - component: {fileID: 8068228173114545716}
+  - component: {fileID: 4446576505647282765}
   m_Layer: 0
   m_Name: P_Door Switch
   m_TagString: Untagged
@@ -110,9 +110,9 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.8, y: 1.51, z: 2.34}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8068228173114545716
+--- !u!114 &4446576505647282765
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,9 +121,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1806201740060546256}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 837362cad87290f4fbe84db6fed2bd52, type: 3}
+  m_Script: {fileID: 11500000, guid: e3e4be3c97c6dcd4ea35a60f789289a5, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SwitchBehaviour
+  m_EditorClassIdentifier: Assembly-CSharp::DoorOpener
   _doorBehaviour: {fileID: 0}
-  _isDoorOpenSwitch: 1
+  _isDoorOpenSwitch: 0
   _isDoorClosedSwitch: 0
