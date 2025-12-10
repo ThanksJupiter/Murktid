@@ -76,9 +76,10 @@ namespace Murktid {
                 Ray ray = Context.shotgunCrosshair.GetPelletScreenPointRay(i, Context.cameraReference.camera);
 
                 // spawn double pellets with origin offset left / right
+                float barrelSeparationMultiplier = Context.playerEquipmentData.CurrentWeapon.config.shotgunBarrelSeparationMultiplier;
                 if(bothBarrels) {
                     SpawnBulletData spawnFirstBulletData = new() {
-                        spawnPosition = ray.origin + -Context.motor.CharacterRight * .1f,
+                        spawnPosition = ray.origin + -Context.motor.CharacterRight * barrelSeparationMultiplier,
                         spawnRotation = Quaternion.LookRotation(ray.direction),
                         initialVelocity = Context.playerEquipmentData.CurrentWeapon.config.bulletVelocity + Random.Range(-randomSpeedModifier, randomSpeedModifier),
                         layerMask = Context.attackLayerMask,
@@ -88,7 +89,7 @@ namespace Murktid {
                     Context.bulletSystem.SpawnBullet(spawnFirstBulletData);
 
                     SpawnBulletData spawnSecondBulletData = new() {
-                        spawnPosition = ray.origin + Context.motor.CharacterRight * .1f,
+                        spawnPosition = ray.origin + Context.motor.CharacterRight * barrelSeparationMultiplier,
                         spawnRotation = Quaternion.LookRotation(ray.direction),
                         initialVelocity = Context.playerEquipmentData.CurrentWeapon.config.bulletVelocity + Random.Range(-randomSpeedModifier, randomSpeedModifier),
                         layerMask = Context.attackLayerMask,

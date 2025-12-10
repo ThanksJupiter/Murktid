@@ -1,5 +1,6 @@
 using R3;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Murktid {
 
@@ -8,6 +9,8 @@ namespace Murktid {
 
         public float bulletVelocity = 50f;
         public float bulletVelocityRandomize = 10f;
+
+        public float shotgunBarrelSeparationMultiplier = .2f;
 
         // damage
         public float ADSDamage = 10f;

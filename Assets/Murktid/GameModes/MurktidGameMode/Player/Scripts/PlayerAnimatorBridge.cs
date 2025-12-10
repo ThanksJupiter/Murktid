@@ -1,7 +1,7 @@
+using System;
 using UnityEngine;
 
 namespace Murktid {
-
     public class PlayerAnimatorBridge {
         private Animator animator;
 
@@ -43,6 +43,12 @@ namespace Murktid {
             set => animator.SetBool(Param.sheathe, value);
         }
 
+        public bool IsWalking
+        {
+            get => animator.GetBool(Param.isWalking);
+            set => animator.SetBool(Param.isWalking, value);
+        }
+
         public bool IsInRangedLayer => animator.GetCurrentAnimatorStateInfo(Layer.ranged).shortNameHash != Param.empty;
         public bool IsInRangedFireLayer => animator.GetCurrentAnimatorStateInfo(Layer.rangedFire).shortNameHash != Param.empty;
         public bool IsInMeleeLayer => animator.GetCurrentAnimatorStateInfo(Layer.melee).shortNameHash != Param.empty;
@@ -66,6 +72,7 @@ namespace Murktid {
             public static readonly int reload = Animator.StringToHash("Reload");
             public static readonly int sheathe = Animator.StringToHash("Sheathe");
             public static readonly int isSprinting = Animator.StringToHash("IsSprinting");
+            public static readonly int isWalking = Animator.StringToHash("IsWalking");
         }
     }
 }

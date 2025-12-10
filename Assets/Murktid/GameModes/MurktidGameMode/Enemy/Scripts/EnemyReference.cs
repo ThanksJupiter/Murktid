@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Murktid {
 
+    [SelectionBase]
     public class EnemyReference : MonoBehaviour, ITarget {
         public EnemyContext context;
         public Animator animator;
