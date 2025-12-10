@@ -3,11 +3,6 @@ using UnityEngine;
 namespace Murktid {
 
     public class AbilityCrouch : PlayerAbility {
-
-        //private bool isCrouching = true;
-        private float targetCapsuleHeight = 2f;
-        private float currentCapsuleHeight = 2f;
-
         public override bool ShouldActivate() {
             if(!Context.input.Crouch.wasPressedThisFrame) {
                 return false;
@@ -41,24 +36,15 @@ namespace Murktid {
 
         protected override void OnActivate() {
             //isCrouching = true;
-            targetCapsuleHeight = Context.settings.crouchingCapsuleHeight;
-            currentCapsuleHeight = Context.motor.Capsule.height;
+            Context.TargetCapsuleHeight = Context.settings.crouchingCapsuleHeight;
             Context.TargetCameraHeight = Context.settings.crouchingCameraHeight;
             // lower capsule height
             // lower move speed to crouch speed tbh
         }
 
         protected override void OnDeactivate() {
-            Context.motor.SetCapsuleDimensions(Context.settings.capsuleRadius, Context.settings.standingCapsuleHeight, Context.settings.standingCapsuleHeight * .5f);
-            targetCapsuleHeight = Context.settings.standingCapsuleHeight;
+            Context.TargetCapsuleHeight = Context.settings.standingCapsuleHeight;
             Context.TargetCameraHeight = Context.settings.standingCameraHeight;
         }
-
-        /*protected override void Tick(float deltaTime) {
-            if(!Context.input.Crouch.IsPressed && (targetCapsuleHeight - currentCapsuleHeight) < .1f) {
-                isCrouching = false;
-                return;
-            }
-        }*/
     }
 }
