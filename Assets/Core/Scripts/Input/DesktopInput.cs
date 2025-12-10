@@ -37,6 +37,7 @@ namespace Murktid {
         public Input<bool> EquipSecondaryWeapon { get; set; } = new();
         public Input<bool> SwitchWeapon { get; set; } = new();
         public Input<bool> Reload { get; set; } = new();
+        public Input<bool> Interact { get; set; } = new();
 
         public void Initialize() { }
         public void Tick() { }
@@ -76,6 +77,9 @@ namespace Murktid {
 
             Reload.wasPressedThisFrame = false;
             Reload.wasReleasedThisFrame = false;
+
+            Interact.wasPressedThisFrame = false;
+            Interact.wasReleasedThisFrame = false;
         }
         public void Dispose() { }
 
@@ -191,6 +195,17 @@ namespace Murktid {
             } else if(context.canceled) {
                 Reload.value = false;
                 Reload.wasReleasedThisFrame = true;
+            }
+        }
+
+        public void OnInteract(InputAction.CallbackContext context) {
+            if(context.performed) {
+                Interact.pressedTimestamp = Time.time;
+                Interact.value = true;
+                Interact.wasPressedThisFrame = true;
+            } else if(context.canceled) {
+                Interact.value = false;
+                Interact.wasReleasedThisFrame = true;
             }
         }
     }

@@ -32,6 +32,7 @@ namespace Murktid {
             abilityComponent.AddDefaultAbility<AbilityMeleeAttack>();
             abilityComponent.AddDefaultAbility<AbilityRecoil>();
             abilityComponent.AddDefaultAbility<AbilityReload>();
+            abilityComponent.AddDefaultAbility<AbilityInteract>();
         }
 
         protected override void Tick(float deltaTime) {
