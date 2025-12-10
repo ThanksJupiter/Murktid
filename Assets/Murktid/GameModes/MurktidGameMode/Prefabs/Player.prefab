@@ -1058,6 +1058,9 @@ MonoBehaviour:
     attackLayerMask:
       serializedVersion: 2
       m_Bits: 385
+    interactionLayerMask:
+      serializedVersion: 2
+      m_Bits: 1
     shotgunCrosshair: {fileID: 355171689747465979}
     hasRecoil: 0
     recoilOffset: 0

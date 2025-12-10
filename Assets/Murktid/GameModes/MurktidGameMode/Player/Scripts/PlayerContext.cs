@@ -25,6 +25,7 @@ namespace Murktid {
         public AmmoDisplay ammoDisplay;
         public BulletSystem bulletSystem;
         public LayerMask attackLayerMask;
+        public LayerMask interactionLayerMask;
         public ShotgunCrosshair shotgunCrosshair;
 
         [Header("Debug Recoil")]
