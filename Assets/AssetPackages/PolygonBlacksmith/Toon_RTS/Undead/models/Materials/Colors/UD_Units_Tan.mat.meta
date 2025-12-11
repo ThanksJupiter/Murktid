@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b4df42a451b88cd49b076e9ce494e127
+timeCreated: 1496153326
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 92553
+  packageName: Toon RTS Units - Undead
+  packageVersion: 1.1
+  assetPath: Assets/Toon_RTS/Undead/models/Materials/Colors/UD_Units_Tan.mat
+  uploadId: 617962
