@@ -71,7 +71,6 @@ namespace Murktid {
                     EnemyController enemyToDestroy = enemiesToDestroy[i];
                     activeEnemies.Remove(enemyToDestroy);
 
-                    enemyToDestroy.Context.enemyPrototypeBehaviour.Explode();
                     // HACK (?) override this where necessary instead of manually calling?
                     // implement similar to IApplicationLifeCycle for objects that need this & destroy accordingly?
                     enemyToDestroy.OnDestroy();
