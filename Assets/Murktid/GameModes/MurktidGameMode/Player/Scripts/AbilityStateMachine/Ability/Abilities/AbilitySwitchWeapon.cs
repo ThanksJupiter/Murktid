@@ -6,6 +6,7 @@ namespace Murktid {
     public class AbilitySwitchWeapon : PlayerAbility {
 
         private bool hasSwitchedWeapon = false;
+        private bool leaveState = false;
 
         public override bool ShouldActivate() {
             if(!Context.input.SwitchWeapon.wasPressedThisFrame) {
@@ -16,7 +17,7 @@ namespace Murktid {
         }
 
         public override bool ShouldDeactivate() {
-            if(!hasSwitchedWeapon) {
+            if(!leaveState) {
                 return false;
             }
 
@@ -26,6 +27,7 @@ namespace Murktid {
         protected override void OnActivate() {
             Context.animatorBridge.Sheathe = true;
             hasSwitchedWeapon = false;
+            leaveState = false;
         }
 
         protected override void Tick(float deltaTime) {
@@ -33,7 +35,11 @@ namespace Murktid {
                 Context.animatorBridge.Sheathe = false;
             }
 
-            if(Context.animatorBridge.IsHitboxActive) {
+            if(hasSwitchedWeapon && !Context.animatorBridge.IsHitboxActive) {
+                leaveState = true;
+            }
+
+            if(Context.animatorBridge.IsHitboxActive && !hasSwitchedWeapon) {
                 switch(Context.playerEquipmentData.currentWeaponType) {
                     case WeaponType.Melee:
                         Context.playerEquipmentData.currentWeaponType = WeaponType.Ranged;
