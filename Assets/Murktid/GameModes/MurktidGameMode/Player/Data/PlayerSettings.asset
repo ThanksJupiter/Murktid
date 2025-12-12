@@ -15,7 +15,7 @@ MonoBehaviour:
   defaultMoveSpeed: 4
   sprintMoveSpeed: 5.5
   sprintSlideSpeed: 12
-  rotationSpeed: 0.15
+  rotationSpeed: 0.1
   movementSharpness: 10
   dodgeSlideMovementSharpness: 5
   sprintSlideMovementSharpness: 3
@@ -40,3 +40,6 @@ MonoBehaviour:
   minVerticalLookAngle: -85
   maxVerticalLookAngle: 85
   cameraFollowSharpness: 1000
+  defaultFOV: 70
+  sprintFOV: 80
+  FOVLerpSpeed: 5

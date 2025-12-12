@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 455b420fe11b9004eb528012e5c9c191
+timeCreated: 1495152556
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 92553
+  packageName: Toon RTS Units - Undead
+  packageVersion: 1.1
+  assetPath: Assets/Toon_RTS/Undead/models/Materials/UD_Standard_Units.mat
+  uploadId: 617962

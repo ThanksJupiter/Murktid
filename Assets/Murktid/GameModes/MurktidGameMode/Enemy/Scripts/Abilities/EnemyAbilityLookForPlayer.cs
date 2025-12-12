@@ -41,6 +41,10 @@ namespace Murktid {
                     continue;
                 }
 
+                // if player has available attacker slot this enemy can occupy
+                // begin running toward player
+                // if not walk toward player
+
                 Context.targetPlayer = player;
                 return;
             }

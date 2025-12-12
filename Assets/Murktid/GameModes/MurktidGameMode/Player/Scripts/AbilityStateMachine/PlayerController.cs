@@ -34,6 +34,7 @@ namespace Murktid {
 
             weaponSystem.Initialize(playerReference);
             weaponSystem.InstantiateWeapon(Context.defaultRangedWeaponReferencePrefab);
+            //
         }
 
         public void SetInput() {

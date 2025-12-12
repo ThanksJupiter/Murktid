@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 529eb81f3b3e7d649958075428d4e0f5
+timeCreated: 1496153322
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 92553
+  packageName: Toon RTS Units - Undead
+  packageVersion: 1.1
+  assetPath: Assets/Toon_RTS/Undead/models/Materials/Colors/UD_Units_Purple.mat
+  uploadId: 617962

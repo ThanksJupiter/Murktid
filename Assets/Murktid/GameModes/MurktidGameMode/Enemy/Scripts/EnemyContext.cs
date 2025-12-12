@@ -21,7 +21,6 @@ namespace Murktid {
         public PlayerReference targetPlayer = null;
 
         // prototype behaviour
-        public EnemyPrototypeBehaviour enemyPrototypeBehaviour;
         public bool isDead = false;
 
         public bool IsTargetWithinAttackRange {
