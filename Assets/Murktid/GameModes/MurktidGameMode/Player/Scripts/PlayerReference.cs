@@ -8,7 +8,7 @@ namespace Murktid {
 
         private void OnDrawGizmos() {
 
-            Gizmos.color = Color.red;
+            Gizmos.color = Color.white;
             Gizmos.DrawLine(
                 context.transform.position,
                 context.transform.position +

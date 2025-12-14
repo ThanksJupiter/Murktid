@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Murktid {
@@ -9,6 +10,8 @@ namespace Murktid {
 
     public class HitboxReference : MonoBehaviour {
 
+        public const int MAX_OVERLAPS = 10;
+
         public EHitboxType hitboxType = EHitboxType.Sphere;
 
         public Vector3 Center => transform.position;
@@ -18,18 +21,46 @@ namespace Murktid {
 
         public bool isActive = false;
 
+
+        private Collider[] overlappedColliders = new Collider[MAX_OVERLAPS];
+
         private readonly Vector3[] corners = new Vector3[8];
-        private readonly Vector3[] localCorners = new Vector3[]
-        {
+
+        private readonly Vector3[] localCorners = new Vector3[] {
             new Vector3(-1, -1, -1), // 0: bottom-left-back
-            new Vector3( 1, -1, -1), // 1: bottom-right-back
-            new Vector3( 1, -1,  1), // 2: bottom-right-front
-            new Vector3(-1, -1,  1), // 3: bottom-left-front
-            new Vector3(-1,  1, -1), // 4: top-left-back
-            new Vector3( 1,  1, -1), // 5: top-right-back
-            new Vector3( 1,  1,  1), // 6: top-right-front
-            new Vector3(-1,  1,  1)  // 7: top-left-front
+            new Vector3(1, -1, -1), // 1: bottom-right-back
+            new Vector3(1, -1, 1), // 2: bottom-right-front
+            new Vector3(-1, -1, 1), // 3: bottom-left-front
+            new Vector3(-1, 1, -1), // 4: top-left-back
+            new Vector3(1, 1, -1), // 5: top-right-back
+            new Vector3(1, 1, 1), // 6: top-right-front
+            new Vector3(-1, 1, 1) // 7: top-left-front
         };
+
+        public int TryGetOverlappedColliders(LayerMask layerMask, out Collider[] outColliders) {
+
+            switch(hitboxType) {
+                case EHitboxType.Sphere:
+                    return OverlapSphere(layerMask, out outColliders);
+                case EHitboxType.Box:
+                    return OverlapBox(layerMask, out outColliders);
+            }
+
+            outColliders = null;
+            return 0;
+        }
+
+        private int OverlapBox(LayerMask layerMask, out Collider[] result) {
+            int overlappedCount = Physics.OverlapBoxNonAlloc(Center, halfExtents, overlappedColliders, Rotation, layerMask);
+            result = overlappedColliders;
+            return overlappedCount;
+        }
+
+        private int OverlapSphere(LayerMask layerMask, out Collider[] result) {
+            int overlappedCount = Physics.OverlapSphereNonAlloc(Center, size, overlappedColliders, layerMask);
+            result = overlappedColliders;
+            return overlappedCount;
+        }
 
         private void OnDrawGizmos() {
 
@@ -41,8 +72,7 @@ namespace Murktid {
                     Gizmos.DrawWireSphere(Center, size);
                     break;
                 case EHitboxType.Box:
-                    for (int i = 0; i < 8; i++)
-                    {
+                    for(int i = 0; i < 8; i++) {
                         Vector3 localPoint = Vector3.Scale(localCorners[i], halfExtents);
                         corners[i] = Center + Rotation * localPoint;
                     }

@@ -49,22 +49,15 @@ namespace Murktid {
                 if(!Context.animatorBridge.IsInMeleeLayer) {
                     didAttack = true;
                 }
-
-                return;
             }
 
             if(Context.animatorBridge.IsHitboxActive) {
                 hasActivatedHitbox = true;
                 Context.animatorBridge.Shoot = false;
-                Vector3 overlapPosition = Context.playerEquipmentData.CurrentWeapon.reference.hitbox.Center;
-                Vector3 halfExtents = Context.playerEquipmentData.CurrentWeapon.reference.hitbox.halfExtents;
-                Quaternion overlapBoxRotation = Context.playerEquipmentData.CurrentWeapon.reference.hitbox.Rotation;
-                //float sphereSize = Context.playerEquipmentData.CurrentWeapon.reference.hitbox.size;
                 Context.playerEquipmentData.CurrentWeapon.reference.hitbox.isActive = true;
 
-                //Collider[] overlappedColliders = Physics.OverlapSphere(spherePosition, sphereSize, Context.attackLayerMask);
-                Collider[] overlappedColliders = Physics.OverlapBox(overlapPosition, halfExtents, overlapBoxRotation, Context.attackLayerMask);
-                for(int i = 0; i < overlappedColliders.Length; i++) {
+                int overlappedCount = Context.Hitbox.TryGetOverlappedColliders(Context.attackLayerMask, out Collider[] overlappedColliders);
+                for(int i = 0; i < overlappedCount; i++) {
                     Collider collider = overlappedColliders[i];
                     if(collider.TryGetComponent(out ITarget target)) {
                         target.Hit(100f);

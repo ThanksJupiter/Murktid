@@ -66,12 +66,8 @@ namespace Murktid {
                 hasActivatedHitbox = true;
                 Context.hitbox.isActive = true;
 
-                Context.animatorBridge.IsAttacking = false;
-                Vector3 spherePosition = Context.hitbox.Center;
-                float sphereSize = Context.hitbox.size;
-
-                Collider[] overlappedColliders = Physics.OverlapSphere(spherePosition, sphereSize, Context.playerMask);
-                for(int i = 0; i < overlappedColliders.Length; i++) {
+                int overlappedCount = Context.hitbox.TryGetOverlappedColliders(Context.playerMask, out Collider[] overlappedColliders);
+                for(int i = 0; i < overlappedCount; i++) {
                     Collider collider = overlappedColliders[i];
                     if(collider.TryGetComponent(out PlayerReference playerReference)) {
                         playerReference.context.health.TakeDamage(10f);

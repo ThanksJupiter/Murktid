@@ -45,6 +45,7 @@ namespace Murktid {
         public List<EnemyController> attackers = new List<EnemyController>();
 
         // Accessors
+        public HitboxReference Hitbox => playerEquipmentData.CurrentWeapon.reference.hitbox;
         public KinematicCharacterMotor Motor => motor;
         public Vector3 MoveInputVector { get => movementData.moveInputVector; set => movementData.moveInputVector = value; }
         public bool IsGrounded => motor.GroundingStatus.IsStableOnGround;
