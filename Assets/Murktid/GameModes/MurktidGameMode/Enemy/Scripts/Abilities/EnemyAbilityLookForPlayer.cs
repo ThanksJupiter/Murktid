@@ -3,12 +3,8 @@ using UnityEngine;
 namespace Murktid {
 
     public class EnemyAbilityLookForPlayer : EnemyAbility {
-        protected override void Setup() {
-            AddTag(AbilityTags.look);
-        }
-
         public override bool ShouldActivate() {
-            if(Context.HasTarget) {
+            if(Context.hasEngagementSlot) {
                 return false;
             }
 
@@ -16,11 +12,11 @@ namespace Murktid {
         }
 
         public override bool ShouldDeactivate() {
-            if(!Context.HasTarget) {
-                return false;
+            if(Context.hasEngagementSlot) {
+                return true;
             }
 
-            return true;
+            return false;
         }
 
         protected override void OnActivate() {
@@ -41,11 +37,8 @@ namespace Murktid {
                     continue;
                 }
 
-                // if player has available attacker slot this enemy can occupy
-                // begin running toward player
-                // if not walk toward player
-
                 Context.targetPlayer = player;
+                Context.playerSlotSystem = player.context.controller.attackerSlotSystem;
                 return;
             }
         }

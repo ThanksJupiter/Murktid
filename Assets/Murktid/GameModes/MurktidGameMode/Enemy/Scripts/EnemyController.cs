@@ -15,6 +15,7 @@ namespace Murktid {
         }
 
         public void Initialize(EnemyReference enemyReference) {
+            Context.controller = this;
             Context.animatorBridge = new(enemyReference.animator);
             Context.gameObject = enemyReference.gameObject;
             Context.health = new(enemyReference);

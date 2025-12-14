@@ -1,6 +1,7 @@
 using UnityEngine;
 using Utils;
 using KinematicCharacterController;
+using System.Collections.Generic;
 using UnityEngine.Serialization;
 
 namespace Murktid {
@@ -23,9 +24,10 @@ namespace Murktid {
         public PlayerController controller;
 
         public AmmoDisplay ammoDisplay;
-        public BulletSystem bulletSystem;
+        //public BulletSystem bulletSystem;
         public LayerMask attackLayerMask;
         public LayerMask interactionLayerMask;
+        public LayerMask obstacleMask;
         public ShotgunCrosshair shotgunCrosshair;
 
         [Header("Debug Recoil")]
@@ -33,6 +35,14 @@ namespace Murktid {
 
         public float recoilOffset = 0f;
         public float recoilReturnSpeed = 5f;
+
+        [Header("Enemy Slot System")]
+        public float slotRadius = 2f;
+        public int maxEngagementSlots = 5;
+        public float slotArcAngle = 180f;
+        public int maxAttackSlots = 3;
+
+        public List<EnemyController> attackers = new List<EnemyController>();
 
         // Accessors
         public KinematicCharacterMotor Motor => motor;

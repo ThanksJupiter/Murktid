@@ -163,6 +163,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &588277746012279890
 GameObject:
@@ -530,6 +531,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -1061,10 +1063,17 @@ MonoBehaviour:
     interactionLayerMask:
       serializedVersion: 2
       m_Bits: 1
+    obstacleMask:
+      serializedVersion: 2
+      m_Bits: 256
     shotgunCrosshair: {fileID: 355171689747465979}
     hasRecoil: 0
     recoilOffset: 0
     recoilReturnSpeed: 3
+    slotRadius: 1.5
+    maxEngagementSlots: 3
+    slotArcAngle: 110
+    maxAttackSlots: 3
   healthDisplayReference: {fileID: 8150369274562770242}
   ammoDisplayReference: {fileID: 209423725776924521}
 --- !u!54 &5740912720274539414
@@ -1195,7 +1204,7 @@ Transform:
   m_GameObject: {fileID: 3481588095374832816}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1395,6 +1404,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -2529,6 +2539,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0

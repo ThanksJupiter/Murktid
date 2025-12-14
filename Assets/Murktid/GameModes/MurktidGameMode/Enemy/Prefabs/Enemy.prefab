@@ -1,5 +1,53 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3810824032708455263
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7866253350118244943}
+  - component: {fileID: 388560879724601583}
+  m_Layer: 0
+  m_Name: Hitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7866253350118244943
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3810824032708455263}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.396, y: -0, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 225515359052169261}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &388560879724601583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3810824032708455263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f51450f922678bc41848b7c9ce2cc539, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HitboxReference
+  hitboxType: 0
+  size: 0.35
+  halfExtents: {x: 1, y: 1, z: 1}
+  isActive: 0
 --- !u!1 &4570201260756466084
 GameObject:
   m_ObjectHideFlags: 0
@@ -61,7 +109,16 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 128
     targetPlayer: {fileID: 0}
+    hasEngagementSlot: 0
+    engagementSlotIndex: -1
+    engagementSlotRequestCooldown: 1
+    engagementSlotRequestTimestamp: -3.4028235e+38
+    hasAttackSlot: 0
+    attackSlotIndex: -1
+    attackSlotRequestCooldown: 3
+    attackSlotRequestTimestamp: -3.4028235e+38
     isDead: 0
+    hitbox: {fileID: 388560879724601583}
   animator: {fileID: 2456626585999874784}
 --- !u!195 &8510702593742695692
 NavMeshAgent:
@@ -73,16 +130,16 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 2
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 420
-  m_StoppingDistance: 2
+  m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1.6
-  m_BaseOffset: 0
+  m_BaseOffset: -0.09
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!54 &6961462211043072729
@@ -241,15 +298,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400084, guid: 984923792d0b828438b2725a82ed0133, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400084, guid: 984923792d0b828438b2725a82ed0133, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400084, guid: 984923792d0b828438b2725a82ed0133, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400084, guid: 984923792d0b828438b2725a82ed0133, type: 3}
       propertyPath: m_LocalPosition.x
@@ -409,9 +466,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2393243029850714029, guid: 984923792d0b828438b2725a82ed0133, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7866253350118244943}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 984923792d0b828438b2725a82ed0133, type: 3}
+--- !u!4 &225515359052169261 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2393243029850714029, guid: 984923792d0b828438b2725a82ed0133, type: 3}
+  m_PrefabInstance: {fileID: 2456626586009300864}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &2456626585999874784 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 9500000, guid: 984923792d0b828438b2725a82ed0133, type: 3}

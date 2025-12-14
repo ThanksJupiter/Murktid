@@ -2,13 +2,18 @@ using UnityEngine;
 
 namespace Murktid {
 
-    public class EnemyAbilityChasePlayer : EnemyAbility {
+    public class EnemyAbilityApproachPlayer : EnemyAbility {
         public override bool ShouldActivate() {
+
+            if(Context.hasEngagementSlot) {
+                return false;
+            }
+
             if(!Context.HasTarget) {
                 return false;
             }
 
-            if(Context.IsTargetWithinAttackRange) {
+            if(Context.IsTargetWithinThreatRange) {
                 return false;
             }
 
@@ -16,7 +21,11 @@ namespace Murktid {
         }
 
         public override bool ShouldDeactivate() {
-            if(Context.IsTargetWithinAttackRange) {
+            if(Context.IsTargetWithinThreatRange) {
+                return true;
+            }
+
+            if(Context.hasEngagementSlot) {
                 return true;
             }
 
@@ -24,17 +33,18 @@ namespace Murktid {
                 return true;
             }
 
-            // if is dead?
-
             return false;
         }
 
         protected override void OnActivate() {
-            Context.animatorBridge.IsChasing = true;
+            Context.animatorBridge.IsWalking = true;
+            Context.agent.speed = Context.settings.defaultWalkSpeed;
         }
 
         protected override void OnDeactivate() {
-            Context.animatorBridge.IsChasing = false;
+            Context.animatorBridge.IsWalking = false;
+            Context.agent.isStopped = true;
+            Context.agent.ResetPath();
         }
 
         protected override void Tick(float deltaTime) {

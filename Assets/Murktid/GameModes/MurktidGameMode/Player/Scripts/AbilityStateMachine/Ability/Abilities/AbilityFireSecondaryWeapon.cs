@@ -86,7 +86,7 @@ namespace Murktid {
                         damage = damage
                     };
 
-                    Context.bulletSystem.SpawnBullet(spawnFirstBulletData);
+                    Context.controller.bulletSystem.SpawnBullet(spawnFirstBulletData);
 
                     SpawnBulletData spawnSecondBulletData = new() {
                         spawnPosition = ray.origin + Context.motor.CharacterRight * barrelSeparationMultiplier,
@@ -96,7 +96,7 @@ namespace Murktid {
                         damage = damage
                     };
 
-                    Context.bulletSystem.SpawnBullet(spawnSecondBulletData);
+                    Context.controller.bulletSystem.SpawnBullet(spawnSecondBulletData);
                 }
                 else {
                     SpawnBulletData spawnBulletData = new() {
@@ -107,7 +107,7 @@ namespace Murktid {
                         damage = damage
                     };
 
-                    Context.bulletSystem.SpawnBullet(spawnBulletData);
+                    Context.controller.bulletSystem.SpawnBullet(spawnBulletData);
                 }
             }
         }

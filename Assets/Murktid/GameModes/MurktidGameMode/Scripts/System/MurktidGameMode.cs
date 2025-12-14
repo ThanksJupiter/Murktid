@@ -66,8 +66,9 @@ namespace Murktid {
                 Context = {
                     input = applicationData.Input,
                     cameraReference = playerCameraReference,
-                    bulletSystem = bulletSystem,
-                }
+                },
+
+                bulletSystem = bulletSystem
             };
 
             player = playerController;

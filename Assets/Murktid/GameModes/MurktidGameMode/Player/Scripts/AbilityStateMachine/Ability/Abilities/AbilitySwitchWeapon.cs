@@ -43,12 +43,12 @@ namespace Murktid {
                 switch(Context.playerEquipmentData.currentWeaponType) {
                     case WeaponType.Melee:
                         Context.playerEquipmentData.currentWeaponType = WeaponType.Ranged;
-                        Context.controller.WeaponSystem.InstantiateWeapon(Context.defaultRangedWeaponReferencePrefab);
+                        Context.controller.weaponSystem.InstantiateWeapon(Context.defaultRangedWeaponReferencePrefab);
                         hasSwitchedWeapon = true;
                         break;
                     case WeaponType.Ranged:
                         Context.playerEquipmentData.currentWeaponType = WeaponType.Melee;
-                        Context.controller.WeaponSystem.InstantiateWeapon(Context.defaultMeleeWeaponReferencePrefab);
+                        Context.controller.weaponSystem.InstantiateWeapon(Context.defaultMeleeWeaponReferencePrefab);
                         hasSwitchedWeapon = true;
                         break;
                     default:

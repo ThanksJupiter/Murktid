@@ -6,10 +6,21 @@ namespace Murktid {
 
         private bool hasAttacked = false;
         private bool hasActivatedHitbox = false;
-        private float attackRateTimestamp = float.MinValue;
-        private float hitboxActivationTimestamp = float.MinValue;
 
         public override bool ShouldActivate() {
+
+            if(!Context.hasAttackSlot) {
+                return false;
+            }
+
+            if(!Context.HasTarget) {
+                return false;
+            }
+
+            if(!Context.hasEngagementSlot) {
+                return false;
+            }
+
             if(!Context.IsTargetWithinAttackRange) {
                 return false;
             }
@@ -22,8 +33,6 @@ namespace Murktid {
         }
 
         protected override void OnActivate() {
-            attackRateTimestamp = Time.time + Context.settings.attackRate;
-            hitboxActivationTimestamp = Time.time + 1f;
             Context.animatorBridge.IsAttacking = true;
             hasAttacked = false;
             hasActivatedHitbox = false;
@@ -33,27 +42,33 @@ namespace Murktid {
         protected override void OnDeactivate() {
             Context.animatorBridge.IsAttacking = false;
             Context.agent.updateRotation = true;
+            Context.playerSlotSystem.ReleaseAttackSlot(Context.attackSlotIndex);
+            Context.hasAttackSlot = false;
         }
 
         protected override void Tick(float deltaTime) {
-            if(Time.time >= attackRateTimestamp) {
-                hasAttacked = true;
-            }
-
             Vector3 targetDirection = Context.targetPlayer.transform.position - Context.transform.position;
             targetDirection.y = 0f;
             Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Context.transform.up);
             Context.transform.rotation = Quaternion.Slerp(Context.transform.rotation, targetRotation, 1f - Mathf.Exp(-Context.settings.rotateToTargetRate * deltaTime));
 
             if(hasActivatedHitbox) {
+
+                if(!Context.animatorBridge.IsHitboxActive) {
+                    Context.hitbox.isActive = false;
+                    hasAttacked = true;
+                }
+
                 return;
             }
 
-            if(Time.time >= hitboxActivationTimestamp) {
+            if(Context.animatorBridge.IsHitboxActive) {
                 hasActivatedHitbox = true;
+                Context.hitbox.isActive = true;
+
                 Context.animatorBridge.IsAttacking = false;
-                Vector3 spherePosition = Context.transform.position + Context.transform.up + Context.transform.forward;
-                float sphereSize = .5f;
+                Vector3 spherePosition = Context.hitbox.Center;
+                float sphereSize = Context.hitbox.size;
 
                 Collider[] overlappedColliders = Physics.OverlapSphere(spherePosition, sphereSize, Context.playerMask);
                 for(int i = 0; i < overlappedColliders.Length; i++) {

@@ -41,6 +41,11 @@ namespace Murktid {
         protected override void Tick(float deltaTime) {
 
             if(hasActivatedHitbox) {
+
+                if(!Context.animatorBridge.IsHitboxActive) {
+                    Context.playerEquipmentData.CurrentWeapon.reference.hitbox.isActive = false;
+                }
+
                 if(!Context.animatorBridge.IsInMeleeLayer) {
                     didAttack = true;
                 }
@@ -51,12 +56,14 @@ namespace Murktid {
             if(Context.animatorBridge.IsHitboxActive) {
                 hasActivatedHitbox = true;
                 Context.animatorBridge.Shoot = false;
-                Vector3 spherePosition = Context.playerEquipmentData.CurrentWeapon.reference.firePoint.position;
-                Debug.DrawRay(spherePosition, Vector3.up, Color.red, 1f);
+                Vector3 overlapPosition = Context.playerEquipmentData.CurrentWeapon.reference.hitbox.Center;
+                Vector3 halfExtents = Context.playerEquipmentData.CurrentWeapon.reference.hitbox.halfExtents;
+                Quaternion overlapBoxRotation = Context.playerEquipmentData.CurrentWeapon.reference.hitbox.Rotation;
+                //float sphereSize = Context.playerEquipmentData.CurrentWeapon.reference.hitbox.size;
+                Context.playerEquipmentData.CurrentWeapon.reference.hitbox.isActive = true;
 
-                float sphereSize = 1.5f;
-
-                Collider[] overlappedColliders = Physics.OverlapSphere(spherePosition, sphereSize, Context.attackLayerMask);
+                //Collider[] overlappedColliders = Physics.OverlapSphere(spherePosition, sphereSize, Context.attackLayerMask);
+                Collider[] overlappedColliders = Physics.OverlapBox(overlapPosition, halfExtents, overlapBoxRotation, Context.attackLayerMask);
                 for(int i = 0; i < overlappedColliders.Length; i++) {
                     Collider collider = overlappedColliders[i];
                     if(collider.TryGetComponent(out ITarget target)) {

@@ -8,5 +8,6 @@ namespace Murktid {
         public PlayerWeaponConfig config;
         public Animator animator;
         public Transform firePoint;
+        public HitboxReference hitbox;
     }
 }

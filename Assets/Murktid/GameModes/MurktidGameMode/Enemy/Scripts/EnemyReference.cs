@@ -22,6 +22,11 @@ namespace Murktid {
             context.health.TakeDamage(damage);
 
             if(context.health.currentHealth.Value <= 0f) {
+
+                if(context.hasEngagementSlot) {
+                    context.playerSlotSystem.ReleaseEngagementSlot(context.engagementSlotIndex);
+                }
+
                 context.isDead = true;
             }
         }

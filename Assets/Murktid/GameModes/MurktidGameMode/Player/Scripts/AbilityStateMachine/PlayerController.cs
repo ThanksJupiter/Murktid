@@ -10,8 +10,9 @@ namespace Murktid {
         private readonly PlayerMovementController playerMovementController = new();
         public PlayerAbilityComponent abilityComponent;
 
-        private PlayerWeaponSystem weaponSystem;
-        public PlayerWeaponSystem WeaponSystem => weaponSystem;
+        public PlayerWeaponSystem weaponSystem;
+        public PlayerAttackerSlotSystem attackerSlotSystem;
+        public BulletSystem bulletSystem;
 
         public PlayerController(PlayerReference playerReference) {
             Context = playerReference.context;
@@ -21,6 +22,7 @@ namespace Murktid {
             Context.health = new(playerReference.healthDisplayReference, playerReference.context.settings);
             Context.ammoDisplay = new(playerReference);
             weaponSystem = new();
+            attackerSlotSystem = new(Context);
         }
 
         public void Initialize(PlayerReference playerReference) {
@@ -34,7 +36,6 @@ namespace Murktid {
 
             weaponSystem.Initialize(playerReference);
             weaponSystem.InstantiateWeapon(Context.defaultRangedWeaponReferencePrefab);
-            //
         }
 
         public void SetInput() {
@@ -53,6 +54,7 @@ namespace Murktid {
             Context.CapsuleHeight = Mathf.Lerp(Context.CapsuleHeight, Context.TargetCapsuleHeight, 1f - Mathf.Exp(-Context.settings.capsuleHeightLerpSpeed * deltaTime));
             Context.motor.SetCapsuleDimensions(Context.settings.capsuleRadius, Context.CapsuleHeight, Context.CapsuleHeight * .5f);
 
+            attackerSlotSystem.Tick(deltaTime);
             StateMachine.Tick(deltaTime);
         }
 
