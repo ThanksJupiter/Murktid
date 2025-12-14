@@ -16,5 +16,7 @@ namespace Murktid {
         public float threatRange = 5f;
         public float attackRate = 3f;
         public float rotateToTargetRate = 3f;
+
+        public float checkEngagementStatusInterval = .5f;
     }
 }

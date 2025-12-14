@@ -14,6 +14,7 @@ namespace Murktid {
         public EnemySettings settings;
         public LayerMask playerMask;
         public LayerMask enemyMask;
+        public LayerMask obstacleMask;
         public EnemyAnimatorBridge animatorBridge;
         public EnemyHealth health;
 
@@ -27,6 +28,8 @@ namespace Murktid {
         [HideInInspector]
         public float engagementSlotRequestTimestamp = float.MinValue;
 
+        public float stopEngagingDistanceThreshold = 15f;
+
         public bool hasAttackSlot = false;
         public int attackSlotIndex = -1;
         public float attackSlotRequestCooldown = 1f;
@@ -36,6 +39,8 @@ namespace Murktid {
         // prototype behaviour
         public bool isDead = false;
         public HitboxReference hitbox;
+
+        public Vector3 RayOrigin => transform.position + Vector3.up;
 
         public bool IsTargetWithinThreatRange {
             get {
@@ -54,6 +59,16 @@ namespace Murktid {
                 }
 
                 return Vector3.Distance(transform.position, targetPlayer.transform.position) < settings.attackRange;
+            }
+        }
+
+        public float DistanceToTarget {
+            get {
+                if(!HasTarget) {
+                    return float.MaxValue;
+                }
+
+                return Vector3.Distance(transform.position, targetPlayer.transform.position);
             }
         }
     }

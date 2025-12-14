@@ -17,6 +17,7 @@ namespace Murktid {
             EnemyController[] nearbyEnemies = GameplayStatics.GetEnemiesAtPositionWithinRadius(transform.position, context.settings.aggroRange, context.enemyMask);
             foreach(EnemyController enemy in nearbyEnemies) {
                 enemy.Context.targetPlayer = playerReference;
+                enemy.Context.playerSlotSystem = playerReference.context.controller.attackerSlotSystem;
             }
 
             context.health.TakeDamage(damage);

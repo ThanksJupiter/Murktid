@@ -8,11 +8,19 @@ namespace Murktid {
                 return false;
             }
 
+            if(Context.HasTarget) {
+                return false;
+            }
+
             return true;
         }
 
         public override bool ShouldDeactivate() {
             if(Context.hasEngagementSlot) {
+                return true;
+            }
+
+            if(Context.HasTarget) {
                 return true;
             }
 

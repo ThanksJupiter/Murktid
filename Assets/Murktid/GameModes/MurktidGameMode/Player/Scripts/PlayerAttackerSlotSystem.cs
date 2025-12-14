@@ -8,14 +8,8 @@ namespace Murktid {
         public HashSet<int> ActiveEngagementSlots { get; } = new HashSet<int>();
         public HashSet<int> ActiveAttackSlots { get; } = new HashSet<int>();
 
-        private float internalRequestTimer = .5f;
-
         public PlayerAttackerSlotSystem(PlayerContext context) : base(context) {
             //occupiedSlots = new bool[context.maxAttackers];
-        }
-
-        public void Tick(float deltaTime) {
-            internalRequestTimer -= deltaTime;
         }
 
         public bool TryClaimEngagementSlot(Vector3 enemyPosition, out int claimedIndex)
@@ -45,7 +39,6 @@ namespace Murktid {
             if (claimedIndex != -1)
             {
                 ActiveEngagementSlots.Add(claimedIndex);
-                internalRequestTimer = .25f;
                 return true;
             }
 
@@ -60,7 +53,6 @@ namespace Murktid {
 
             if(ActiveAttackSlots.Count < context.maxAttackSlots) {
                 ActiveAttackSlots.Add(engagementIndex);
-                internalRequestTimer = .5f;
                 return true;
             }
 

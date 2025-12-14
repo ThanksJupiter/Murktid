@@ -108,11 +108,15 @@ MonoBehaviour:
     enemyMask:
       serializedVersion: 2
       m_Bits: 128
+    obstacleMask:
+      serializedVersion: 2
+      m_Bits: 257
     targetPlayer: {fileID: 0}
     hasEngagementSlot: 0
     engagementSlotIndex: -1
-    engagementSlotRequestCooldown: 1
+    engagementSlotRequestCooldown: 2
     engagementSlotRequestTimestamp: -3.4028235e+38
+    stopEngagingDistanceThreshold: 10
     hasAttackSlot: 0
     attackSlotIndex: -1
     attackSlotRequestCooldown: 3
