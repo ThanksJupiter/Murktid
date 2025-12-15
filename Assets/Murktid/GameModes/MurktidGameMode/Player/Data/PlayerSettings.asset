@@ -35,7 +35,7 @@ MonoBehaviour:
   maxAirMoveSpeed: 4
   drag: 0.1
   cameraHeightLerpSpeed: 10
-  standingCameraHeight: 1.4
+  standingCameraHeight: 1.6
   crouchingCameraHeight: 0.9
   minVerticalLookAngle: -85
   maxVerticalLookAngle: 85

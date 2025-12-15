@@ -75,5 +75,6 @@ namespace Murktid {
         public bool IsReloading { get; set; }
         public bool IsBlocking { get; set; }
         public int BlockHitIndex { get; set; }
+        public bool BlockPush { get; set; }
     }
 }

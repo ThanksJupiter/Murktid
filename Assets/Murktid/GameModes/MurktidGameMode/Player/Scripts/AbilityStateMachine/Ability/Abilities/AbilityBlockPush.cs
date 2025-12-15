@@ -1,9 +1,8 @@
-using R3;
 using UnityEngine;
 
 namespace Murktid {
 
-    public class AbilityMeleeAttack : PlayerAbility {
+    public class AbilityBlockPush : PlayerAbility {
 
         private bool didAttack = false;
         private bool hasActivatedHitbox = false;
@@ -13,7 +12,11 @@ namespace Murktid {
                 return false;
             }
 
-            if(!Context.input.PrimaryAction.IsPressed) {
+            if(!Context.IsBlocking) {
+                return false;
+            }
+
+            if(!Context.input.PrimaryAction.wasPressedThisFrame) {
                 return false;
             }
 
@@ -31,7 +34,7 @@ namespace Murktid {
         protected override void OnActivate() {
             didAttack = false;
             hasActivatedHitbox = false;
-            Context.animatorBridge.Shoot = true;
+            Context.animatorBridge.BlockPush = true;
         }
 
         protected override void Tick(float deltaTime) {
@@ -49,14 +52,14 @@ namespace Murktid {
 
             if(Context.animatorBridge.IsHitboxActive) {
                 hasActivatedHitbox = true;
-                Context.animatorBridge.Shoot = false;
+                Context.animatorBridge.BlockPush = false;
                 Context.playerEquipmentData.CurrentWeapon.reference.hitbox.isActive = true;
 
                 int overlappedCount = Context.Hitbox.TryGetOverlappedColliders(Context.attackLayerMask, out Collider[] overlappedColliders);
                 for(int i = 0; i < overlappedCount; i++) {
                     Collider collider = overlappedColliders[i];
                     if(collider.TryGetComponent(out ITarget target)) {
-                        target.Hit(100f);
+                        target.Hit(10f);
                     }
                 }
             }
