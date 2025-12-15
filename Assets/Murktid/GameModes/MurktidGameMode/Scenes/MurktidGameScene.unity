@@ -941,7 +941,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6217489226341525943, guid: fd6ea40b68ab4b044aa9466555cb7d98, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6664030485235931597, guid: fd6ea40b68ab4b044aa9466555cb7d98, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1011,7 +1011,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6217489226341525943, guid: fd6ea40b68ab4b044aa9466555cb7d98, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6664030485235931597, guid: fd6ea40b68ab4b044aa9466555cb7d98, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1495,7 +1495,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2677845388396077362, guid: fd6ea40b68ab4b044aa9466555cb7d98, type: 3}
       propertyPath: enemiesToSpawn
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6217489226341525943, guid: fd6ea40b68ab4b044aa9466555cb7d98, type: 3}
       propertyPath: m_Name

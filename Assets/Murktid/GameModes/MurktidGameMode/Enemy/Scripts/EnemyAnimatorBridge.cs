@@ -31,6 +31,11 @@ namespace Murktid {
 
         public bool IsHitboxActive => animator.GetFloat(Param.hitboxActive) > .1f;
 
+        public float Speed {
+            get => animator.GetFloat(Param.speed);
+            set => animator.SetFloat(Param.speed, value);
+        }
+
         private static class Param {
             public static readonly int empty = Animator.StringToHash("Empty");
             public static readonly int isIdle = Animator.StringToHash("isIdle");
@@ -38,6 +43,7 @@ namespace Murktid {
             public static readonly int isWalking = Animator.StringToHash("isWalking");
             public static readonly int isAttacking = Animator.StringToHash("isAttacking");
             public static readonly int hitboxActive = Animator.StringToHash("HitboxActive");
+            public static readonly int speed = Animator.StringToHash("Speed");
         }
     }
 }

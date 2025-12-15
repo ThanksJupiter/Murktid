@@ -23,6 +23,9 @@ namespace Murktid {
         }
 
         public void Tick(float deltaTime) {
+
+            Context.animatorBridge.Speed = Context.agent.desiredVelocity.magnitude / Context.settings.defaultChaseSpeed;
+
             StateMachine.Tick(deltaTime);
         }
 
