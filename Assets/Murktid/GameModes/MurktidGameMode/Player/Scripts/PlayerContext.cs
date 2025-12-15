@@ -60,6 +60,7 @@ namespace Murktid {
             get => movementData.activeMoveSpeed;
             set => movementData.activeMoveSpeed = value;
         }
+
         public float CapsuleHeight { get; set; }
         public float TargetCapsuleHeight { get; set; }
         public float TargetCameraHeight { get; set; }
@@ -72,5 +73,7 @@ namespace Murktid {
         public bool IsAimingDownSights { get; set; }
         public bool IsShooting { get; set; }
         public bool IsReloading { get; set; }
+        public bool IsBlocking { get; set; }
+        public int BlockHitIndex { get; set; }
     }
 }

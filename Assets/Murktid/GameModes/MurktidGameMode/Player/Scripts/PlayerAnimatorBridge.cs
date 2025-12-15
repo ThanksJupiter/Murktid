@@ -49,6 +49,18 @@ namespace Murktid {
             set => animator.SetBool(Param.isWalking, value);
         }
 
+        public bool IsBlocking
+        {
+            get => animator.GetBool(Param.isBlocking);
+            set => animator.SetBool(Param.isBlocking, value);
+        }
+
+        public int BlockHitIndex
+        {
+            get => animator.GetInteger(Param.blockHitIndex);
+            set => animator.SetInteger(Param.blockHitIndex, value);
+        }
+
         public bool IsInRangedLayer => animator.GetCurrentAnimatorStateInfo(Layer.ranged).shortNameHash != Param.empty;
         public bool IsInRangedFireLayer => animator.GetCurrentAnimatorStateInfo(Layer.rangedFire).shortNameHash != Param.empty;
         public bool IsInMeleeLayer => animator.GetCurrentAnimatorStateInfo(Layer.melee).shortNameHash != Param.empty;
@@ -73,6 +85,8 @@ namespace Murktid {
             public static readonly int sheathe = Animator.StringToHash("Sheathe");
             public static readonly int isSprinting = Animator.StringToHash("IsSprinting");
             public static readonly int isWalking = Animator.StringToHash("IsWalking");
+            public static readonly int isBlocking = Animator.StringToHash("IsBlocking");
+            public static readonly int blockHitIndex = Animator.StringToHash("BlockHitIndex");
         }
     }
 }
