@@ -42,6 +42,8 @@ namespace Murktid {
         public float slotArcAngle = 180f;
         public int maxAttackSlots = 3;
 
+        public HitboxReference pushHitbox;
+
         public List<EnemyController> attackers = new List<EnemyController>();
 
         // Accessors

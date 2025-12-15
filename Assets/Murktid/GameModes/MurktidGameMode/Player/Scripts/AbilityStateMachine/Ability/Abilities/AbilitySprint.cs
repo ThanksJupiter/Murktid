@@ -5,6 +5,10 @@ namespace Murktid {
     public class AbilitySprint : PlayerAbility {
         public override bool ShouldActivate() {
 
+            if(Context.IsBlocking) {
+                return false;
+            }
+
             if(!Context.IsGrounded) {
                 return false;
             }
@@ -37,6 +41,10 @@ namespace Murktid {
         }
 
         public override bool ShouldDeactivate() {
+
+            if(Context.IsBlocking) {
+                return true;
+            }
 
             if(!Context.IsGrounded) {
                 return true;

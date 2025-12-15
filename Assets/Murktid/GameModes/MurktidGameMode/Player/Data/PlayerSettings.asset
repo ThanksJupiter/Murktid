@@ -23,7 +23,7 @@ MonoBehaviour:
   dodgeDuration: 0.15
   standingCapsuleHeight: 2
   crouchingCapsuleHeight: 1
-  capsuleRadius: 0.5
+  capsuleRadius: 0.25
   capsuleHeightLerpSpeed: 5
   maxHealth: 100
   jumpForce: 5

@@ -42,7 +42,7 @@ namespace Murktid {
             if(hasActivatedHitbox) {
 
                 if(!Context.animatorBridge.IsHitboxActive) {
-                    Context.playerEquipmentData.CurrentWeapon.reference.hitbox.isActive = false;
+                    Context.pushHitbox.isActive = false;
                 }
 
                 if(!Context.animatorBridge.IsInMeleeLayer) {
@@ -53,9 +53,9 @@ namespace Murktid {
             if(Context.animatorBridge.IsHitboxActive) {
                 hasActivatedHitbox = true;
                 Context.animatorBridge.BlockPush = false;
-                Context.playerEquipmentData.CurrentWeapon.reference.hitbox.isActive = true;
+                Context.pushHitbox.isActive = true;
 
-                int overlappedCount = Context.Hitbox.TryGetOverlappedColliders(Context.attackLayerMask, out Collider[] overlappedColliders);
+                int overlappedCount = Context.pushHitbox.TryGetOverlappedColliders(Context.attackLayerMask, out Collider[] overlappedColliders);
                 for(int i = 0; i < overlappedCount; i++) {
                     Collider collider = overlappedColliders[i];
                     if(collider.TryGetComponent(out ITarget target)) {

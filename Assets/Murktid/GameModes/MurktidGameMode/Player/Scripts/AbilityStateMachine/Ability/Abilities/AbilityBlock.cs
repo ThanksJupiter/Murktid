@@ -36,6 +36,8 @@ namespace Murktid {
         protected override void OnDeactivate() {
             Context.IsBlocking = false;
             Context.animatorBridge.IsBlocking = false;
+            Context.BlockHitIndex = 0;
+            Context.animatorBridge.BlockHitIndex = 0;
         }
 
         protected override void Tick(float deltaTime) {

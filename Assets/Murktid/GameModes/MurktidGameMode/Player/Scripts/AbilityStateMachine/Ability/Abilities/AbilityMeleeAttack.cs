@@ -13,6 +13,10 @@ namespace Murktid {
                 return false;
             }
 
+            if(Context.IsBlocking) {
+                return false;
+            }
+
             if(!Context.input.PrimaryAction.IsPressed) {
                 return false;
             }
@@ -25,6 +29,10 @@ namespace Murktid {
                 return true;
             }
 
+            if(Context.IsBlocking) {
+                return true;
+            }
+
             return didAttack;
         }
 
@@ -34,12 +42,17 @@ namespace Murktid {
             Context.animatorBridge.Shoot = true;
         }
 
+        protected override void OnDeactivate() {
+            Context.Hitbox.isActive = false;
+            Context.animatorBridge.Shoot = false;
+        }
+
         protected override void Tick(float deltaTime) {
 
             if(hasActivatedHitbox) {
 
                 if(!Context.animatorBridge.IsHitboxActive) {
-                    Context.playerEquipmentData.CurrentWeapon.reference.hitbox.isActive = false;
+                    Context.Hitbox.isActive = false;
                 }
 
                 if(!Context.animatorBridge.IsInMeleeLayer) {
@@ -50,7 +63,7 @@ namespace Murktid {
             if(Context.animatorBridge.IsHitboxActive) {
                 hasActivatedHitbox = true;
                 Context.animatorBridge.Shoot = false;
-                Context.playerEquipmentData.CurrentWeapon.reference.hitbox.isActive = true;
+                Context.Hitbox.isActive = true;
 
                 int overlappedCount = Context.Hitbox.TryGetOverlappedColliders(Context.attackLayerMask, out Collider[] overlappedColliders);
                 for(int i = 0; i < overlappedCount; i++) {

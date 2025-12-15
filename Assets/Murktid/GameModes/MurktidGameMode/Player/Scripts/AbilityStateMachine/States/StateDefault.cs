@@ -34,6 +34,7 @@ namespace Murktid {
             abilityComponent.AddDefaultAbility<AbilityReload>();
             abilityComponent.AddDefaultAbility<AbilityInteract>();
             abilityComponent.AddDefaultAbility<AbilityBlock>();
+            abilityComponent.AddDefaultAbility<AbilityBlockPush>();
         }
 
         protected override void Tick(float deltaTime) {

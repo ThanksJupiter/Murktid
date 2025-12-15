@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HitboxReference
   hitboxType: 0
-  size: 0.45
+  size: 0.75
   halfExtents: {x: 1, y: 1, z: 1}
   isActive: 0
 --- !u!1 &4570201260756466084
