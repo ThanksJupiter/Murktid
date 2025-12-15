@@ -70,7 +70,13 @@ namespace Murktid {
                 for(int i = 0; i < overlappedCount; i++) {
                     Collider collider = overlappedColliders[i];
                     if(collider.TryGetComponent(out PlayerReference playerReference)) {
-                        playerReference.context.health.TakeDamage(10f);
+
+                        if(playerReference.context.IsBlocking) {
+                            playerReference.context.BlockHitIndex = Random.Range(1, 4);
+                        }
+                        else {
+                            playerReference.context.health.TakeDamage(10f);
+                        }
                     }
                 }
             }
