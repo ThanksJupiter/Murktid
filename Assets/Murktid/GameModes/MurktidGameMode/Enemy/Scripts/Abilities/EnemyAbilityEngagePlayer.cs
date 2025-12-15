@@ -31,10 +31,12 @@ namespace Murktid {
         protected override void OnActivate() {
             Context.animatorBridge.IsChasing = true;
             Context.agent.speed = Context.settings.defaultChaseSpeed;
+            Context.agent.avoidancePriority = 0;
         }
 
         protected override void OnDeactivate() {
             Context.animatorBridge.IsChasing = false;
+            Context.agent.avoidancePriority = 50;
         }
 
         protected override void Tick(float deltaTime) {

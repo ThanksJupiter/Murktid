@@ -37,6 +37,7 @@ namespace Murktid {
             hasAttacked = false;
             hasActivatedHitbox = false;
             Context.agent.updateRotation = false;
+            Context.agent.avoidancePriority = 0;
         }
 
         protected override void OnDeactivate() {
@@ -47,13 +48,12 @@ namespace Murktid {
         }
 
         protected override void Tick(float deltaTime) {
-            /*Vector3 targetDirection = Context.targetPlayer.transform.position - Context.transform.position;
+            Vector3 targetDirection = Context.targetPlayer.transform.position - Context.transform.position;
             targetDirection.y = 0f;
             Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Context.transform.up);
-            Context.transform.rotation = Quaternion.Slerp(Context.transform.rotation, targetRotation, 1f - Mathf.Exp(-Context.settings.rotateToTargetRate * deltaTime));*/
+            Context.transform.rotation = Quaternion.Slerp(Context.transform.rotation, targetRotation, 1f - Mathf.Exp(-Context.settings.rotateToTargetRate * deltaTime));
 
             if(hasActivatedHitbox) {
-
                 if(!Context.animatorBridge.IsHitboxActive) {
                     Context.hitbox.isActive = false;
                     hasAttacked = true;
@@ -65,12 +65,14 @@ namespace Murktid {
             if(Context.animatorBridge.IsHitboxActive) {
                 hasActivatedHitbox = true;
                 Context.hitbox.isActive = true;
+                bool hitPlayer = false;
 
                 int overlappedCount = Context.hitbox.TryGetOverlappedColliders(Context.playerMask, out Collider[] overlappedColliders);
                 for(int i = 0; i < overlappedCount; i++) {
                     Collider collider = overlappedColliders[i];
                     if(collider.TryGetComponent(out PlayerReference playerReference)) {
 
+                        hitPlayer = true;
                         if(playerReference.context.IsBlocking) {
                             playerReference.context.BlockHitIndex = Random.Range(1, 4);
                         }
@@ -78,6 +80,12 @@ namespace Murktid {
                             playerReference.context.health.TakeDamage(10f);
                         }
                     }
+                }
+
+                if(!hitPlayer) {
+                    Context.playerSlotSystem.ReleaseEngagementSlot(Context.engagementSlotIndex);
+                    Context.hasEngagementSlot = false;
+                    Context.agent.avoidancePriority = 50;
                 }
             }
         }

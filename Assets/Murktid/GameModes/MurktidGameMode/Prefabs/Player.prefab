@@ -1066,14 +1066,14 @@ MonoBehaviour:
       m_Bits: 1
     obstacleMask:
       serializedVersion: 2
-      m_Bits: 256
+      m_Bits: 257
     shotgunCrosshair: {fileID: 355171689747465979}
     hasRecoil: 0
     recoilOffset: 0
     recoilReturnSpeed: 3
     slotRadius: 1.25
-    maxEngagementSlots: 5
-    slotArcAngle: 160
+    maxEngagementSlots: 3
+    slotArcAngle: 60
     maxAttackSlots: 3
     pushHitbox: {fileID: 7003441214942450490}
   healthDisplayReference: {fileID: 8150369274562770242}
