@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba408989a3920bd458e30d3220dd4af3, type: 3}
   m_Name: EnemySettings
   m_EditorClassIdentifier: Assembly-CSharp::Murktid.EnemySettings
-  defaultChaseSpeed: 6
+  defaultChaseSpeed: 5.5
   defaultWalkSpeed: 1.5
   maxHealth: 100
   aggroRange: 15
