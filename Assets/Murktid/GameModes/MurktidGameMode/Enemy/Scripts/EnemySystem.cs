@@ -73,6 +73,7 @@ namespace Murktid {
 
                     // HACK (?) override this where necessary instead of manually calling?
                     // implement similar to IApplicationLifeCycle for objects that need this & destroy accordingly?
+                    enemyToDestroy.Context.graphicsContainer.transform.SetParent(null);
                     enemyToDestroy.OnDestroy();
                     Object.Destroy(enemyToDestroy.Context.gameObject);
                 }

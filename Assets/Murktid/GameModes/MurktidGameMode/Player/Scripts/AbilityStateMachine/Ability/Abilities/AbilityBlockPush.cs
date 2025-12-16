@@ -16,7 +16,7 @@ namespace Murktid {
                 return false;
             }
 
-            if(!Context.input.PrimaryAction.wasPressedThisFrame) {
+            if(!Context.input.PrimaryAction.IsPressed) {
                 return false;
             }
 

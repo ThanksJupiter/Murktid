@@ -17,6 +17,7 @@ namespace Murktid {
         public LayerMask obstacleMask;
         public EnemyAnimatorBridge animatorBridge;
         public EnemyHealth health;
+        public GameObject graphicsContainer;
 
         // Target
         public bool HasTarget => targetPlayer != null;
