@@ -705,7 +705,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2538737762150636746, guid: 79723fc41e4554548acf337b241f1b1d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5862843785441496230, guid: 79723fc41e4554548acf337b241f1b1d, type: 3}
       propertyPath: tmpHammerTransform
@@ -945,7 +945,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6217489226341525943, guid: fd6ea40b68ab4b044aa9466555cb7d98, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6664030485235931597, guid: fd6ea40b68ab4b044aa9466555cb7d98, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1015,7 +1015,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6217489226341525943, guid: fd6ea40b68ab4b044aa9466555cb7d98, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6664030485235931597, guid: fd6ea40b68ab4b044aa9466555cb7d98, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1499,7 +1499,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2677845388396077362, guid: fd6ea40b68ab4b044aa9466555cb7d98, type: 3}
       propertyPath: enemiesToSpawn
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6217489226341525943, guid: fd6ea40b68ab4b044aa9466555cb7d98, type: 3}
       propertyPath: m_Name

@@ -1,4 +1,5 @@
 using R3;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Murktid {
@@ -42,6 +43,7 @@ namespace Murktid {
             hasActivatedHitbox = false;
             Context.animatorBridge.Shoot = true;
             Context.animatorBridge.AttackIndex = 0;
+            hitboxActivated = false;
         }
 
         protected override void OnDeactivate() {
@@ -49,6 +51,9 @@ namespace Murktid {
             Context.animatorBridge.Shoot = false;
             followUpAttackRequested = false;
         }
+
+        private List<ITarget> hitTargets = new List<ITarget>();
+        private bool hitboxActivated = false;
 
         protected override void Tick(float deltaTime) {
 
@@ -64,9 +69,8 @@ namespace Murktid {
             }
 
             if(hasActivatedHitbox) {
-
                 if(!Context.animatorBridge.IsHitboxActive) {
-                    Context.Hitbox.isActive = false;
+                    DeactivateHitbox();
 
                     if(followUpAttackRequested) {
                         Context.animatorBridge.Shoot = true;
@@ -81,18 +85,38 @@ namespace Murktid {
             }
 
             if(Context.animatorBridge.IsHitboxActive) {
+
+                if(!hitboxActivated) {
+                    ActivateHitbox();
+                }
+
+                TickHitbox();
+
                 hasActivatedHitbox = true;
                 Context.animatorBridge.Shoot = false;
-                Context.Hitbox.isActive = true;
+            }
+        }
 
-                int overlappedCount = Context.Hitbox.TryGetOverlappedColliders(Context.attackLayerMask, out Collider[] overlappedColliders);
-                for(int i = 0; i < overlappedCount; i++) {
-                    Collider collider = overlappedColliders[i];
-                    if(collider.TryGetComponent(out ITarget target)) {
-                        target.Hit(100f);
-                    }
+        private void ActivateHitbox() {
+            hitboxActivated = true;
+            hitTargets.Clear();
+            Context.Hitbox.isActive = true;
+        }
+
+        private void TickHitbox() {
+            int overlappedCount = Context.Hitbox.TryGetOverlappedColliders(Context.attackLayerMask, out Collider[] overlappedColliders);
+            for(int i = 0; i < overlappedCount; i++) {
+                Collider collider = overlappedColliders[i];
+                if(collider.TryGetComponent(out ITarget target) && !hitTargets.Contains(target)) {
+                    hitTargets.Add(target);
+                    target.Hit(35f);
                 }
             }
+        }
+
+        private void DeactivateHitbox() {
+            Context.Hitbox.isActive = false;
+            hitboxActivated = false;
         }
     }
 }

@@ -10,7 +10,6 @@ namespace Murktid {
 
         // prototype hit function
         public void Hit(float damage) {
-
             PlayerReference playerReference = FindFirstObjectByType<PlayerReference>();
             context.targetPlayer = playerReference;
 
@@ -28,7 +27,11 @@ namespace Murktid {
                     context.playerSlotSystem.ReleaseEngagementSlot(context.engagementSlotIndex);
                 }
 
+                context.animatorBridge.IsDead = true;
                 context.isDead = true;
+            }
+            else {
+                context.animatorBridge.TakeDamage = true;
             }
         }
     }
