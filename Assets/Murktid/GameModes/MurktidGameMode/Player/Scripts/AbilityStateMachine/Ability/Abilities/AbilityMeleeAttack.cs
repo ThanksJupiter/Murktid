@@ -5,8 +5,9 @@ namespace Murktid {
 
     public class AbilityMeleeAttack : PlayerAbility {
 
-        private bool didAttack = false;
+        private bool leaveState = false;
         private bool hasActivatedHitbox = false;
+        private bool followUpAttackRequested = false;
 
         public override bool ShouldActivate() {
             if(Context.playerEquipmentData.currentWeaponType != WeaponType.Melee) {
@@ -33,30 +34,49 @@ namespace Murktid {
                 return true;
             }
 
-            return didAttack;
+            return leaveState;
         }
 
         protected override void OnActivate() {
-            didAttack = false;
+            leaveState = false;
             hasActivatedHitbox = false;
             Context.animatorBridge.Shoot = true;
+            Context.animatorBridge.AttackIndex = 0;
         }
 
         protected override void OnDeactivate() {
             Context.Hitbox.isActive = false;
             Context.animatorBridge.Shoot = false;
+            followUpAttackRequested = false;
         }
 
         protected override void Tick(float deltaTime) {
+
+            if(Context.animatorBridge.CanQueueFollowUpAttack && Context.input.PrimaryAction.wasPressedThisFrame) {
+                followUpAttackRequested = true;
+
+                if(Context.animatorBridge.AttackIndex < 3) {
+                    Context.animatorBridge.AttackIndex++;
+                }
+                else {
+                    Context.animatorBridge.AttackIndex = 0;
+                }
+            }
 
             if(hasActivatedHitbox) {
 
                 if(!Context.animatorBridge.IsHitboxActive) {
                     Context.Hitbox.isActive = false;
+
+                    if(followUpAttackRequested) {
+                        Context.animatorBridge.Shoot = true;
+                        hasActivatedHitbox = false;
+                        followUpAttackRequested = false;
+                    }
                 }
 
                 if(!Context.animatorBridge.IsInMeleeLayer) {
-                    didAttack = true;
+                    leaveState = true;
                 }
             }
 

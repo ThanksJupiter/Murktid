@@ -67,12 +67,19 @@ namespace Murktid {
             set => animator.SetBool(Param.blockPush, value);
         }
 
+        public int AttackIndex
+        {
+            get => animator.GetInteger(Param.attackIndex);
+            set => animator.SetInteger(Param.attackIndex, value);
+        }
+
         public bool IsInRangedLayer => animator.GetCurrentAnimatorStateInfo(Layer.ranged).shortNameHash != Param.empty;
         public bool IsInRangedFireLayer => animator.GetCurrentAnimatorStateInfo(Layer.rangedFire).shortNameHash != Param.empty;
         public bool IsInMeleeLayer => animator.GetCurrentAnimatorStateInfo(Layer.melee).shortNameHash != Param.empty;
         public bool IsInSheatheLayer => animator.GetCurrentAnimatorStateInfo(Layer.sheathe).shortNameHash != Param.empty;
 
-        public bool IsHitboxActive => animator.GetFloat("HitboxActive") > .1f;
+        public bool IsHitboxActive => animator.GetFloat(Param.hitboxActive) > .1f;
+        public bool CanQueueFollowUpAttack => animator.GetFloat(Param.canQueueFollowUpAttack) > .1f;
 
         public static class Layer
         {
@@ -94,6 +101,9 @@ namespace Murktid {
             public static readonly int isBlocking = Animator.StringToHash("IsBlocking");
             public static readonly int blockHitIndex = Animator.StringToHash("BlockHitIndex");
             public static readonly int blockPush = Animator.StringToHash("BlockPush");
+            public static readonly int hitboxActive = Animator.StringToHash("HitboxActive");
+            public static readonly int canQueueFollowUpAttack = Animator.StringToHash("CanQueueFollowUpAttack");
+            public static readonly int attackIndex = Animator.StringToHash("AttackIndex");
         }
     }
 }
