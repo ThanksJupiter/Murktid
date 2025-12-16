@@ -38,11 +38,11 @@ namespace Murktid {
                 }*/
 
                 // line of sight
-                Vector3 directionToPlayer = Context.targetPlayer.transform.position - Context.RayOrigin;
+                /*Vector3 directionToPlayer = Context.targetPlayer.transform.position - Context.RayOrigin;
                 if(Physics.Raycast(Context.RayOrigin, directionToPlayer.normalized, Context.DistanceToTarget, Context.obstacleMask)) {
                     Debug.DrawRay(Context.RayOrigin, directionToPlayer, Color.red);
                     return;
-                }
+                }*/
 
                 if(Context.playerSlotSystem.TryClaimEngagementSlot(Context.transform.position, out int claimedIndex)) {
                     Context.hasEngagementSlot = true;

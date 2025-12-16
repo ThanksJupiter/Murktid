@@ -111,6 +111,7 @@ MonoBehaviour:
     obstacleMask:
       serializedVersion: 2
       m_Bits: 257
+    graphicsContainer: {fileID: 2456626586009266548}
     targetPlayer: {fileID: 0}
     hasEngagementSlot: 0
     engagementSlotIndex: -1
@@ -489,5 +490,10 @@ Animator:
 --- !u!4 &2456626586009171284 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400084, guid: 984923792d0b828438b2725a82ed0133, type: 3}
+  m_PrefabInstance: {fileID: 2456626586009300864}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2456626586009266548 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100084, guid: 984923792d0b828438b2725a82ed0133, type: 3}
   m_PrefabInstance: {fileID: 2456626586009300864}
   m_PrefabAsset: {fileID: 0}

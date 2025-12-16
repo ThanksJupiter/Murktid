@@ -26,7 +26,7 @@ MonoBehaviour:
   capsuleRadius: 0.25
   capsuleHeightLerpSpeed: 5
   maxHealth: 100
-  jumpForce: 5
+  jumpForce: 6
   allowJumpingWhenSliding: 1
   jumpPostGroundingGraceTime: 0.3
   jumpPreGroundingGraceTime: 0.3
