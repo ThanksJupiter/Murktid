@@ -234,7 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c628cd3ee2f5eed4b9eb24513ee0bd64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Murktid.NestTentacle
-  maxHealth: 20
+  maxHealth: 5
   rootToBreak: []
   wallsToBreak: []
 --- !u!54 &5716296589966140146
