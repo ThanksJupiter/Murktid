@@ -12,6 +12,8 @@ namespace Murktid {
 
         public float shotgunBarrelSeparationMultiplier = .2f;
 
+        public GameObject hitEffectPrefab;
+
         // damage
         public float ADSDamage = 10f;
         public float ADSRange = 25f;

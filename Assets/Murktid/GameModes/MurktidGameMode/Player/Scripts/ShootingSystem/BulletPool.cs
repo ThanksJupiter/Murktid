@@ -4,27 +4,24 @@ using UnityEngine;
 namespace Murktid {
 
     public class BulletPool {
-        private List<BulletReference> availableBullets = new List<BulletReference>();
-        public BulletReference bulletReferencePrefab;
+        private List<BulletData> availableBullets = new List<BulletData>();
 
-        public BulletReference GetAvailableBullet() {
-            foreach(BulletReference bullet in availableBullets) {
-                if(!bullet.data.isActive) {
+        public BulletData GetAvailableBullet() {
+            foreach(BulletData bullet in availableBullets) {
+                if(!bullet.isActive) {
                     return bullet;
                 }
             }
 
-            BulletReference newBulletReference = Object.Instantiate(bulletReferencePrefab);
-            BulletData newBulletData = newBulletReference.data;
-            newBulletData.transform = newBulletReference.transform;
-            return newBulletReference;
+            BulletData newBullet = new();
+            return newBullet;
         }
 
-        public void ReturnBulletToPool(BulletReference bulletReference) {
-
-            bulletReference.data.isActive = false;
-            bulletReference.gameObject.SetActive(false);
-            availableBullets.Add(bulletReference);
+        public void ReturnBulletToPool(BulletData bullet) {
+            bullet.isActive = false;
+            if(!availableBullets.Contains(bullet)) {
+                availableBullets.Add(bullet);
+            }
         }
     }
 }

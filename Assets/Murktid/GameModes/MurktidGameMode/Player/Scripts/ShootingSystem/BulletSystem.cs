@@ -5,7 +5,8 @@ namespace Murktid {
 
     [System.Serializable]
     public class BulletData {
-        public Transform transform;
+        public Vector3 position;
+        public Vector3 forward;
         public bool isActive;
         public float speed;
         public bool hasHitTarget;
@@ -15,58 +16,61 @@ namespace Murktid {
         public bool shouldBeReturnedToPool;
         public float damage;
         public LayerMask layerMask;
+        public GameObject hitEffectPrefab;
 
         public bool ShouldBeReturnedToPool => Time.time > bulletDespawnTimestamp || shouldBeReturnedToPool;
     }
 
     public class SpawnBulletData {
         public Vector3 spawnPosition;
-        public Quaternion spawnRotation;
+        public Vector3 velocityDirection;
         public float initialVelocity;
         public LayerMask layerMask;
-
+        public GameObject hitEffectPrefab;
         public float damage;
     }
 
     public class BulletSystem {
         private BulletPool bulletPool;
-        private List<BulletReference> activeBullets = new List<BulletReference>();
+        private BloodEffectSystem bloodEffectSystem;
+        private List<BulletData> activeBullets = new List<BulletData>();
 
         public void Initialize(MurktidGameReference gameReference) {
             bulletPool = new();
-            bulletPool.bulletReferencePrefab = gameReference.gameData.bulletReferencePrefab;
+            bloodEffectSystem = new();
         }
 
         public void SpawnBullet(SpawnBulletData data) {
-            BulletReference spawnedBulletReference = bulletPool.GetAvailableBullet();
+            BulletData bulletData = bulletPool.GetAvailableBullet();
 
-            spawnedBulletReference.data.speed = data.initialVelocity;
-            spawnedBulletReference.transform.position = data.spawnPosition;
-            spawnedBulletReference.transform.rotation = data.spawnRotation;
-            spawnedBulletReference.data.bulletDespawnTimestamp = Time.time + 10f;
-            spawnedBulletReference.data.damage = data.damage;
-            spawnedBulletReference.data.isActive = true;
-            spawnedBulletReference.data.layerMask = data.layerMask;
-            spawnedBulletReference.gameObject.SetActive(true);
+            bulletData.speed = data.initialVelocity;
+            bulletData.position = data.spawnPosition;
+            bulletData.forward = data.velocityDirection;
+            bulletData.bulletDespawnTimestamp = Time.time + 10f;
+            bulletData.damage = data.damage;
+            bulletData.isActive = true;
+            bulletData.shouldBeReturnedToPool = false;
+            bulletData.layerMask = data.layerMask;
+            bulletData.hitEffectPrefab = data.hitEffectPrefab;
 
-            activeBullets.Add(spawnedBulletReference);
+            activeBullets.Add(bulletData);
         }
 
         public void Tick(float deltaTime) {
             for(int index = activeBullets.Count - 1; index >= 0; index--) {
-                BulletReference bullet = activeBullets[index];
-                if(!bullet.data.isActive) {
+                BulletData bullet = activeBullets[index];
+                if(!bullet.isActive) {
                     continue;
                 }
 
-                float bulletVelocity = bullet.data.speed * deltaTime;
+                float bulletVelocity = bullet.speed * deltaTime;
                 if(DidBulletHit(bullet, bulletVelocity, out ITarget target)) {
                     if(target != null) {
                         OnBulletHitTarget(bullet, target);
                     }
                 }
 
-                if(bullet.data.ShouldBeReturnedToPool) {
+                if(bullet.ShouldBeReturnedToPool) {
                     ReturnBulletToPool(bullet);
                     continue;
                 }
@@ -75,14 +79,14 @@ namespace Murktid {
             }
         }
 
-        private void MoveBullet(BulletReference bullet, float bulletVelocity) {
-            bullet.transform.position += bullet.transform.forward * bulletVelocity;
+        private void MoveBullet(BulletData bullet, float bulletVelocity) {
+            bullet.position += bullet.forward * bulletVelocity;
         }
 
-        private bool DidBulletHit(BulletReference bullet, float bulletVelocity, out ITarget target) {
+        private bool DidBulletHit(BulletData bullet, float bulletVelocity, out ITarget target) {
 
             target = null;
-            if(!Physics.Raycast(bullet.transform.position, bullet.transform.forward, out RaycastHit hitInfo, bulletVelocity, bullet.data.layerMask)) {
+            if(!Physics.Raycast(bullet.position, bullet.forward, out RaycastHit hitInfo, bulletVelocity, bullet.layerMask)) {
                 return false;
             }
 
@@ -91,25 +95,24 @@ namespace Murktid {
                 return true;
             }
 
-            bullet.hitParticleSystem.Play();
-            //bullet.data.shouldBeReturnedToPool = true;
-            bullet.data.speed = 0f;
-            bullet.data.bulletDespawnTimestamp = Time.time + 2f;
-            // hit walls & get recycled
+            //Debug.Log($"bullet hit, play particle effect pls");
+            //bullet.hitParticleSystem.Play();
+            bullet.shouldBeReturnedToPool = true;
+            bullet.speed = 0f;
 
             return true;
         }
 
-        private void OnBulletHitTarget(BulletReference bullet, ITarget target) {
-            target.Hit(bullet.data.damage);
-            //bullet.data.speed = 0f;
-            bullet.data.bulletDespawnTimestamp = Time.time + 2f;
-            bullet.hitParticleSystem.Play();
+        private void OnBulletHitTarget(BulletData bullet, ITarget target) {
+            target.Hit(bullet.damage);
+            bullet.shouldBeReturnedToPool = true;
+
+            bloodEffectSystem.PlayBloodSpatterEffect(bullet.position, Quaternion.LookRotation(bullet.forward, Vector3.up), bullet.hitEffectPrefab);
         }
 
-        private void ReturnBulletToPool(BulletReference bulletReference) {
-            activeBullets.Remove(bulletReference);
-            bulletPool.ReturnBulletToPool(bulletReference);
+        private void ReturnBulletToPool(BulletData bullet) {
+            activeBullets.Remove(bullet);
+            bulletPool.ReturnBulletToPool(bullet);
         }
     }
 }
