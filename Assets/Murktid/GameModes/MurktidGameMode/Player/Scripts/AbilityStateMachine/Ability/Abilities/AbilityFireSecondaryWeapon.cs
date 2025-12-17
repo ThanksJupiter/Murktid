@@ -80,9 +80,10 @@ namespace Murktid {
                 if(bothBarrels) {
                     SpawnBulletData spawnFirstBulletData = new() {
                         spawnPosition = ray.origin + -Context.motor.CharacterRight * barrelSeparationMultiplier,
-                        spawnRotation = Quaternion.LookRotation(ray.direction),
+                        velocityDirection = ray.direction,
                         initialVelocity = Context.playerEquipmentData.CurrentWeapon.config.bulletVelocity + Random.Range(-randomSpeedModifier, randomSpeedModifier),
                         layerMask = Context.attackLayerMask,
+                        hitEffectPrefab = Context.playerEquipmentData.CurrentWeapon.config.hitEffectPrefab,
                         damage = damage
                     };
 
@@ -90,9 +91,10 @@ namespace Murktid {
 
                     SpawnBulletData spawnSecondBulletData = new() {
                         spawnPosition = ray.origin + Context.motor.CharacterRight * barrelSeparationMultiplier,
-                        spawnRotation = Quaternion.LookRotation(ray.direction),
+                        velocityDirection = ray.direction,
                         initialVelocity = Context.playerEquipmentData.CurrentWeapon.config.bulletVelocity + Random.Range(-randomSpeedModifier, randomSpeedModifier),
                         layerMask = Context.attackLayerMask,
+                        hitEffectPrefab = Context.playerEquipmentData.CurrentWeapon.config.hitEffectPrefab,
                         damage = damage
                     };
 
@@ -101,9 +103,10 @@ namespace Murktid {
                 else {
                     SpawnBulletData spawnBulletData = new() {
                         spawnPosition = ray.origin,
-                        spawnRotation = Quaternion.LookRotation(ray.direction),
+                        velocityDirection = ray.direction,
                         initialVelocity = Context.playerEquipmentData.CurrentWeapon.config.bulletVelocity + Random.Range(-randomSpeedModifier, randomSpeedModifier),
                         layerMask = Context.attackLayerMask,
+                        hitEffectPrefab = Context.playerEquipmentData.CurrentWeapon.config.hitEffectPrefab,
                         damage = damage
                     };
 

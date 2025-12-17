@@ -109,7 +109,7 @@ namespace Murktid {
                 Collider collider = overlappedColliders[i];
                 if(collider.TryGetComponent(out ITarget target) && !hitTargets.Contains(target)) {
                     hitTargets.Add(target);
-                    target.Hit(35f);
+                    target.Hit(75f);
                 }
             }
         }
