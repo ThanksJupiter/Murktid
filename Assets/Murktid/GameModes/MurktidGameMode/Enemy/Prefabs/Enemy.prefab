@@ -110,7 +110,7 @@ MonoBehaviour:
       m_Bits: 128
     obstacleMask:
       serializedVersion: 2
-      m_Bits: 257
+      m_Bits: 385
     graphicsContainer: {fileID: 2456626586009266548}
     targetPlayer: {fileID: 0}
     hasEngagementSlot: 0

@@ -1,10 +1,13 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Murktid {
 
     public class EnemyAbilityEngagePlayer : EnemyAbility {
-        public override bool ShouldActivate() {
 
+        private int strikes = 0;
+
+        public override bool ShouldActivate() {
             if(Context.IsTargetWithinAttackRange) {
                 return false;
             }
@@ -47,20 +50,37 @@ namespace Murktid {
             if(Time.time >= Context.engagementSlotRequestTimestamp) {
                 Context.engagementSlotRequestTimestamp = Time.time + Context.engagementSlotRequestCooldown;
 
+                Vector3 directionToPlayer = (Context.targetPlayer.transform.position + Vector3.up) - Context.RayOrigin;
+                bool isPlayerBlocked = Physics.Raycast(Context.RayOrigin, directionToPlayer.normalized, Context.DistanceToTarget, Context.obstacleMask);
+                Debug.DrawRay(Context.RayOrigin, directionToPlayer, Color.blue);
+
+                bool lostEngagement = false;
+                //Debug.Log($"agent remaining distance: {Context.agent.remainingDistance}");
+
+                // want to stop engaging player if
+                // agent.remainingdistance is absurd
+
+                string message = $"Stop engage because: ";
+
                 // distance
-                if(Context.DistanceToTarget > Context.stopEngagingDistanceThreshold) {
-                    Context.playerSlotSystem.ReleaseEngagementSlot(Context.engagementSlotIndex);
-                    Context.hasEngagementSlot = false;
-                    return;
+                if(Context.DistanceToTarget > Context.stopEngagingDistanceThreshold && isPlayerBlocked) {
+                    lostEngagement = true;
+                    message += $"distance too great and no line of sight";
+                }
+                else if(isPlayerBlocked && Context.agent.remainingDistance > Context.stopEngagingDistanceThreshold) {
+                    //Debug.Log($"Player not in line of sight, releasing engagement slot");
+                    lostEngagement = true;
+                    message += $"agent remaining distance: {Context.agent.remainingDistance} & no line of sight";
                 }
 
-                Vector3 directionToPlayer = Context.targetPlayer.transform.position - Context.RayOrigin;
-                Debug.DrawRay(Context.RayOrigin, directionToPlayer, Color.blue);
-                if(Physics.Raycast(Context.RayOrigin, directionToPlayer.normalized, Context.DistanceToTarget, Context.obstacleMask)) {
-                    Debug.Log($"Player not in line of sight, releasing engagement slot");
+                if(lostEngagement || strikes >= 2) {
+                    strikes = 0;
                     Context.playerSlotSystem.ReleaseEngagementSlot(Context.engagementSlotIndex);
                     Context.hasEngagementSlot = false;
-                    return;
+                    //Debug.Log(message);
+                }
+                else {
+                    strikes++;
                 }
             }
         }

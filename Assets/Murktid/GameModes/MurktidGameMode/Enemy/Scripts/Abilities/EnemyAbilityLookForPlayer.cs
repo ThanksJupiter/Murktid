@@ -45,6 +45,15 @@ namespace Murktid {
                     continue;
                 }
 
+                float distanceToTarget = Vector3.Distance(Context.RayOrigin, collider.transform.position);
+                Vector3 directionToPlayer = (collider.transform.position + Vector3.up) - Context.RayOrigin;
+                Debug.DrawRay(Context.RayOrigin, directionToPlayer, Color.red);
+                bool isPlayerBlocked = Physics.Raycast(Context.RayOrigin, directionToPlayer.normalized, distanceToTarget, Context.obstacleMask);
+
+                if(isPlayerBlocked) {
+                    continue;
+                }
+
                 Context.targetPlayer = player;
                 Context.playerSlotSystem = player.context.controller.attackerSlotSystem;
                 return;

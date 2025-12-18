@@ -17,8 +17,10 @@ namespace Murktid {
         public float damage;
         public LayerMask layerMask;
         public GameObject hitEffectPrefab;
+        public int maxHits;
+        public int hits;
 
-        public bool ShouldBeReturnedToPool => Time.time > bulletDespawnTimestamp || shouldBeReturnedToPool;
+        public bool ShouldBeReturnedToPool => Time.time > bulletDespawnTimestamp || shouldBeReturnedToPool || hits >= maxHits;
     }
 
     public class SpawnBulletData {
@@ -52,6 +54,8 @@ namespace Murktid {
             bulletData.shouldBeReturnedToPool = false;
             bulletData.layerMask = data.layerMask;
             bulletData.hitEffectPrefab = data.hitEffectPrefab;
+            bulletData.maxHits = 3;
+            bulletData.hits = 0;
 
             activeBullets.Add(bulletData);
         }
@@ -104,8 +108,12 @@ namespace Murktid {
         }
 
         private void OnBulletHitTarget(BulletData bullet, ITarget target) {
-            target.Hit(bullet.damage);
-            bullet.shouldBeReturnedToPool = true;
+
+            float damageReduction = 7f * bullet.hits;
+            float damage = bullet.damage - damageReduction;
+            target.Hit(damage);
+            bullet.hits++;
+            //bullet.shouldBeReturnedToPool = true;
 
             bloodEffectSystem.PlayBloodSpatterEffect(bullet.position, Quaternion.LookRotation(bullet.forward, Vector3.up), bullet.hitEffectPrefab);
         }
