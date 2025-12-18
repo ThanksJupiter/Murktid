@@ -1072,9 +1072,9 @@ MonoBehaviour:
     recoilOffset: 0
     recoilReturnSpeed: 3
     slotRadius: 1.25
-    maxEngagementSlots: 3
-    slotArcAngle: 60
-    maxAttackSlots: 3
+    maxEngagementSlots: 5
+    slotArcAngle: 200
+    maxAttackSlots: 1
     pushHitbox: {fileID: 7003441214942450490}
   healthDisplayReference: {fileID: 8150369274562770242}
   ammoDisplayReference: {fileID: 209423725776924521}
