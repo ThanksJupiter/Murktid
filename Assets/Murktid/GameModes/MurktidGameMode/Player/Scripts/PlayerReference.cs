@@ -23,8 +23,7 @@ namespace Murktid {
                 context.transform.forward * context.slotRadius
             );
 
-            for (int i = 0; i < context.maxEngagementSlots; i++)
-            {
+            for(int i = 0; i < context.maxEngagementSlots; i++) {
                 Vector3 pos = GetSlotPosition(i);
 
                 if(Application.isPlaying) {

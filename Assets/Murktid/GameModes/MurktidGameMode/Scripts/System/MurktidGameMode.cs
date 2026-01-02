@@ -1,3 +1,5 @@
+using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -10,11 +12,24 @@ namespace Murktid {
         private EnemySystem enemySystem = new();
         private BulletSystem bulletSystem = new();
 
+        private NetcodeTestManager netcodeTestManager;
+
         public MurktidGameMode(ApplicationData applicationData) {
             this.applicationData = applicationData;
         }
         public bool IsGameModeInitialized { get; private set; }
         public void EnterGameMode() {
+
+            netcodeTestManager = Object.FindFirstObjectByType<NetcodeTestManager>();
+            netcodeTestManager.hostButton.clicked += StartHost;
+            netcodeTestManager.clientButton.clicked += StartClient;
+        }
+
+        private void StartHost() {
+            Debug.Log($"start host :)");
+
+            NetworkManager.Singleton.StartHost();
+            Object.Destroy(Object.FindFirstObjectByType<Camera>().gameObject);
             MurktidGameReference gameModeReference = Object.FindFirstObjectByType<MurktidGameReference>();
             switch(gameModeReference.gameData.playerType) {
 
@@ -33,6 +48,11 @@ namespace Murktid {
 
             applicationData.cursorHandler.PushState(CursorHandler.CursorState.Locked, this);
             IsGameModeInitialized = true;
+        }
+
+        private void StartClient() {
+            Debug.Log($"start cliente :o");
+            NetworkManager.Singleton.StartClient();
         }
 
         private void InitializeDefaultStateMachine(MurktidGameReference gameModeReference) {
@@ -59,7 +79,10 @@ namespace Murktid {
             Vector3 spawnPosition = gameModeReference.GetSpawnPosition();
             Quaternion spawnRotation = gameModeReference.GetSpawnRotation();
 
-            PlayerReference playerReference = Object.Instantiate(gameModeReference.gameData.playerData.playerReferencePrefab, spawnPosition, spawnRotation);
+            NetworkObject playerNetworkObject = NetworkManager.Singleton.SpawnManager.InstantiateAndSpawn(gameModeReference.gameData.playerData.playerNetworkObjectPrefab, isPlayerObject: true, position: spawnPosition, rotation: spawnRotation);
+
+            PlayerReference playerReference = playerNetworkObject.GetComponent<PlayerReference>();
+            //PlayerReference playerReference = Object.Instantiate(gameModeReference.gameData.playerData.playerReferencePrefab, spawnPosition, spawnRotation);
             PlayerCameraReference playerCameraReference = Object.Instantiate(gameModeReference.gameData.playerData.playerCameraReferencePrefab, spawnPosition, spawnRotation);
 
             PlayerController playerController = new(playerReference) {
@@ -76,6 +99,16 @@ namespace Murktid {
         }
 
         public void Tick() {
+
+            // TODO not this
+            if(!NetworkManager.Singleton) {
+                return;
+            }
+
+            if(!NetworkManager.Singleton.IsHost) {
+                return;
+            }
+
             player.SetInput();
 
             float deltaTime = Time.deltaTime;
@@ -91,6 +124,9 @@ namespace Murktid {
         }
         public void Dispose() {
             player?.Dispose();
+
+            netcodeTestManager.hostButton.clicked -= StartHost;
+            netcodeTestManager.clientButton.clicked -= StartClient;
         }
     }
 }

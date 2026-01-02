@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: MurktidPlayerData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
   playerReferencePrefab: {fileID: 154935534918106331, guid: ca48815d5b31f21479be24db1db8932d, type: 3}
+  playerNetworkObjectPrefab: {fileID: 7490924464081539660, guid: ca48815d5b31f21479be24db1db8932d, type: 3}
   playerCameraReferencePrefab: {fileID: 5862843785441496230, guid: 79723fc41e4554548acf337b241f1b1d, type: 3}

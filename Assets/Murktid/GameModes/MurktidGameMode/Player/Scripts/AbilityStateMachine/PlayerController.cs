@@ -1,4 +1,5 @@
 using KinematicCharacterController;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Murktid {
@@ -27,6 +28,10 @@ namespace Murktid {
 
         public void Initialize(PlayerReference playerReference) {
             Context.animatorBridge = new(/*Context.cameraReference.animator*/);
+
+            if(NetworkManager.Singleton.IsHost) {
+                Debug.Log($"am host :D");
+            }
 
             StateMachine.PushState<StateDefault>();
             Context.ActiveMoveSpeed = Context.settings.defaultMoveSpeed;

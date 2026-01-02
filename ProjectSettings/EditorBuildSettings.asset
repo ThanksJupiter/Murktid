@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Murktid/Levels/Salzmann.unity
     guid: 4fbd666f249fed5459d3392a8200d1b7
+  - enabled: 1
+    path: Assets/Murktid/GameModes/MurktidGameMode/Scenes/MurktidGameScene.unity
+    guid: 5320e60994d568c4da5ce1cda86527dd
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 8b0833ceda520d0408c2ffc8d914bfa3, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
