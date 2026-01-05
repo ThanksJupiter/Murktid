@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4631018236875864}
   - component: {fileID: 33634416506026602}
   - component: {fileID: 23336753600039366}
-  - component: {fileID: 64052768758540248}
+  - component: {fileID: 5371427966769593890}
   m_Layer: 0
   m_Name: P_Stairs_1x2_01
   m_TagString: Untagged
@@ -89,8 +89,9 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &64052768758540248
+--- !u!64 &5371427966769593890
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -109,6 +110,6 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: d541909567834dc4f9038a90f73aa161, type: 3}

@@ -15,6 +15,11 @@ MonoBehaviour:
   m_GroupName: Base Assets
   m_GUID: 5e9bd9b55e7f17c4bb27821e7715244a
   m_SerializeEntries:
+  - m_GUID: 4a8145f028f3ea948a65028b51474a3f
+    m_Address: Assets/Murktid/Graphics/RPG_FPS_game_assets_industrial/Other_props/Palets/Palet_v1/Source/Palet_M1.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a32e01173d6dd4644b8877c1407ed627
     m_Address: InitializerSettingsFile
     m_ReadOnly: 0
