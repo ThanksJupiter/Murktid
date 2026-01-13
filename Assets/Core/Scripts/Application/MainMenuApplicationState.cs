@@ -34,6 +34,12 @@ namespace Murktid {
                 applicationData.ChangeApplicationState(ApplicationState.GameMode);
                 applicationData.ChangeGameModeState(mode);
             };
+
+            // create / start character customization functionality
+            // save customized character somehow and take it into consideration when spawning character when starting game
+            // get access to camera & menu ui
+            // create separate customization UI and leave main menu prefab thing alone?
+            // but it might be part of same window so perhaps combine? or no because might want to customize elsewhere later
         }
         private void OnSceneLoaded() {
             Addressables.LoadAssetAsync<MenuPrefabsContainer>(bootstrapSettings.menuPrefabsContainer).Completed += OnContainerLoaded;
