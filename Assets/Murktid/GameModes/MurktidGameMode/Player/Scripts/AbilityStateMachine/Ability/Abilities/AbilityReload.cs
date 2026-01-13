@@ -32,7 +32,7 @@ namespace Murktid {
             hasReloaded = false;
             Context.IsReloading = true;
             Context.animatorBridge.Reload = true;
-            reloadTimestamp = Time.time + 1.9f;
+            reloadTimestamp = Time.time + .9f;
         }
 
         protected override void OnDeactivate() {
