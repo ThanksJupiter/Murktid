@@ -9,6 +9,9 @@ namespace Murktid {
         private EnemySystemReference enemySystemReference;
         private EnemyReference enemyReferencePrefab;
 
+        private AIDirectorReference aiDirectorReference;
+        private AIDirector aiDirector;
+
         private List<EnemySpawnPoint> spawnPoints;
         private List<EnemyController> activeEnemies = new();
 

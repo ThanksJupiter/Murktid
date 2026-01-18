@@ -1,4 +1,3 @@
-using R3;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -59,13 +58,6 @@ namespace Murktid {
 
             if(Context.animatorBridge.CanQueueFollowUpAttack && Context.input.PrimaryAction.wasPressedThisFrame) {
                 followUpAttackRequested = true;
-
-                if(Context.animatorBridge.AttackIndex < 3) {
-                    Context.animatorBridge.AttackIndex++;
-                }
-                else {
-                    Context.animatorBridge.AttackIndex = 0;
-                }
             }
 
             if(hasActivatedHitbox) {
@@ -73,6 +65,14 @@ namespace Murktid {
                     DeactivateHitbox();
 
                     if(followUpAttackRequested) {
+
+                        if(Context.animatorBridge.AttackIndex < 1) {
+                            Context.animatorBridge.AttackIndex++;
+                        }
+                        else {
+                            Context.animatorBridge.AttackIndex = 0;
+                        }
+
                         Context.animatorBridge.Shoot = true;
                         hasActivatedHitbox = false;
                         followUpAttackRequested = false;
@@ -110,6 +110,19 @@ namespace Murktid {
                 if(collider.TryGetComponent(out ITarget target) && !hitTargets.Contains(target)) {
                     hitTargets.Add(target);
                     target.Hit(75f);
+
+                    Vector3 cameraPosition = Context.cameraReference.transform.position;
+                    Vector3 heightAdjustedColliderPosition = new(
+                        collider.transform.position.x,
+                        Context.cameraReference.transform.position.y,
+                        collider.transform.position.z
+                        );
+
+                    Vector3 fromHitboxToHitColliderDirection = heightAdjustedColliderPosition - cameraPosition;
+                    float halfDistance = fromHitboxToHitColliderDirection.magnitude * .5f;
+                    Vector3 hitEffectPosition = cameraPosition + (fromHitboxToHitColliderDirection.normalized * halfDistance);
+
+                    Object.Instantiate(Context.hammerHitEffect, hitEffectPosition, Quaternion.identity);
                 }
             }
         }

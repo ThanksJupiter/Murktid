@@ -30,6 +30,9 @@ namespace Murktid {
         public LayerMask obstacleMask;
         public ShotgunCrosshair shotgunCrosshair;
 
+        [Header("Effects")]
+        public ParticleSystem hammerHitEffect;
+
         [Header("Debug Recoil")]
         public bool hasRecoil = false;
 
