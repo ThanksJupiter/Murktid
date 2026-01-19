@@ -7,6 +7,10 @@ namespace Murktid {
 
         private int strikes = 0;
 
+        protected override void Setup() {
+            AddTag(AbilityTags.movement);
+        }
+
         public override bool ShouldActivate() {
             if(Context.IsTargetWithinAttackRange) {
                 return false;

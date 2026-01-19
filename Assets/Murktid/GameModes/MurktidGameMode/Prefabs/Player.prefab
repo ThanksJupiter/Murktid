@@ -1998,7 +1998,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Murktid.HitboxReference
   hitboxType: 0
-  size: 1.5
+  size: 2
   halfExtents: {x: 1, y: 1, z: 1}
   isActive: 0
 --- !u!1 &6277219635062983044

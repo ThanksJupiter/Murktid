@@ -7,6 +7,10 @@ namespace Murktid {
         private bool hasAttacked = false;
         private bool hasActivatedHitbox = false;
 
+        protected override void Setup() {
+            AddTag(AbilityTags.movement);
+        }
+
         public override bool ShouldActivate() {
 
             if(!Context.hasAttackSlot) {
@@ -29,6 +33,15 @@ namespace Murktid {
         }
 
         public override bool ShouldDeactivate() {
+
+            if(Context.animatorBridge.TakeDamage) {
+                return true;
+            }
+
+            if(Context.animatorBridge.IsKnockback) {
+                return true;
+            }
+
             return hasAttacked;
         }
 
@@ -74,6 +87,7 @@ namespace Murktid {
 
                         hitPlayer = true;
                         if(playerReference.context.IsBlocking) {
+                            Context.animatorBridge.IsKnockback = true;
                             playerReference.context.BlockHitIndex = Random.Range(1, 4);
                         }
                         else {

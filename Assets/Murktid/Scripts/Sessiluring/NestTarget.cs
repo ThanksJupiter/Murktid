@@ -40,7 +40,7 @@ namespace Murktid {
 
             if(!AllTentaclesDestroyed()) {
                 return;
-            } 
+            }
 
             currentHealth -= damage;
             /*UpdateHealthBar();
@@ -72,6 +72,9 @@ namespace Murktid {
             Destroy(gameObject);
 
         }
-        
+        public void Stagger() {
+
+        }
+
     }
 }

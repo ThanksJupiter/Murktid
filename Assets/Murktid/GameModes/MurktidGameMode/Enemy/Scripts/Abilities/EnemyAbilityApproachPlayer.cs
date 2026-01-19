@@ -3,6 +3,11 @@ using UnityEngine;
 namespace Murktid {
 
     public class EnemyAbilityApproachPlayer : EnemyAbility {
+
+        protected override void Setup() {
+            AddTag(AbilityTags.movement);
+        }
+
         public override bool ShouldActivate() {
 
             if(Context.hasEngagementSlot) {

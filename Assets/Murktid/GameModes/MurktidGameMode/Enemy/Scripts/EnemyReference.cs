@@ -34,5 +34,9 @@ namespace Murktid {
                 context.animatorBridge.TakeDamage = true;
             }
         }
+
+        public void Stagger() {
+            context.animatorBridge.IsKnockback = true;
+        }
     }
 }

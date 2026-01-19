@@ -40,6 +40,9 @@ namespace Murktid {
             }
             Destroy(gameObject);
         }
-       
+        public void Stagger() {
+
+        }
+
     }
 }

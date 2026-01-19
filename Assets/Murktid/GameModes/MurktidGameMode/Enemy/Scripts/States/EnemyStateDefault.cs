@@ -19,6 +19,7 @@ namespace Murktid {
             abilityComponent.AddDefaultAbility<EnemyAbilityLookForPlayer>();
             abilityComponent.AddDefaultAbility<EnemyAbilityRequestAttackSlot>();
             abilityComponent.AddDefaultAbility<EnemyAbilityRequestEngageSlot>();
+            abilityComponent.AddDefaultAbility<EnemyAbilityKnockback>();
         }
 
         protected override void Tick(float deltaTime) {

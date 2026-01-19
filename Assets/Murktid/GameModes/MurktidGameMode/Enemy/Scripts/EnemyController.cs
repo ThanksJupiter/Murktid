@@ -27,6 +27,7 @@ namespace Murktid {
             Context.animatorBridge.Speed = Context.agent.desiredVelocity.magnitude / Context.settings.defaultChaseSpeed;
             if(Context.animatorBridge.IsInDamageLayer) {
                 Context.animatorBridge.TakeDamage = false;
+                Context.animatorBridge.IsKnockback = false;
             }
             StateMachine.Tick(deltaTime);
         }

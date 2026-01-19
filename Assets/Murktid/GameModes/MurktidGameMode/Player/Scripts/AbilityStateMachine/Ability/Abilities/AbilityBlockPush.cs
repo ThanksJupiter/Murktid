@@ -16,7 +16,7 @@ namespace Murktid {
                 return false;
             }
 
-            if(!Context.input.PrimaryAction.IsPressed) {
+            if(!Context.input.PrimaryAction.wasPressedThisFrame) {
                 return false;
             }
 
@@ -43,9 +43,6 @@ namespace Murktid {
 
                 if(!Context.animatorBridge.IsHitboxActive) {
                     Context.pushHitbox.isActive = false;
-                }
-
-                if(!Context.animatorBridge.IsInMeleeLayer) {
                     didAttack = true;
                 }
             }
@@ -59,7 +56,7 @@ namespace Murktid {
                 for(int i = 0; i < overlappedCount; i++) {
                     Collider collider = overlappedColliders[i];
                     if(collider.TryGetComponent(out ITarget target)) {
-                        target.Hit(10f);
+                        target.Stagger();
                     }
                 }
             }

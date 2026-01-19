@@ -1130,23 +1130,23 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: a3cd22eceea5e8548b10cdb5d9b49a25, type: 2}
     - target: {fileID: 6747272404772840668, guid: 33de50634bbf1b0449bbcbac44124574, type: 3}
       propertyPath: m_LocalScale.x
-      value: 40
+      value: 240
       objectReference: {fileID: 0}
     - target: {fileID: 6747272404772840668, guid: 33de50634bbf1b0449bbcbac44124574, type: 3}
       propertyPath: m_LocalScale.z
-      value: 70.002
+      value: 270.0047
       objectReference: {fileID: 0}
     - target: {fileID: 6747272404772840668, guid: 33de50634bbf1b0449bbcbac44124574, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 20
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 6747272404772840668, guid: 33de50634bbf1b0449bbcbac44124574, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.9999994
+      value: -0.99999934
       objectReference: {fileID: 0}
     - target: {fileID: 6747272404772840668, guid: 33de50634bbf1b0449bbcbac44124574, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -19.999989
+      value: -110.00154
       objectReference: {fileID: 0}
     - target: {fileID: 6747272404772840668, guid: 33de50634bbf1b0449bbcbac44124574, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6123,7 +6123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshSurface
   m_SerializedVersion: 0
   m_AgentTypeID: 0
-  m_CollectObjects: 1
+  m_CollectObjects: 0
   m_Size: {x: 50, y: 10, z: 85.44432}
   m_Center: {x: 0, y: -1, z: 17.72216}
   m_LayerMask:

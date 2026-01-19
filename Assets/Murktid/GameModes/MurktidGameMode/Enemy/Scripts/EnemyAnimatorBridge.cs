@@ -34,12 +34,19 @@ namespace Murktid {
             set => animator.SetBool(Param.takeDamage, value);
         }
 
+        public bool IsKnockback {
+            get => animator.GetBool(Param.isKnockback);
+            set => animator.SetBool(Param.isKnockback, value);
+        }
+
         public bool IsDead {
             get => animator.GetBool(Param.isDead);
             set => animator.SetBool(Param.isDead, value);
         }
 
         public bool IsHitboxActive => animator.GetFloat(Param.hitboxActive) > .1f;
+
+        public bool IsMovementLocked => animator.GetFloat(Param.movementLock) > .1f;
 
         public bool IsInBaseLayer => animator.GetCurrentAnimatorStateInfo(Layer.baseLayer).shortNameHash != Param.empty;
         public bool IsInDamageLayer => animator.GetCurrentAnimatorStateInfo(Layer.damage).shortNameHash != Param.empty;
@@ -65,7 +72,9 @@ namespace Murktid {
             public static readonly int isAttacking = Animator.StringToHash("isAttacking");
             public static readonly int hitboxActive = Animator.StringToHash("HitboxActive");
             public static readonly int speed = Animator.StringToHash("Speed");
+            public static readonly int movementLock = Animator.StringToHash("MovementLock");
             public static readonly int takeDamage = Animator.StringToHash("TakeDamage");
+            public static readonly int isKnockback = Animator.StringToHash("isKnockback");
             public static readonly int isDead = Animator.StringToHash("IsDead");
         }
     }

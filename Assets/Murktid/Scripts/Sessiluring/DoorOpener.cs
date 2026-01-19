@@ -14,6 +14,9 @@ namespace Murktid {
         public void Hit(float damage) {
             //Debug.Log($"Hit: { gameObject.name } for { damage }");
         }
+        public void Stagger() {
+
+        }
 
         public void Interact() {
             Debug.Log($"Interacted with: {gameObject.name}");
