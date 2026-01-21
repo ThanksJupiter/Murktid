@@ -18,6 +18,9 @@ namespace Murktid {
         // pool instead of destroying
         private List<EnemyController> enemiesToDestroy = new();
 
+        public PlayerAttackerSlotSystem slotSystem;
+
+
         public EnemySystem() {
 
         }
@@ -83,6 +86,8 @@ namespace Murktid {
 
                 enemiesToDestroy.Clear();
             }
+
+            slotSystem.Tick(activeEnemies);
         }
     }
 }

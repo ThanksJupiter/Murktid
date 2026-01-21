@@ -26,6 +26,11 @@ MonoBehaviour:
   capsuleRadius: 0.25
   capsuleHeightLerpSpeed: 5
   maxHealth: 100
+  maxStamina: 100
+  defaultStaminaRegenerationRate: 15
+  defaultStaminaRegenerationDelay: 0.5
+  sprintStaminaCost: 20
+  dodgeStaminaCost: 25
   jumpForce: 6
   allowJumpingWhenSliding: 1
   jumpPostGroundingGraceTime: 0.3

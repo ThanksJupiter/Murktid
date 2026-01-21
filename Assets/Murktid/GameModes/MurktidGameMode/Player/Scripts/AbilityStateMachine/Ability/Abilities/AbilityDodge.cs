@@ -7,6 +7,7 @@ namespace Murktid {
         private bool setVelocity = true;
         private bool hasDodged = false;
         private float dodgeCompleteTimestamp = float.MinValue;
+        private bool hadSufficientStamina = false;
 
         public override bool ShouldActivate() {
             if(!Context.input.Dodge.wasPressedThisFrame) {
@@ -25,10 +26,20 @@ namespace Murktid {
         }
 
         protected override void OnActivate() {
+
+            hadSufficientStamina = Context.stamina.Value > Context.settings.dodgeStaminaCost;
+            Context.stamina.ConsumeStamina(Context.settings.dodgeStaminaCost);
+
             setVelocity = true;
             BlockAbility(AbilityTags.movement, this);
+            BlockAbility(AbilityTags.regenerateStamina, this);
             hasDodged = false;
             dodgeCompleteTimestamp = Time.time + Context.settings.dodgeDuration;
+
+            if(!hadSufficientStamina) {
+                dodgeCompleteTimestamp = Time.time + (Context.settings.dodgeDuration * .25f);
+            }
+
             Context.IsDodging = true;
 
             Vector3 moveInputVector = new(Context.input.Move.value.x, 0f, Context.input.Move.value.y);
@@ -64,6 +75,11 @@ namespace Murktid {
 
             if(setVelocity) {
                 currentVelocity = Context.DodgeDirection * Context.settings.sprintSlideSpeed;
+
+                if(!hadSufficientStamina) {
+                    currentVelocity = Context.DodgeDirection * (Context.settings.sprintSlideSpeed * .5f);
+                }
+
                 setVelocity = false;
                 return;
             }

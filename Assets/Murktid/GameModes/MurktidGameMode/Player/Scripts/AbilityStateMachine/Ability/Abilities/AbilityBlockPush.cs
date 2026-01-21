@@ -6,6 +6,7 @@ namespace Murktid {
 
         private bool didAttack = false;
         private bool hasActivatedHitbox = false;
+        private bool hadSufficientStamina = false;
 
         public override bool ShouldActivate() {
             if(Context.playerEquipmentData.currentWeaponType != WeaponType.Melee) {
@@ -32,9 +33,19 @@ namespace Murktid {
         }
 
         protected override void OnActivate() {
+
+            BlockAbility(AbilityTags.regenerateStamina, this);
+
+            hadSufficientStamina = Context.stamina.Value > Context.settings.blockPushStaminaCost;
+            Context.stamina.ConsumeStamina(Context.settings.blockPushStaminaCost);
+
             didAttack = false;
             hasActivatedHitbox = false;
             Context.animatorBridge.BlockPush = true;
+        }
+
+        protected override void OnDeactivate() {
+            UnblockAbilitiesByInstigator(this);
         }
 
         protected override void Tick(float deltaTime) {
@@ -56,7 +67,13 @@ namespace Murktid {
                 for(int i = 0; i < overlappedCount; i++) {
                     Collider collider = overlappedColliders[i];
                     if(collider.TryGetComponent(out ITarget target)) {
-                        target.Stagger();
+
+                        if(hadSufficientStamina) {
+                            target.Stagger();
+                        }
+                        else {
+                            target.Hit(1f);
+                        }
                     }
                 }
             }

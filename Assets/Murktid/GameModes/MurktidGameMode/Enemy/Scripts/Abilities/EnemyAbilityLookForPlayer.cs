@@ -56,6 +56,8 @@ namespace Murktid {
 
                 Context.targetPlayer = player;
                 Context.playerSlotSystem = player.context.controller.attackerSlotSystem;
+                // add self to slot system for consideration
+                Context.playerSlotSystem.AddToActiveEnemies(Context.controller);
                 return;
             }
         }

@@ -7,6 +7,7 @@ public class PlayerSettings : ScriptableObject {
     [Header("Locomotion")]
     public float defaultMoveSpeed = 6f;
     public float sprintMoveSpeed = 12f;
+    public float exhaustedSprintMoveSpeed = 4.75f;
     public float sprintSlideSpeed = 18f;
 
     // mouse sensitivity basically, TODO do something about this (make editable in options)
@@ -27,6 +28,16 @@ public class PlayerSettings : ScriptableObject {
 
     [Header("Health")]
     public float maxHealth = 100f;
+
+    [Header("Stamina")]
+    public float maxStamina = 100f;
+    public float defaultStaminaRegenerationRate = 20f;
+    public float defaultStaminaRegenerationDelay = .5f;
+    public float sprintStaminaCost = 15f;
+    public float sprintSlideStaminaCost = 10f;
+    public float dodgeStaminaCost = 20f;
+    public float blockPushStaminaCost = 20f;
+    public float blockAttackStaminaCost = 10f;
 
     [Header("Jump")]
     public float jumpForce = 5f;
@@ -50,5 +61,6 @@ public class PlayerSettings : ScriptableObject {
     public float cameraFollowSharpness = 1000f;
     public float defaultFOV = 70f;
     public float sprintFOV = 80f;
+    public float exhaustedSprintFOV = 75f;
     public float FOVLerpSpeed = 5f;
 }

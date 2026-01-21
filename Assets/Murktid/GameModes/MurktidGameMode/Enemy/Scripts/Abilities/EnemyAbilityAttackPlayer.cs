@@ -21,10 +21,6 @@ namespace Murktid {
                 return false;
             }
 
-            if(!Context.hasEngagementSlot) {
-                return false;
-            }
-
             if(!Context.IsTargetWithinAttackRange) {
                 return false;
             }
@@ -50,21 +46,27 @@ namespace Murktid {
             hasAttacked = false;
             hasActivatedHitbox = false;
             Context.agent.updateRotation = false;
-            Context.agent.avoidancePriority = 0;
+            //Context.agent.avoidancePriority = 0;
         }
 
         protected override void OnDeactivate() {
             Context.animatorBridge.IsAttacking = false;
+            Context.animatorBridge.AttackReady = false;
             Context.agent.updateRotation = true;
-            Context.playerSlotSystem.ReleaseAttackSlot(Context.attackSlotIndex);
-            Context.hasAttackSlot = false;
         }
 
         protected override void Tick(float deltaTime) {
-            Vector3 targetDirection = Context.targetPlayer.transform.position - Context.transform.position;
-            targetDirection.y = 0f;
-            Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Context.transform.up);
-            Context.transform.rotation = Quaternion.Slerp(Context.transform.rotation, targetRotation, 1f - Mathf.Exp(-Context.settings.rotateToTargetRate * deltaTime));
+
+            /*if(Context.IsTargetWithinAttackRange && !Context.animatorBridge.IsAttacking) {
+                Context.animatorBridge.IsAttacking = true;
+            }*/
+
+            if(Context.animatorBridge.IsAttacking) {
+                Vector3 targetDirection = Context.targetPlayer.transform.position - Context.transform.position;
+                targetDirection.y = 0f;
+                Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Context.transform.up);
+                Context.transform.rotation = Quaternion.Slerp(Context.transform.rotation, targetRotation, 1f - Mathf.Exp(-Context.settings.rotateToTargetRate * deltaTime));
+            }
 
             if(hasActivatedHitbox) {
                 if(!Context.animatorBridge.IsHitboxActive) {
@@ -76,6 +78,7 @@ namespace Murktid {
             }
 
             if(Context.animatorBridge.IsHitboxActive) {
+                Context.animatorBridge.AttackReady = false;
                 hasActivatedHitbox = true;
                 Context.hitbox.isActive = true;
                 bool hitPlayer = false;
@@ -85,8 +88,11 @@ namespace Murktid {
                     Collider collider = overlappedColliders[i];
                     if(collider.TryGetComponent(out PlayerReference playerReference)) {
 
+                        bool blockedAttack = playerReference.context.stamina.Value >= playerReference.context.settings.blockAttackStaminaCost;
+                        playerReference.context.stamina.ConsumeStamina(playerReference.context.settings.blockAttackStaminaCost);
+
                         hitPlayer = true;
-                        if(playerReference.context.IsBlocking) {
+                        if(playerReference.context.IsBlocking && blockedAttack) {
                             Context.animatorBridge.IsKnockback = true;
                             playerReference.context.BlockHitIndex = Random.Range(1, 4);
                         }
@@ -96,11 +102,9 @@ namespace Murktid {
                     }
                 }
 
-                if(!hitPlayer) {
-                    Context.playerSlotSystem.ReleaseEngagementSlot(Context.engagementSlotIndex);
-                    Context.hasEngagementSlot = false;
+                /*if(!hitPlayer) {
                     Context.agent.avoidancePriority = 50;
-                }
+                }*/
             }
         }
     }

@@ -20,6 +20,7 @@ namespace Murktid {
             abilityComponent = new(Context);
             StateMachine = new(abilityComponent);
             Context.health = new(playerReference.healthDisplayReference, playerReference.context.settings);
+            Context.stamina = new(playerReference.staminaDisplayReference, playerReference.context.settings);
             Context.ammoDisplay = new(playerReference);
             weaponSystem = new();
             attackerSlotSystem = new(Context);
@@ -54,7 +55,6 @@ namespace Murktid {
             Context.CapsuleHeight = Mathf.Lerp(Context.CapsuleHeight, Context.TargetCapsuleHeight, 1f - Mathf.Exp(-Context.settings.capsuleHeightLerpSpeed * deltaTime));
             Context.motor.SetCapsuleDimensions(Context.settings.capsuleRadius, Context.CapsuleHeight, Context.CapsuleHeight * .5f);
 
-            //attackerSlotSystem.Tick(deltaTime);
             StateMachine.Tick(deltaTime);
         }
 

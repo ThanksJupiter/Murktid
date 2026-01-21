@@ -16,6 +16,7 @@ namespace Murktid {
         public PlayerEquipmentData playerEquipmentData = new();
         public PlayerSettings settings;
         public PlayerHealth health;
+        public PlayerStamina stamina;
         public IInput input;
 
         public PlayerWeaponReference defaultRangedWeaponReferencePrefab;

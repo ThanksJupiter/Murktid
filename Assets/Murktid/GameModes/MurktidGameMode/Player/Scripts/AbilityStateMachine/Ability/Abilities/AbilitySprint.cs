@@ -3,6 +3,13 @@ using UnityEngine;
 namespace Murktid {
 
     public class AbilitySprint : PlayerAbility {
+
+        private bool hasStamina = true;
+
+        protected override void Setup() {
+            AddTag(AbilityTags.sprint);
+        }
+
         public override bool ShouldActivate() {
 
             if(Context.IsBlocking) {
@@ -74,10 +81,12 @@ namespace Murktid {
         }
 
         protected override void OnActivate() {
+            hasStamina = true;
             Context.ActiveMoveSpeed = Context.settings.sprintMoveSpeed;
             Context.IsSprinting = true;
             Context.animatorBridge.IsSprinting = true;
             Context.CurrentFOVTarget = Context.settings.sprintFOV;
+            BlockAbility(AbilityTags.regenerateStamina, this);
         }
 
         protected override void OnDeactivate() {
@@ -85,6 +94,17 @@ namespace Murktid {
             Context.IsSprinting = false;
             Context.animatorBridge.IsSprinting = false;
             Context.CurrentFOVTarget = Context.settings.defaultFOV;
+            UnblockAbilitiesByInstigator(this);
+        }
+
+        protected override void Tick(float deltaTime) {
+            Context.stamina.ConsumeStamina(Context.settings.sprintStaminaCost * deltaTime);
+
+            if(Context.stamina.Value <= 0f && hasStamina) {
+                hasStamina = false;
+                Context.ActiveMoveSpeed = Context.settings.exhaustedSprintMoveSpeed;
+                Context.CurrentFOVTarget = Context.settings.exhaustedSprintFOV;
+            }
         }
     }
 }

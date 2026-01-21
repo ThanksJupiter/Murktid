@@ -53,6 +53,11 @@ namespace Murktid {
         }
 
         protected override void Tick(float deltaTime) {
+
+            // this should approach player and stop at a respectable distance
+
+            // add ability to slightly circle / move about when in threat range before given slot by slot system
+
             Context.agent.SetDestination(Context.targetPlayer.transform.position);
         }
     }

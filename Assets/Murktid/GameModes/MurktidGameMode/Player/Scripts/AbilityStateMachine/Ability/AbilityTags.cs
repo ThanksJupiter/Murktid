@@ -5,6 +5,7 @@
         public static readonly AbilityTag falling = new("Falling");
         public static readonly AbilityTag movement = new("Movement");
         public static readonly AbilityTag sprint = new("Sprint");
+        public static readonly AbilityTag regenerateStamina = new("RegenerateStamina");
         public static readonly AbilityTag firePrimary = new("FirePrimary");
         public static readonly AbilityTag fireSecondary = new("FireSecondary");
     }

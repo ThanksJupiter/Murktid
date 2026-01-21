@@ -5,6 +5,7 @@ namespace Murktid {
     public class AbilitySprintSlide : PlayerAbility {
 
         private bool setVelocity = true;
+        private bool hadSufficientStamina = false;
 
         public override bool ShouldActivate() {
             if(!Context.IsSprinting) {
@@ -27,16 +28,18 @@ namespace Murktid {
         }
 
         protected override void OnActivate() {
+
+            hadSufficientStamina = Context.stamina.Value > Context.settings.sprintSlideStaminaCost;
+
             setVelocity = true;
             BlockAbility(AbilityTags.movement, this);
+            BlockAbility(AbilityTags.regenerateStamina, this);
             Context.IsSprintSliding = true;
             Context.DodgeDirection = Context.motor.Velocity.normalized;
-            //Context.CurrentFOVTarget = Context.settings.sprintFOV;
         }
 
         protected override void OnDeactivate() {
             UnblockAbilitiesByInstigator(this);
-            //Context.CurrentFOVTarget = Context.settings.defaultFOV;
         }
 
         public override void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime) {
@@ -46,6 +49,11 @@ namespace Murktid {
 
             if(setVelocity) {
                 currentVelocity = Context.DodgeDirection * Context.settings.sprintSlideSpeed;
+
+                if(!hadSufficientStamina) {
+                    currentVelocity = Context.DodgeDirection * (Context.settings.sprintSlideSpeed * .75f);
+                }
+
                 setVelocity = false;
                 return;
             }

@@ -7,6 +7,7 @@ namespace Murktid {
         private readonly ApplicationData applicationData;
 
         private IMurktidPlayer player;
+        private PlayerController playerController;
         private EnemySystem enemySystem = new();
         private BulletSystem bulletSystem = new();
 
@@ -29,6 +30,11 @@ namespace Murktid {
             }
 
             enemySystem?.Initialize();
+
+            if(enemySystem != null) {
+                enemySystem.slotSystem = playerController.attackerSlotSystem;
+            }
+
             bulletSystem.Initialize(gameModeReference);
 
             applicationData.cursorHandler.PushState(CursorHandler.CursorState.Locked, this);
@@ -62,7 +68,7 @@ namespace Murktid {
             PlayerReference playerReference = Object.Instantiate(gameModeReference.gameData.playerData.playerReferencePrefab, spawnPosition, spawnRotation);
             PlayerCameraReference playerCameraReference = Object.Instantiate(gameModeReference.gameData.playerData.playerCameraReferencePrefab, spawnPosition, spawnRotation);
 
-            PlayerController playerController = new(playerReference) {
+            playerController = new(playerReference) {
                 Context = {
                     input = applicationData.Input,
                     cameraReference = playerCameraReference,

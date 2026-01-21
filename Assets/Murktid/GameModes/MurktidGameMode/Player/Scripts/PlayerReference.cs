@@ -4,6 +4,7 @@ namespace Murktid {
     public class PlayerReference : MonoBehaviour {
         public PlayerContext context;
         public HealthDisplayReference healthDisplayReference;
+        public StaminaDisplayReference staminaDisplayReference;
         public AmmoDisplayReference ammoDisplayReference;
 
         private void OnDrawGizmos() {

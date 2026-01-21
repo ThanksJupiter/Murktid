@@ -29,6 +29,11 @@ namespace Murktid {
             set => animator.SetBool(Param.isAttacking, value);
         }
 
+        public bool AttackReady {
+            get => animator.GetBool(Param.attackReady);
+            set => animator.SetBool(Param.attackReady, value);
+        }
+
         public bool TakeDamage {
             get => animator.GetBool(Param.takeDamage);
             set => animator.SetBool(Param.takeDamage, value);
@@ -70,6 +75,7 @@ namespace Murktid {
             public static readonly int isChasing = Animator.StringToHash("isChasing");
             public static readonly int isWalking = Animator.StringToHash("isWalking");
             public static readonly int isAttacking = Animator.StringToHash("isAttacking");
+            public static readonly int attackReady = Animator.StringToHash("AttackReady");
             public static readonly int hitboxActive = Animator.StringToHash("HitboxActive");
             public static readonly int speed = Animator.StringToHash("Speed");
             public static readonly int movementLock = Animator.StringToHash("MovementLock");

@@ -14,11 +14,12 @@ namespace Murktid {
             }
 
             abilityComponent.AddDefaultAbility<EnemyAbilityApproachPlayer>();
+            abilityComponent.AddDefaultAbility<EnemyAbilityReadyAttack>();
             abilityComponent.AddDefaultAbility<EnemyAbilityAttackPlayer>();
-            abilityComponent.AddDefaultAbility<EnemyAbilityEngagePlayer>();
+            //abilityComponent.AddDefaultAbility<EnemyAbilityEngagePlayer>();
             abilityComponent.AddDefaultAbility<EnemyAbilityLookForPlayer>();
-            abilityComponent.AddDefaultAbility<EnemyAbilityRequestAttackSlot>();
-            abilityComponent.AddDefaultAbility<EnemyAbilityRequestEngageSlot>();
+            //abilityComponent.AddDefaultAbility<EnemyAbilityRequestAttackSlot>();
+            //abilityComponent.AddDefaultAbility<EnemyAbilityRequestEngageSlot>();
             abilityComponent.AddDefaultAbility<EnemyAbilityKnockback>();
         }
 

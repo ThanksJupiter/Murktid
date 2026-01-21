@@ -12,6 +12,55 @@ namespace Murktid {
             //occupiedSlots = new bool[context.maxAttackers];
         }
 
+        public List<EnemyController> activeEnemies = new();
+        public List<EnemyController> attackingEnemies = new();
+
+        public void AddToActiveEnemies(EnemyController enemy) {
+            if(!activeEnemies.Contains(enemy)) {
+                activeEnemies.Add(enemy);
+            }
+        }
+
+        public void Tick(List<EnemyController> enemies) {
+
+            // return;
+            Vector3 playerPosition = context.transform.position;
+            float lowestAngle = float.MaxValue;
+            EnemyController frontMostEnemy = null;
+
+            for(int i = activeEnemies.Count - 1; i >= 0; i--) {
+                EnemyController enemy = activeEnemies[i];
+
+                if(attackingEnemies.Contains(enemy)) {
+                    continue;
+                }
+
+                if(!enemies.Contains(enemy)) {
+                    activeEnemies.Remove(enemy);
+                    continue;
+                }
+
+                if(!enemy.Context.IsTargetWithinThreatRange) {
+                   continue;
+                }
+
+                Vector3 directionToEnemy = enemy.Context.transform.position - playerPosition;
+                float angle = Vector3.Angle(context.motor.CharacterForward, directionToEnemy);
+
+                if(angle < lowestAngle) {
+                    lowestAngle = angle;
+                    frontMostEnemy = enemy;
+                }
+            }
+
+            if(frontMostEnemy != null) {
+                frontMostEnemy.Context.hasAttackSlot = true;
+            }
+
+            // evaluate which enemies can attack the player
+            // ones most in front should attack 1st
+        }
+
         public bool TryClaimEngagementSlot(Vector3 enemyPosition, out int claimedIndex)
         {
             claimedIndex = -1;
