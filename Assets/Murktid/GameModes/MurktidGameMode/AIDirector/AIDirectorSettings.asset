@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8471b520831e9442bd43ba7a020de0c, type: 3}
+  m_Name: AIDirectorSettings
+  m_EditorClassIdentifier: Assembly-CSharp::AIDirectorSettings
+  waveSpawnKillsThreshold: 20
+  minWaveCount: 3
+  maxWaveCount: 15
+  maxEnemies: 30
+  minWaveSpawnDelay: 5
+  maxWaveSpawnDelay: 12
+  minSpawnDelay: 0.1
+  maxSpawnDelay: 2
+  stressDecayRate: 1
+  sustainPeakDuration: 4
+  relaxDuration: 5

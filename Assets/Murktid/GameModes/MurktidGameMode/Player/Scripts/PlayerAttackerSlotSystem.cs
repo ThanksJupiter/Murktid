@@ -55,9 +55,9 @@ namespace Murktid {
                     continue;
                 }
 
-                if(!enemy.Context.IsTargetWithinThreatRange) {
+                /*if(!enemy.Context.IsTargetWithinThreatRange) {
                     continue;
-                }
+                }*/
 
                 Vector3 directionToEnemy = enemy.Context.transform.position - playerPosition;
                 float angle = Vector3.Angle(context.motor.CharacterForward, directionToEnemy);

@@ -25,6 +25,11 @@ namespace Murktid {
                 return false;
             }
 
+            // activate if this is true
+            if(Context.animatorBridge.IsAttacking) {
+                return true;
+            }
+
             if(!Context.animatorBridge.AttackReady) {
                 return false;
             }
@@ -50,7 +55,7 @@ namespace Murktid {
         }
 
         protected override void OnActivate() {
-            Context.animatorBridge.IsAttacking = true;
+            //Context.animatorBridge.IsAttacking = true;
             hasAttacked = false;
             hasActivatedHitbox = false;
             Context.agent.updateRotation = false;
@@ -108,11 +113,11 @@ namespace Murktid {
                                 playerReference.context.BlockHitIndex = Random.Range(1, 4);
                             }
                             else {
-                                playerReference.context.health.TakeDamage(2f);
+                                playerReference.context.health.TakeDamage(3f);
                             }
                         }
                         else {
-                            playerReference.context.health.TakeDamage(5f);
+                            playerReference.context.health.TakeDamage(7f);
                         }
                     }
                 }

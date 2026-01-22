@@ -33,6 +33,11 @@ namespace Murktid {
 
             enemyReferencePrefab = enemySystemReference.enemyReferencePrefab;
             spawnPoints = Object.FindObjectsByType<EnemySpawnPoint>(FindObjectsInactive.Exclude, FindObjectsSortMode.None).ToList();
+
+            aiDirectorReference = Object.FindFirstObjectByType<AIDirectorReference>();
+            aiDirector = new(aiDirectorReference, this);
+            aiDirector.Initialize();
+
             SpawnInitialEnemies();
         }
 
@@ -51,12 +56,35 @@ namespace Murktid {
             }
         }
 
-        private void SpawnEnemy(Vector3 position, Quaternion rotation) {
+        public void SpawnEnemy(Vector3 position, Quaternion rotation, PlayerReference targetPlayer = null) {
             EnemyReference spawnedEnemyReference = Object.Instantiate(enemyReferencePrefab, position, rotation);
             EnemyController enemyController = new(spawnedEnemyReference.context);
             enemyController.Initialize(spawnedEnemyReference);
             spawnedEnemyReference.controller = enemyController;
             activeEnemies.Add(enemyController);
+
+            if(targetPlayer != null) {
+                enemyController.SetTarget(targetPlayer);
+            }
+        }
+
+        public void SpawnEnemies(int amount, bool aggressive = false) {
+
+            PlayerReference player = null;
+            if(aggressive) {
+                player = Object.FindFirstObjectByType<PlayerReference>();
+            }
+
+            for(int i = 0; i < amount; i++) {
+                EnemySpawnPoint spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
+
+                Vector3 spawnPosition = new(
+                    spawnPoint.transform.position.x + Random.Range(-spawnPoint.spawnRadius, spawnPoint.spawnRadius),
+                    spawnPoint.transform.position.y,
+                    spawnPoint.transform.position.z + Random.Range(-spawnPoint.spawnRadius, spawnPoint.spawnRadius));
+
+                SpawnEnemy(spawnPosition, spawnPoint.transform.rotation, player);
+            }
         }
 
         public void Tick(float deltaTime) {
@@ -83,11 +111,15 @@ namespace Murktid {
                     enemyToDestroy.Context.graphicsContainer.transform.SetParent(null);
                     enemyToDestroy.OnDestroy();
                     Object.Destroy(enemyToDestroy.Context.gameObject);
+
+
+                    aiDirector.OnEnemyKilled();
                 }
 
                 enemiesToDestroy.Clear();
             }
 
+            aiDirector.Tick(deltaTime);
             slotSystem.Tick(activeEnemies);
         }
     }
