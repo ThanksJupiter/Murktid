@@ -53,6 +53,14 @@ namespace Murktid {
             }
         }
 
+        public bool IsTargetWithinRange(float range) {
+            if(!HasTarget) {
+                return false;
+            }
+
+            return Vector3.Distance(transform.position, targetPlayer.transform.position) < range;
+        }
+
         public bool IsTargetWithinAttackRange {
             get {
                 if(!HasTarget) {

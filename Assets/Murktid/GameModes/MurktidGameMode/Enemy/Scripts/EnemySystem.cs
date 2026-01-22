@@ -76,6 +76,7 @@ namespace Murktid {
                 for(int i = enemiesToDestroy.Count - 1; i >= 0; i--) {
                     EnemyController enemyToDestroy = enemiesToDestroy[i];
                     activeEnemies.Remove(enemyToDestroy);
+                    slotSystem.RemoveFromActiveEnemies(enemyToDestroy);
 
                     // HACK (?) override this where necessary instead of manually calling?
                     // implement similar to IApplicationLifeCycle for objects that need this & destroy accordingly?

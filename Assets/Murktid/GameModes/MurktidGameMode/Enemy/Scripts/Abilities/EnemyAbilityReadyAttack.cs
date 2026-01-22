@@ -4,6 +4,8 @@ namespace Murktid {
 
     public class EnemyAbilityReadyAttack : EnemyAbility {
 
+        private float chaseLerpSpeed = .5f;
+
         protected override void Setup() {
             AddTag(AbilityTags.movement);
         }
@@ -51,7 +53,8 @@ namespace Murktid {
         }
 
         protected override void OnActivate() {
-            Context.agent.speed = Context.settings.defaultChaseSpeed;
+            //Context.agent.speed = Context.settings.defaultChaseSpeed;
+            chaseLerpSpeed = Random.Range(Context.settings.minChaseLerpSpeed, Context.settings.maxChaseLerpSpeed);
             Context.animatorBridge.AttackReady = true;
 
             if(!Context.IsTargetWithinAttackRange) {
@@ -68,8 +71,9 @@ namespace Murktid {
 
         protected override void Tick(float deltaTime) {
 
+            Context.agent.speed = Mathf.Lerp(Context.agent.speed, Context.settings.defaultChaseSpeed, 1f - Mathf.Exp(-chaseLerpSpeed * deltaTime));
+
             if(!Context.IsTargetWithinAttackRange) {
-                Context.agent.speed = Context.settings.defaultChaseSpeed;
                 Context.agent.SetDestination(Context.targetPlayer.transform.position);
             }
             else {

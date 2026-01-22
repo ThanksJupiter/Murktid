@@ -108,11 +108,11 @@ namespace Murktid {
                                 playerReference.context.BlockHitIndex = Random.Range(1, 4);
                             }
                             else {
-                                playerReference.context.health.TakeDamage(5f);
+                                playerReference.context.health.TakeDamage(2f);
                             }
                         }
                         else {
-                            playerReference.context.health.TakeDamage(10f);
+                            playerReference.context.health.TakeDamage(5f);
                         }
                     }
                 }

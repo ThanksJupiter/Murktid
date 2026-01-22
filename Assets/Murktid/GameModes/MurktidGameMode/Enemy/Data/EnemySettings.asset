@@ -13,11 +13,16 @@ MonoBehaviour:
   m_Name: EnemySettings
   m_EditorClassIdentifier: Assembly-CSharp::Murktid.EnemySettings
   defaultChaseSpeed: 5.5
-  defaultWalkSpeed: 1.5
+  minDefaultWalkSpeed: 0.5
+  maxDefaultWalkSpeed: 1.5
+  minChaseLerpSpeed: 0.1
+  maxChaseLerpSpeed: 2
   maxHealth: 100
-  aggroRange: 15
+  aggroRange: 25
   attackRange: 1.5
-  threatRange: 5
+  threatRange: 15
+  minThreatRange: 5
+  maxThreatRange: 25
   attackRate: 2
   rotateToTargetRate: 5
   checkEngagementStatusInterval: 0.5
