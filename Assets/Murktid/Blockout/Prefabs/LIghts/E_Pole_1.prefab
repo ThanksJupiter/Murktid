@@ -50,7 +50,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -5070,6 +5070,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ActivateLight
   light: {fileID: 2498371063004244680}
+  particleSystem: {fileID: 1337959620345721165}
 --- !u!1001 &4095845511715411979
 PrefabInstance:
   m_ObjectHideFlags: 0

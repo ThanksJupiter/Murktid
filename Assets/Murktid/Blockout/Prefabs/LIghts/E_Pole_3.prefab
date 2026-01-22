@@ -234,6 +234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ActivateLight
   light: {fileID: 4332416592036985210}
+  particleSystem: {fileID: 9059646330815573948}
 --- !u!1 &4391892323180361658
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,7 +285,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
