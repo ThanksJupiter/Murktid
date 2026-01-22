@@ -17,6 +17,7 @@ namespace Murktid {
             foreach(EnemyController enemy in nearbyEnemies) {
                 enemy.Context.targetPlayer = playerReference;
                 enemy.Context.playerSlotSystem = playerReference.context.controller.attackerSlotSystem;
+                enemy.Context.playerSlotSystem.AddToActiveEnemies(enemy.Context.controller);
             }
 
             context.health.TakeDamage(damage);

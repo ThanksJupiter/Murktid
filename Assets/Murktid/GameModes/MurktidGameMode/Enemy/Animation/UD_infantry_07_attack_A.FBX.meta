@@ -313,7 +313,7 @@ ModelImporter:
       takeName: Take 001
       internalID: -998496362607748373
       firstFrame: 0
-      lastFrame: 10
+      lastFrame: 11
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -341,7 +341,7 @@ ModelImporter:
       name: UD_infantry_07_attack_A_Release
       takeName: Take 001
       internalID: 3060872287085348379
-      firstFrame: 10
+      firstFrame: 9
       lastFrame: 40
       wrapMode: 0
       orientationOffsetY: 0
@@ -375,7 +375,7 @@ ModelImporter:
             inWeight: 0
             outWeight: 0
           - serializedVersion: 3
-            time: 0.033304483
+            time: 0.088860035
             value: 0
             inSlope: 0
             outSlope: 0
@@ -384,7 +384,7 @@ ModelImporter:
             inWeight: 0
             outWeight: 0
           - serializedVersion: 3
-            time: 0.040577203
+            time: 0.096132755
             value: 1
             inSlope: 0
             outSlope: 0
@@ -393,7 +393,7 @@ ModelImporter:
             inWeight: 0
             outWeight: 0
           - serializedVersion: 3
-            time: 0.09096682
+            time: 0.12430015
             value: 1
             inSlope: 0
             outSlope: 0
@@ -402,7 +402,7 @@ ModelImporter:
             inWeight: 0
             outWeight: 0
           - serializedVersion: 3
-            time: 0.09823954
+            time: 0.13157287
             value: 0
             inSlope: 0
             outSlope: 0

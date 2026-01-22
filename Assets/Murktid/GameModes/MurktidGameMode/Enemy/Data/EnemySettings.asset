@@ -16,7 +16,7 @@ MonoBehaviour:
   defaultWalkSpeed: 1.5
   maxHealth: 100
   aggroRange: 15
-  attackRange: 2.5
+  attackRange: 1.5
   threatRange: 5
   attackRate: 2
   rotateToTargetRate: 5
