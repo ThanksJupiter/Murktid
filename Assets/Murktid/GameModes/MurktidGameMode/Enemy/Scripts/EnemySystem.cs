@@ -119,7 +119,7 @@ namespace Murktid {
                 enemiesToDestroy.Clear();
             }
 
-            aiDirector.Tick(deltaTime);
+            aiDirector?.Tick(deltaTime);
             slotSystem.Tick(activeEnemies);
         }
     }
