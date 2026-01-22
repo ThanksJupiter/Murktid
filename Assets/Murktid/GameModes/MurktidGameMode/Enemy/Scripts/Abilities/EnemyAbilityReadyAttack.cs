@@ -55,10 +55,17 @@ namespace Murktid {
         protected override void OnActivate() {
             //Context.agent.speed = Context.settings.defaultChaseSpeed;
             chaseLerpSpeed = Random.Range(Context.settings.minChaseLerpSpeed, Context.settings.maxChaseLerpSpeed);
-            Context.animatorBridge.AttackReady = true;
 
             if(!Context.IsTargetWithinAttackRange) {
                 Context.animatorBridge.IsChasing = true;
+
+                if(Context.IsTargetWithinThreatRange) {
+                    Context.animatorBridge.AttackReady = true;
+                }
+            }
+            else {
+                Context.animatorBridge.AttackReady = false;
+                Context.animatorBridge.IsAttacking = true;
             }
         }
 
@@ -75,9 +82,14 @@ namespace Murktid {
 
             if(!Context.IsTargetWithinAttackRange) {
                 Context.agent.SetDestination(Context.targetPlayer.transform.position);
+
+                if(Context.IsTargetWithinThreatRange) {
+                    Context.animatorBridge.AttackReady = true;
+                }
             }
             else {
-                Context.animatorBridge.AttackReady = true;
+                Context.animatorBridge.AttackReady = false;
+                Context.animatorBridge.IsAttacking = true;
             }
         }
     }

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58cc61290224a0b40a14fdcb44c304ad, type: 3}
   m_Name: SlotSystemSettings
   m_EditorClassIdentifier: Assembly-CSharp::Murktid.SlotSystemSettings
-  maxAttackers: 5
+  maxAttackers: 20

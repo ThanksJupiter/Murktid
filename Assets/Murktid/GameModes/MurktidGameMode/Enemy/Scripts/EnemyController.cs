@@ -33,6 +33,13 @@ namespace Murktid {
             StateMachine.Tick(deltaTime);
         }
 
+        public void SetTarget(PlayerReference player) {
+            Context.targetPlayer = player;
+            Context.playerSlotSystem = player.context.controller.attackerSlotSystem;
+            // add self to slot system for consideration
+            Context.playerSlotSystem.AddToActiveEnemies(Context.controller);
+        }
+
         public void StopAttacking() {
             Context.hasAttackSlot = false;
             Context.animatorBridge.IsAttacking = false;
