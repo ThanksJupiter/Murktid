@@ -3,6 +3,13 @@ using UnityEngine;
 namespace Murktid {
 
     public class EnemyAbilityReadyAttack : EnemyAbility {
+
+        private float chaseLerpSpeed = .5f;
+
+        protected override void Setup() {
+            AddTag(AbilityTags.movement);
+        }
+
         public override bool ShouldActivate() {
 
             if(!Context.hasAttackSlot) {
@@ -13,7 +20,11 @@ namespace Murktid {
                 return false;
             }
 
-            if(Context.IsTargetWithinAttackRange) {
+            if(Context.animatorBridge.AttackReady) {
+                return false;
+            }
+
+            if(Context.animatorBridge.IsAttacking) {
                 return false;
             }
 
@@ -30,27 +41,44 @@ namespace Murktid {
                 return true;
             }
 
-            if(Context.IsTargetWithinAttackRange) {
+            if(Context.animatorBridge.IsAttacking) {
                 return true;
             }
+
+            /*if(Context.IsTargetWithinAttackRange) {
+                return true;
+            }*/
 
             return false;
         }
 
         protected override void OnActivate() {
-            Context.agent.speed = Context.settings.defaultChaseSpeed;
+            //Context.agent.speed = Context.settings.defaultChaseSpeed;
+            chaseLerpSpeed = Random.Range(Context.settings.minChaseLerpSpeed, Context.settings.maxChaseLerpSpeed);
             Context.animatorBridge.AttackReady = true;
-            Context.animatorBridge.IsChasing = true;
+
+            if(!Context.IsTargetWithinAttackRange) {
+                Context.animatorBridge.IsChasing = true;
+            }
         }
 
         protected override void OnDeactivate() {
             Context.animatorBridge.IsChasing = false;
+            Context.agent.velocity = Vector3.zero;
             Context.agent.isStopped = true;
             Context.agent.ResetPath();
         }
 
         protected override void Tick(float deltaTime) {
-            Context.agent.SetDestination(Context.targetPlayer.transform.position);
+
+            Context.agent.speed = Mathf.Lerp(Context.agent.speed, Context.settings.defaultChaseSpeed, 1f - Mathf.Exp(-chaseLerpSpeed * deltaTime));
+
+            if(!Context.IsTargetWithinAttackRange) {
+                Context.agent.SetDestination(Context.targetPlayer.transform.position);
+            }
+            else {
+                Context.animatorBridge.AttackReady = true;
+            }
         }
     }
 }

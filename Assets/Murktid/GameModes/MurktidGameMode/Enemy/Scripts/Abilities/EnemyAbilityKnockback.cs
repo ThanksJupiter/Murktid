@@ -21,6 +21,8 @@ namespace Murktid {
 
         protected override void OnActivate() {
             BlockAbility(AbilityTags.movement, this);
+            Context.animatorBridge.AttackReady = false;
+            Context.animatorBridge.IsAttacking = false;
             Context.agent.isStopped = true;
         }
 

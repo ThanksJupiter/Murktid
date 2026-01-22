@@ -59,14 +59,15 @@ namespace Murktid {
 
         public float Speed {
             get => animator.GetFloat(Param.speed);
-            set => animator.SetFloat(Param.speed, value);
+            set => animator.SetFloat(Param.speed, value, .25f, Time.deltaTime);
         }
 
         public static class Layer
         {
             public static readonly int baseLayer = 0;
-            public static readonly int damage = 1;
-            public static readonly int dead = 2;
+            public static readonly int attack = 1;
+            public static readonly int damage = 2;
+            public static readonly int dead = 3;
         }
 
         private static class Param {

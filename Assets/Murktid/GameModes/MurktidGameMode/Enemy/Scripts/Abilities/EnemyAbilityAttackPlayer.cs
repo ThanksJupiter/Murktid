@@ -25,6 +25,10 @@ namespace Murktid {
                 return false;
             }
 
+            if(!Context.animatorBridge.AttackReady) {
+                return false;
+            }
+
             return true;
         }
 
@@ -35,6 +39,10 @@ namespace Murktid {
             }
 
             if(Context.animatorBridge.IsKnockback) {
+                return true;
+            }
+
+            if(!Context.IsTargetWithinAttackRange) {
                 return true;
             }
 
@@ -79,6 +87,7 @@ namespace Murktid {
 
             if(Context.animatorBridge.IsHitboxActive) {
                 Context.animatorBridge.AttackReady = false;
+                Context.animatorBridge.IsAttacking = false;
                 hasActivatedHitbox = true;
                 Context.hitbox.isActive = true;
                 bool hitPlayer = false;
@@ -88,16 +97,22 @@ namespace Murktid {
                     Collider collider = overlappedColliders[i];
                     if(collider.TryGetComponent(out PlayerReference playerReference)) {
 
-                        bool blockedAttack = playerReference.context.stamina.Value >= playerReference.context.settings.blockAttackStaminaCost;
-                        playerReference.context.stamina.ConsumeStamina(playerReference.context.settings.blockAttackStaminaCost);
-
                         hitPlayer = true;
-                        if(playerReference.context.IsBlocking && blockedAttack) {
-                            Context.animatorBridge.IsKnockback = true;
-                            playerReference.context.BlockHitIndex = Random.Range(1, 4);
+                        if(playerReference.context.IsBlocking) {
+
+                            bool blockedAttack = playerReference.context.stamina.Value >= playerReference.context.settings.blockAttackStaminaCost;
+                            playerReference.context.stamina.ConsumeStamina(playerReference.context.settings.blockAttackStaminaCost);
+
+                            if(blockedAttack) {
+                                Context.animatorBridge.IsKnockback = true;
+                                playerReference.context.BlockHitIndex = Random.Range(1, 4);
+                            }
+                            else {
+                                playerReference.context.health.TakeDamage(2f);
+                            }
                         }
                         else {
-                            playerReference.context.health.TakeDamage(10f);
+                            playerReference.context.health.TakeDamage(5f);
                         }
                     }
                 }

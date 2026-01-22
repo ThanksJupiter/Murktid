@@ -8,8 +8,11 @@ namespace Murktid {
         public HashSet<int> ActiveEngagementSlots { get; } = new HashSet<int>();
         public HashSet<int> ActiveAttackSlots { get; } = new HashSet<int>();
 
+        public SlotSystemSettings settings;
+
         public PlayerAttackerSlotSystem(PlayerContext context) : base(context) {
             //occupiedSlots = new bool[context.maxAttackers];
+            settings = context.settings.slotSystemSettings;
         }
 
         public List<EnemyController> activeEnemies = new();
@@ -21,12 +24,24 @@ namespace Murktid {
             }
         }
 
+        public void RemoveFromActiveEnemies(EnemyController enemy) {
+            if(attackingEnemies.Contains(enemy)) {
+                attackingEnemies.Remove(enemy);
+            }
+            if(activeEnemies.Contains(enemy)) {
+                activeEnemies.Remove(enemy);
+            }
+        }
+
         public void Tick(List<EnemyController> enemies) {
 
-            // return;
             Vector3 playerPosition = context.transform.position;
             float lowestAngle = float.MaxValue;
             EnemyController frontMostEnemy = null;
+
+            if(attackingEnemies.Count >= settings.maxAttackers) {
+                return;
+            }
 
             for(int i = activeEnemies.Count - 1; i >= 0; i--) {
                 EnemyController enemy = activeEnemies[i];
@@ -36,12 +51,12 @@ namespace Murktid {
                 }
 
                 if(!enemies.Contains(enemy)) {
-                    activeEnemies.Remove(enemy);
+                    RemoveFromActiveEnemies(enemy);
                     continue;
                 }
 
                 if(!enemy.Context.IsTargetWithinThreatRange) {
-                   continue;
+                    continue;
                 }
 
                 Vector3 directionToEnemy = enemy.Context.transform.position - playerPosition;
@@ -53,7 +68,8 @@ namespace Murktid {
                 }
             }
 
-            if(frontMostEnemy != null) {
+            if(frontMostEnemy != null && !attackingEnemies.Contains(frontMostEnemy)) {
+                attackingEnemies.Add(frontMostEnemy);
                 frontMostEnemy.Context.hasAttackSlot = true;
             }
 
@@ -61,15 +77,15 @@ namespace Murktid {
             // ones most in front should attack 1st
         }
 
-        public bool TryClaimEngagementSlot(Vector3 enemyPosition, out int claimedIndex)
-        {
+        // evaluate which enemies should stop attacking the player if better ones are found
+
+        public bool TryClaimEngagementSlot(Vector3 enemyPosition, out int claimedIndex) {
             claimedIndex = -1;
 
             float bestScore = float.NegativeInfinity;
 
-            for (int i = 0; i < context.maxEngagementSlots; i++)
-            {
-                if (ActiveEngagementSlots.Contains(i))
+            for(int i = 0; i < context.maxEngagementSlots; i++) {
+                if(ActiveEngagementSlots.Contains(i))
                     continue;
 
                 Vector3 slotPosition = GetSlotPosition(i);
@@ -78,15 +94,13 @@ namespace Murktid {
                 float distance = Vector3.Distance(enemyPosition, slotPosition);
                 float score = dot - (distance * 0.1f);
 
-                if (score > bestScore)
-                {
+                if(score > bestScore) {
                     bestScore = score;
                     claimedIndex = i;
                 }
             }
 
-            if (claimedIndex != -1)
-            {
+            if(claimedIndex != -1) {
                 ActiveEngagementSlots.Add(claimedIndex);
                 return true;
             }

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovementSettings
   defaultMoveSpeed: 4
   sprintMoveSpeed: 5.5
+  exhaustedSprintMoveSpeed: 4.75
   sprintSlideSpeed: 12
   rotationSpeed: 0.1
   movementSharpness: 10
@@ -30,7 +31,10 @@ MonoBehaviour:
   defaultStaminaRegenerationRate: 15
   defaultStaminaRegenerationDelay: 0.5
   sprintStaminaCost: 20
+  sprintSlideStaminaCost: 10
   dodgeStaminaCost: 25
+  blockPushStaminaCost: 20
+  blockAttackStaminaCost: 10
   jumpForce: 6
   allowJumpingWhenSliding: 1
   jumpPostGroundingGraceTime: 0.3
@@ -47,4 +51,6 @@ MonoBehaviour:
   cameraFollowSharpness: 1000
   defaultFOV: 70
   sprintFOV: 80
+  exhaustedSprintFOV: 75
   FOVLerpSpeed: 5
+  slotSystemSettings: {fileID: 11400000, guid: 39b035301f416a94b849422de1a6012f, type: 2}

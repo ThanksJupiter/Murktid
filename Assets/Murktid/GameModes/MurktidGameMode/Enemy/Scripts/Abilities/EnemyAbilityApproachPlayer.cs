@@ -4,6 +4,8 @@ namespace Murktid {
 
     public class EnemyAbilityApproachPlayer : EnemyAbility {
 
+        private float range = 15f;
+
         protected override void Setup() {
             AddTag(AbilityTags.movement);
         }
@@ -26,7 +28,7 @@ namespace Murktid {
         }
 
         public override bool ShouldDeactivate() {
-            if(Context.IsTargetWithinThreatRange) {
+            if(Context.IsTargetWithinRange(range)) {
                 return true;
             }
 
@@ -42,8 +44,11 @@ namespace Murktid {
         }
 
         protected override void OnActivate() {
+
+            range = Random.Range(Context.settings.minThreatRange, Context.settings.maxThreatRange);
+
             Context.animatorBridge.IsWalking = true;
-            Context.agent.speed = Context.settings.defaultWalkSpeed;
+            Context.agent.speed = Random.Range(Context.settings.minDefaultWalkSpeed, Context.settings.maxDefaultWalkSpeed);
         }
 
         protected override void OnDeactivate() {
