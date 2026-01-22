@@ -6,9 +6,11 @@ public class ActivateLight : MonoBehaviour
     public ParticleSystem particleSystem;
 
     public void Activate() {
-        Debug.Log("Light is Activated");
+        //Debug.Log("Light is Activated");
             light.enabled = true;
-            particleSystem.Play();
+            if(particleSystem != null) {
+                particleSystem.Play();
+            }
 
     }
 }
