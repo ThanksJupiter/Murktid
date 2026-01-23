@@ -33,6 +33,10 @@ namespace Murktid {
 
         public override bool ShouldDeactivate() {
 
+            if(!Context.hasAttackSlot) {
+                return true;
+            }
+
             if(Context.animatorBridge.TakeDamage) {
                 return true;
             }

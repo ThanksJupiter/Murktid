@@ -25,11 +25,18 @@ namespace Murktid {
         }
 
         public void RemoveFromActiveEnemies(EnemyController enemy) {
-            if(attackingEnemies.Contains(enemy)) {
-                attackingEnemies.Remove(enemy);
-            }
+
+            RemoveFromAttackingEnemies(enemy);
+
             if(activeEnemies.Contains(enemy)) {
                 activeEnemies.Remove(enemy);
+            }
+        }
+
+        public void RemoveFromAttackingEnemies(EnemyController enemy) {
+            if(attackingEnemies.Contains(enemy)) {
+                enemy.StopAttacking();
+                attackingEnemies.Remove(enemy);
             }
         }
 
@@ -38,10 +45,6 @@ namespace Murktid {
             Vector3 playerPosition = context.transform.position;
             float lowestAngle = float.MaxValue;
             EnemyController frontMostEnemy = null;
-
-            if(attackingEnemies.Count >= settings.maxAttackers) {
-                return;
-            }
 
             for(int i = activeEnemies.Count - 1; i >= 0; i--) {
                 EnemyController enemy = activeEnemies[i];
@@ -68,7 +71,24 @@ namespace Murktid {
                 }
             }
 
-            if(frontMostEnemy != null && !attackingEnemies.Contains(frontMostEnemy)) {
+            if(frontMostEnemy == null) {
+                return;
+            }
+
+            if(attackingEnemies.Count >= settings.maxAttackers) {
+                for(int i = 0; i < attackingEnemies.Count; i++) {
+                    EnemyController attackingEnemy = attackingEnemies[i];
+
+                    if(frontMostEnemy.Context.DistanceToTarget < attackingEnemy.Context.DistanceToTarget) {
+                        RemoveFromAttackingEnemies(attackingEnemy);
+                        break;
+                    }
+                }
+
+                return;
+            }
+
+            if(!attackingEnemies.Contains(frontMostEnemy)) {
                 attackingEnemies.Add(frontMostEnemy);
                 frontMostEnemy.Context.hasAttackSlot = true;
             }

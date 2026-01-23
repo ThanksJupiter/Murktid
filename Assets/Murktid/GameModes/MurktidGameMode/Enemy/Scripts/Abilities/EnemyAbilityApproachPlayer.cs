@@ -5,6 +5,7 @@ namespace Murktid {
     public class EnemyAbilityApproachPlayer : EnemyAbility {
 
         private float range = 15f;
+        private float chaseLerpSpeed = .5f;
 
         protected override void Setup() {
             AddTag(AbilityTags.movement);
@@ -45,10 +46,9 @@ namespace Murktid {
 
         protected override void OnActivate() {
 
+            chaseLerpSpeed = Random.Range(Context.settings.minChaseLerpSpeed, Context.settings.maxChaseLerpSpeed);
             range = Random.Range(Context.settings.minThreatRange, Context.settings.maxThreatRange);
-
             Context.animatorBridge.IsWalking = true;
-            Context.agent.speed = Random.Range(Context.settings.minDefaultWalkSpeed, Context.settings.maxDefaultWalkSpeed);
         }
 
         protected override void OnDeactivate() {
@@ -59,6 +59,7 @@ namespace Murktid {
 
         protected override void Tick(float deltaTime) {
 
+            Context.agent.speed = Mathf.Lerp(Context.agent.speed, Context.settings.maxDefaultWalkSpeed, 1f - Mathf.Exp(-chaseLerpSpeed * deltaTime));
             // this should approach player and stop at a respectable distance
 
             // add ability to slightly circle / move about when in threat range before given slot by slot system

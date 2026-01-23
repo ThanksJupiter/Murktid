@@ -56,7 +56,7 @@ namespace Murktid {
             // TODO base stress level on more than kills
             // proximity to kills
             // damage taken
-            playerStressLevel += 2.5f;
+            playerStressLevel += settings.stressLevelIncreasePerKill;
 
             enemyCount--;
             menu.UpdateEnemyCountText(enemyCount);
@@ -71,7 +71,6 @@ namespace Murktid {
             enemyCount += amount;
             menu.UpdateEnemyCountText(enemyCount);
             enemySystem.SpawnEnemies(amount, aggressive);
-            Debug.Log($"Spawn: {amount} enemies");
         }
 
         public void Tick(float deltaTime) {

@@ -16,6 +16,7 @@ namespace Murktid {
         public float maxSpawnDelay = 2f;
 
         [Header("Player Stress Level")]
+        public float stressLevelIncreasePerKill = 5f;
         public float stressDecayRate = .25f;
         public float relaxStressDecayRate = 10f;
 
