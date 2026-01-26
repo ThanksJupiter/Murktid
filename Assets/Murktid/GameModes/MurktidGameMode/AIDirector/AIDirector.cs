@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Windows.WebCam;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
@@ -20,7 +21,14 @@ namespace Murktid {
         private AIDirectorDebugMenu menu;
         private EnemySystem enemySystem;
 
+        private UpgradeWindow upgradeWindow;
+
+        public int currentRound = 0;
+
         private float buildUpTime = 0f;
+
+        private int enemiesSpawnedThisRound = 0;
+        private int maxEnemiesSpawnedThisRound = 10;
 
         private int enemyCount = 0;
         private int totalPlayerKills = 0;
@@ -34,9 +42,17 @@ namespace Murktid {
         private float playerStressLevel = 0f;
         private float stressLevel => playerStressLevel / 100f;
 
-        public AIDirector(AIDirectorReference reference, EnemySystem enemySystem) {
+        private float currentExperience = 0f;
+        private float currentExperienceThreshold = 100f;
+        private int currentPlayerLevel = 1;
+        private int availableUpgradePoints = 0;
+
+        private CursorHandler cursorHandler;
+
+        public AIDirector(AIDirectorReference reference, EnemySystem enemySystem, CursorHandler cursorHandler) {
             settings = reference.settings;
             this.enemySystem = enemySystem;
+            this.cursorHandler = cursorHandler;
         }
 
         public void Initialize() {
@@ -47,11 +63,40 @@ namespace Murktid {
             AIDirectorDebugMenuReference debugMenuReference = Object.FindFirstObjectByType<AIDirectorDebugMenuReference>();
             menu = new(debugMenuReference);
             menu.UpdateCurrentStateText(currentState);
+
+            currentRound = 1;
+            menu.UpdateCurrentRoundText(currentRound);
+
+            menu.UpdateCurrentPlayerLevel(currentPlayerLevel);
+
+            upgradeWindow = Object.FindFirstObjectByType<UpgradeWindow>();
+            upgradeWindow.Initialize();
         }
 
         public void OnEnemyKilled() {
             totalPlayerKills++;
             playerKillCounter++;
+
+            currentExperience += settings.experienceGainedOnKill;
+            if(currentExperience >= currentExperienceThreshold) {
+
+                currentPlayerLevel++;
+                menu.UpdateCurrentPlayerLevel(currentPlayerLevel);
+
+                availableUpgradePoints++;
+
+                float leftOverExperience = currentExperience - currentExperienceThreshold;
+                currentExperienceThreshold *= settings.experienceRequiredMultiplier;
+
+                if(leftOverExperience > 0f) {
+                    currentExperience = leftOverExperience;
+                }
+                else {
+                    currentExperience = 0f;
+                }
+            }
+
+            menu.UpdateExperience(currentExperience, currentExperienceThreshold);
 
             // TODO base stress level on more than kills
             // proximity to kills
@@ -69,6 +114,7 @@ namespace Murktid {
 
         public void SpawnEnemy(int amount = 1, bool aggressive = true) {
             enemyCount += amount;
+            enemiesSpawnedThisRound += amount;
             menu.UpdateEnemyCountText(enemyCount);
             enemySystem.SpawnEnemies(amount, aggressive);
         }
@@ -124,7 +170,9 @@ namespace Murktid {
             }
 
             // if(playerKillCounter >= settings.waveSpawnKillsThreshold) {
-            if(stressLevel > .9f) {
+            if(enemiesSpawnedThisRound >= maxEnemiesSpawnedThisRound) {
+                enemiesSpawnedThisRound = 0;
+                maxEnemiesSpawnedThisRound *= Mathf.RoundToInt(1f + settings.roundMultiplier);
                 playerKillCounter = 0;
                 int enemiesToSpawn = Mathf.RoundToInt(Mathf.Lerp(settings.minWaveCount, settings.maxWaveCount, stressLevel));
                 SpawnEnemy(enemiesToSpawn);
@@ -154,10 +202,18 @@ namespace Murktid {
             if(enemyCount <= 0) {
                 ChangeState(EAIDirectorState.Relax);
                 relaxTimer = 0f;
+
+                if(availableUpgradePoints > 0) {
+                    upgradeWindow.onCompleted += HideUpgradeWindow;
+                    upgradeWindow.Display(availableUpgradePoints);
+                    cursorHandler.PushState(CursorHandler.CursorState.Free, this);
+                    upgradeMenuDisplayed = true;
+                }
             }
         }
 
         private float relaxTimer = 0f;
+        private bool upgradeMenuDisplayed = false;
 
         public void RelaxTick(float deltaTime) {
 
@@ -171,10 +227,20 @@ namespace Murktid {
 
             playerStressLevel -= settings.relaxStressDecayRate * deltaTime;
 
-            if(stressLevel <= 0f) {
+            if(stressLevel <= 0f && !upgradeMenuDisplayed) {
                 ChangeState(EAIDirectorState.Buildup);
                 playerKillCounter = 0;
+                currentRound++;
+                menu.UpdateCurrentRoundText(currentRound);
             }
+        }
+
+        private void HideUpgradeWindow(int upgradePoints) {
+            upgradeMenuDisplayed = false;
+            upgradeWindow.onCompleted -= HideUpgradeWindow;
+            availableUpgradePoints = upgradePoints;
+            upgradeWindow.Hide();
+            cursorHandler.ClearInstigator(this);
         }
     }
 }

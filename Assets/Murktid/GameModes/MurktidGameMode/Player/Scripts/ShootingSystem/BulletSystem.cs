@@ -30,6 +30,7 @@ namespace Murktid {
         public LayerMask layerMask;
         public GameObject hitEffectPrefab;
         public float damage;
+        public int maxHits;
     }
 
     public class BulletSystem {
@@ -54,7 +55,7 @@ namespace Murktid {
             bulletData.shouldBeReturnedToPool = false;
             bulletData.layerMask = data.layerMask;
             bulletData.hitEffectPrefab = data.hitEffectPrefab;
-            bulletData.maxHits = 3;
+            bulletData.maxHits = data.maxHits;
             bulletData.hits = 0;
 
             activeBullets.Add(bulletData);

@@ -20,5 +20,19 @@ namespace Murktid {
         public void UpdateStressLevelText(float value) {
             reference.stressLevel.text = value.ToString("0.0");
         }
+
+        public void UpdateCurrentRoundText(int roundNo) {
+            reference.currentRound.text = roundNo.ToString();
+        }
+
+        public void UpdateCurrentPlayerLevel(int level) {
+            reference.currentPlayerLevel.text = level.ToString();
+        }
+
+        public void UpdateExperience(float current, float required) {
+            reference.currentExperienceText.text = current.ToString("0");
+            reference.requiredExperienceText.text = required.ToString("0");
+            reference.experienceSlider.value = current / required;
+        }
     }
 }

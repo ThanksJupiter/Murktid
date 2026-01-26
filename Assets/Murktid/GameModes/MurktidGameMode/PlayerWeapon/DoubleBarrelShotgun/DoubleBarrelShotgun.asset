@@ -16,9 +16,10 @@ MonoBehaviour:
   bulletVelocityRandomize: 10
   shotgunBarrelSeparationMultiplier: 0.25
   hitEffectPrefab: {fileID: 6402993596441017450, guid: 4b74f9bb41caef842a87decb0a7315b7, type: 3}
-  ADSDamage: 25
+  ADSDamage: 10
   ADSRange: 25
   ADSRadius: 0.5
+  maxHits: 1
   hipfireDamage: 25
   hipfireRange: 15
   hipfireRadius: 5

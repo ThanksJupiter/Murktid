@@ -7,6 +7,10 @@ namespace Murktid {
         public float duration = -1f;
         private float activationTime = 0.0f;
 
+        public string name = "default";
+        [TextArea]
+        public string description = "";
+
         public float time => Time.time - activationTime;
         public float remainingTime => duration - time;
         public bool isInfinite => duration <= 0f;
@@ -34,5 +38,6 @@ namespace Murktid {
         public virtual float GetStatusEffectedRangedDamage(float originalRangedDamage) { return originalRangedDamage; }
         public virtual float GetStatusEffectedMeleeDamage(float originalMeleeDamage) { return originalMeleeDamage; }
         public virtual float GetStatusEffectedDamageTaken(float originalDamageTaken) { return originalDamageTaken; }
+        public virtual int GetStatusEffectedBulletPenetration(int originalPenetration) { return originalPenetration; }
     }
 }

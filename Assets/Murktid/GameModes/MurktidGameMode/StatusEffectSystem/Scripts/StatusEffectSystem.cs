@@ -142,5 +142,15 @@ namespace Murktid {
 
             return workingRangedDamage;
         }
+
+        public int GetStatusEffectedBulletPenetration(int originalBulletPenetration) {
+            int workingBulletPenetration = originalBulletPenetration;
+
+            for(int i = effects.Count - 1; i >= 0; i--) {
+                workingBulletPenetration = effects[i].GetStatusEffectedBulletPenetration(workingBulletPenetration);
+            }
+
+            return workingBulletPenetration;
+        }
     }
 }

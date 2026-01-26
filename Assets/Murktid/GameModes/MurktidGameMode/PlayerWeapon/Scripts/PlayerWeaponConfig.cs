@@ -19,6 +19,8 @@ namespace Murktid {
         public float ADSRange = 25f;
         public float ADSRadius = .5f;
 
+        public int maxHits = 1;
+
         public float hipfireDamage = 25f;
         public float hipfireRange = 15f;
         public float hipfireRadius = 5f;

@@ -19,10 +19,11 @@ namespace Murktid {
         private List<EnemyController> enemiesToDestroy = new();
 
         public PlayerAttackerSlotSystem slotSystem;
+        public CursorHandler cursorHandler;
 
 
-        public EnemySystem() {
-
+        public EnemySystem(CursorHandler cursorHandler) {
+            this.cursorHandler = cursorHandler;
         }
 
         public void Initialize() {
@@ -35,7 +36,7 @@ namespace Murktid {
             spawnPoints = Object.FindObjectsByType<EnemySpawnPoint>(FindObjectsInactive.Exclude, FindObjectsSortMode.None).ToList();
 
             aiDirectorReference = Object.FindFirstObjectByType<AIDirectorReference>();
-            aiDirector = new(aiDirectorReference, this);
+            aiDirector = new(aiDirectorReference, this, cursorHandler);
             aiDirector.Initialize();
 
             SpawnInitialEnemies();

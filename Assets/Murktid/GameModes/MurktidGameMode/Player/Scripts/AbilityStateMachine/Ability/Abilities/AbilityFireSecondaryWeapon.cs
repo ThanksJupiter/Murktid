@@ -73,6 +73,8 @@ namespace Murktid {
 
             // account for upgraded damage
             float damage = Context.statusEffectSystem.GetStatusEffectedRangedDamage(Context.playerEquipmentData.CurrentWeapon.config.ADSDamage);
+            int maxHits = Context.statusEffectSystem.GetStatusEffectedBulletPenetration(Context.playerEquipmentData.CurrentWeapon.config.maxHits);
+            Debug.Log($"maxhits: {maxHits}");
 
             float randomSpeedModifier = Context.playerEquipmentData.CurrentWeapon.config.bulletVelocityRandomize;
 
@@ -88,7 +90,8 @@ namespace Murktid {
                         initialVelocity = Context.playerEquipmentData.CurrentWeapon.config.bulletVelocity + Random.Range(-randomSpeedModifier, randomSpeedModifier),
                         layerMask = Context.attackLayerMask,
                         hitEffectPrefab = Context.playerEquipmentData.CurrentWeapon.config.hitEffectPrefab,
-                        damage = damage
+                        damage = damage,
+                        maxHits = maxHits
                     };
 
                     Context.controller.bulletSystem.SpawnBullet(spawnFirstBulletData);
@@ -99,7 +102,8 @@ namespace Murktid {
                         initialVelocity = Context.playerEquipmentData.CurrentWeapon.config.bulletVelocity + Random.Range(-randomSpeedModifier, randomSpeedModifier),
                         layerMask = Context.attackLayerMask,
                         hitEffectPrefab = Context.playerEquipmentData.CurrentWeapon.config.hitEffectPrefab,
-                        damage = damage
+                        damage = damage,
+                        maxHits = maxHits
                     };
 
                     Context.controller.bulletSystem.SpawnBullet(spawnSecondBulletData);
@@ -111,7 +115,8 @@ namespace Murktid {
                         initialVelocity = Context.playerEquipmentData.CurrentWeapon.config.bulletVelocity + Random.Range(-randomSpeedModifier, randomSpeedModifier),
                         layerMask = Context.attackLayerMask,
                         hitEffectPrefab = Context.playerEquipmentData.CurrentWeapon.config.hitEffectPrefab,
-                        damage = damage
+                        damage = damage,
+                        maxHits = maxHits
                     };
 
                     Context.controller.bulletSystem.SpawnBullet(spawnBulletData);

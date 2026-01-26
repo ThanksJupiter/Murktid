@@ -8,7 +8,7 @@ namespace Murktid {
 
         private IMurktidPlayer player;
         private PlayerController playerController;
-        private EnemySystem enemySystem = new();
+        private EnemySystem enemySystem;
         private BulletSystem bulletSystem = new();
 
         public MurktidGameMode(ApplicationData applicationData) {
@@ -29,7 +29,8 @@ namespace Murktid {
                     break;
             }
 
-            enemySystem?.Initialize();
+            enemySystem = new EnemySystem(applicationData.cursorHandler);
+            enemySystem.Initialize();
 
             if(enemySystem != null) {
                 enemySystem.slotSystem = playerController.attackerSlotSystem;
