@@ -22,6 +22,7 @@ namespace Murktid {
             Context.health = new(playerReference.healthDisplayReference, playerReference.context.settings);
             Context.stamina = new(playerReference.staminaDisplayReference, playerReference.context.settings);
             Context.ammoDisplay = new(playerReference);
+            Context.statusEffectSystem = new();
             weaponSystem = new();
             attackerSlotSystem = new(Context);
         }
@@ -37,6 +38,8 @@ namespace Murktid {
 
             weaponSystem.Initialize(playerReference);
             weaponSystem.InstantiateWeapon(Context.defaultRangedWeaponReferencePrefab);
+
+            Context.statusEffectSystem.statusEffectContext = playerReference;
         }
 
         public void SetInput() {
@@ -56,6 +59,7 @@ namespace Murktid {
             Context.motor.SetCapsuleDimensions(Context.settings.capsuleRadius, Context.CapsuleHeight, Context.CapsuleHeight * .5f);
 
             StateMachine.Tick(deltaTime);
+            Context.statusEffectSystem.Tick(deltaTime);
         }
 
         public void Dispose() {

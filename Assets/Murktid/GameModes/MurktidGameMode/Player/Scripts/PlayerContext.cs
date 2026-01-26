@@ -17,6 +17,7 @@ namespace Murktid {
         public PlayerSettings settings;
         public PlayerHealth health;
         public PlayerStamina stamina;
+        public StatusEffectSystem statusEffectSystem;
         public IInput input;
 
         public PlayerWeaponReference defaultRangedWeaponReferencePrefab;
@@ -30,6 +31,9 @@ namespace Murktid {
         public LayerMask interactionLayerMask;
         public LayerMask obstacleMask;
         public ShotgunCrosshair shotgunCrosshair;
+
+        [Header("Status Effects")]
+        public IncreaseStaminaRegenerationEffect increaseStaminaRegenerationEffect;
 
         [Header("Effects")]
         public ParticleSystem hammerHitEffect;

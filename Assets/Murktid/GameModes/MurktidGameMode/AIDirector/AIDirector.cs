@@ -160,6 +160,13 @@ namespace Murktid {
         private float relaxTimer = 0f;
 
         public void RelaxTick(float deltaTime) {
+
+            // display upgrade menu
+            // let player pick 1 upgrade
+            // when upgrade is selected return to buildup state
+
+            // increase amount of enemies spawned in subsequent waves
+
             relaxTimer += deltaTime;
 
             playerStressLevel -= settings.relaxStressDecayRate * deltaTime;

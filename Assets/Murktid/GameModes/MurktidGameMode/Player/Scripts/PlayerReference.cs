@@ -1,11 +1,15 @@
 using UnityEngine;
 
 namespace Murktid {
-    public class PlayerReference : MonoBehaviour {
+    public class PlayerReference : MonoBehaviour, IStatusEffectContext {
         public PlayerContext context;
         public HealthDisplayReference healthDisplayReference;
         public StaminaDisplayReference staminaDisplayReference;
         public AmmoDisplayReference ammoDisplayReference;
+
+        public GameObject MachineGameObject => context.transform.gameObject;
+        public StatusEffectSystem System => context.statusEffectSystem;
+        public PlayerContext Context => context;
 
         private void OnDrawGizmos() {
 

@@ -60,6 +60,7 @@ namespace Murktid {
             bool bothBarrels = !Context.input.SecondaryAction.IsPressed && Context.playerEquipmentData.CurrentWeapon.HasLoadedAmmo(2);
             if(bothBarrels) {
                 Context.playerEquipmentData.CurrentWeapon.ConsumeAmmo(2);
+                Context.statusEffectSystem.AddEffect(Context.increaseStaminaRegenerationEffect);
             }
             else {
                 Context.playerEquipmentData.CurrentWeapon.ConsumeAmmo(1);
@@ -69,7 +70,10 @@ namespace Murktid {
             Vector3 direction = Context.cameraReference.transform.forward;
             float maxDistance = Context.playerEquipmentData.CurrentWeapon.config.ADSRange;
             float radius = Context.playerEquipmentData.CurrentWeapon.config.ADSRadius;
-            float damage = Context.playerEquipmentData.CurrentWeapon.config.ADSDamage;
+
+            // account for upgraded damage
+            float damage = Context.statusEffectSystem.GetStatusEffectedRangedDamage(Context.playerEquipmentData.CurrentWeapon.config.ADSDamage);
+
             float randomSpeedModifier = Context.playerEquipmentData.CurrentWeapon.config.bulletVelocityRandomize;
 
             for(int i = 0; i < Context.shotgunCrosshair.PelletAmount; i++) {

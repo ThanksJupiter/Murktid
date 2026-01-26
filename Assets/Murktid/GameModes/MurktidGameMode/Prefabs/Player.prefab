@@ -1143,6 +1143,7 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 257
     shotgunCrosshair: {fileID: 355171689747465979}
+    increaseStaminaRegenerationEffect: {fileID: 11400000, guid: 4d3dd0a5873966d47aa505b8859846ea, type: 2}
     hammerHitEffect: {fileID: 8748700163077195737, guid: 63a75bd2e26b4ca44a52ef2eb770d8e1, type: 3}
     hasRecoil: 0
     recoilOffset: 0

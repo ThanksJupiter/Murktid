@@ -31,9 +31,10 @@ namespace Murktid {
         }
 
         protected override void Tick(float deltaTime) {
-
             if(Time.time >= regenTimestamp) {
-                Context.stamina.RestoreStamina(Context.settings.defaultStaminaRegenerationRate * deltaTime);
+
+                float staminaRegeneration = Context.statusEffectSystem.GetStatusEffectedStaminaRegeneration(Context.settings.defaultStaminaRegenerationRate);
+                Context.stamina.RestoreStamina(staminaRegeneration * deltaTime);
             }
         }
     }
