@@ -48,17 +48,21 @@ namespace Murktid {
         private int availableUpgradePoints = 0;
 
         private CursorHandler cursorHandler;
+        private PlayerController playerController;
+        private StatusEffectSystem statusEffectSystem;
 
-        public AIDirector(AIDirectorReference reference, EnemySystem enemySystem, CursorHandler cursorHandler) {
+        public AIDirector(AIDirectorReference reference, EnemySystem enemySystem, CursorHandler cursorHandler, PlayerController playerController, StatusEffectSystem statusEffectSystem) {
             settings = reference.settings;
             this.enemySystem = enemySystem;
             this.cursorHandler = cursorHandler;
+            this.playerController = playerController;
+            this.statusEffectSystem = statusEffectSystem;
         }
 
         public void Initialize() {
             waveSpawnTimer = Random.Range(settings.minWaveSpawnDelay, settings.maxWaveSpawnDelay);
-            waveSpawnTimer = 2f;
-            spawnTimer = Random.Range(settings.minSpawnDelay, settings.maxSpawnDelay);
+            waveSpawnTimer = 10f;
+            spawnTimer = 1f;
 
             AIDirectorDebugMenuReference debugMenuReference = Object.FindFirstObjectByType<AIDirectorDebugMenuReference>();
             menu = new(debugMenuReference);
@@ -71,13 +75,16 @@ namespace Murktid {
 
             upgradeWindow = Object.FindFirstObjectByType<UpgradeWindow>();
             upgradeWindow.Initialize();
+
+            maxEnemiesSpawnedThisRound = settings.baseMaxEnemies;
+            currentExperienceThreshold = settings.baseRequiredExperienceToLevelUp;
         }
 
         public void OnEnemyKilled() {
             totalPlayerKills++;
             playerKillCounter++;
 
-            currentExperience += settings.experienceGainedOnKill;
+            currentExperience += statusEffectSystem.GetStatusEffectedExperienceGained(settings.experienceGainedOnKill);
             if(currentExperience >= currentExperienceThreshold) {
 
                 currentPlayerLevel++;
@@ -113,10 +120,17 @@ namespace Murktid {
         }
 
         public void SpawnEnemy(int amount = 1, bool aggressive = true) {
-            enemyCount += amount;
-            enemiesSpawnedThisRound += amount;
+
+            int amountToSpawn = amount;
+            int postSpawnTotalEnemies = enemyCount + amountToSpawn;
+            if(postSpawnTotalEnemies > maxEnemiesSpawnedThisRound) {
+                amountToSpawn = amount - (postSpawnTotalEnemies - maxEnemiesSpawnedThisRound);
+            }
+
+            enemyCount += amountToSpawn;
+            enemiesSpawnedThisRound += amountToSpawn;
             menu.UpdateEnemyCountText(enemyCount);
-            enemySystem.SpawnEnemies(amount, aggressive);
+            enemySystem.SpawnEnemies(amountToSpawn, aggressive);
         }
 
         public void Tick(float deltaTime) {
@@ -164,20 +178,23 @@ namespace Murktid {
             waveSpawnTimer -= deltaTime;
 
             if(waveSpawnTimer <= 0f) {
-                waveSpawnTimer = Mathf.Lerp(settings.maxWaveSpawnDelay, settings.minWaveSpawnDelay, stressLevel);
+                waveSpawnTimer = Mathf.Lerp(settings.minWaveSpawnDelay, settings.maxWaveSpawnDelay, stressLevel);
                 int enemiesToSpawn = Mathf.RoundToInt(Mathf.Lerp(settings.minWaveCount, settings.maxWaveCount, stressLevel));
                 SpawnEnemy(enemiesToSpawn);
             }
 
             // if(playerKillCounter >= settings.waveSpawnKillsThreshold) {
-            if(enemiesSpawnedThisRound >= maxEnemiesSpawnedThisRound) {
+            //if(enemiesSpawnedThisRound >= maxEnemiesSpawnedThisRound) {
+            if(stressLevel >= 1f || enemiesSpawnedThisRound >= maxEnemiesSpawnedThisRound) {
                 enemiesSpawnedThisRound = 0;
-                maxEnemiesSpawnedThisRound *= Mathf.RoundToInt(1f + settings.roundMultiplier);
+                //maxEnemiesSpawnedThisRound = Mathf.RoundToInt(settings.baseMaxEnemies * (1 + (currentRound * settings.roundMultiplier)));
+                maxEnemiesSpawnedThisRound = Mathf.CeilToInt(maxEnemiesSpawnedThisRound * 1.1f);
                 playerKillCounter = 0;
-                int enemiesToSpawn = Mathf.RoundToInt(Mathf.Lerp(settings.minWaveCount, settings.maxWaveCount, stressLevel));
-                SpawnEnemy(enemiesToSpawn);
+                //int enemiesToSpawn = Mathf.RoundToInt(Mathf.Lerp(settings.maxWaveCount, settings.minWaveCount, stressLevel));
+                //SpawnEnemy(enemiesToSpawn);
                 buildUpTime = 0f;
                 ChangeState(EAIDirectorState.SustainPeak);
+                sustainPeakTimer = 0f;
             }
 
             // track player stress level
@@ -185,29 +202,45 @@ namespace Murktid {
         }
 
         public void SustainPeakTick(float deltaTime) {
+
+            spawnTimer -= deltaTime;
+
             if(spawnTimer <= 0f) {
-                spawnTimer = settings.minSpawnDelay;
+                spawnTimer = Random.Range(settings.minSpawnDelay, settings.maxSpawnDelay);
 
                 SpawnEnemy();
             }
 
             sustainPeakTimer += deltaTime;
 
-            if(sustainPeakTimer >= settings.sustainPeakDuration) {
+            if(stressLevel >= 1f || sustainPeakTimer >= settings.sustainPeakDuration) {
                 ChangeState(EAIDirectorState.PeakFade);
+                displayUpgradeMenuTimer = 2f;
             }
         }
 
+        private float displayUpgradeMenuTimer = 2f;
+
         public void PeakFadeTick(float deltaTime) {
             if(enemyCount <= 0) {
-                ChangeState(EAIDirectorState.Relax);
-                relaxTimer = 0f;
 
                 if(availableUpgradePoints > 0) {
-                    upgradeWindow.onCompleted += HideUpgradeWindow;
-                    upgradeWindow.Display(availableUpgradePoints);
-                    cursorHandler.PushState(CursorHandler.CursorState.Free, this);
-                    upgradeMenuDisplayed = true;
+                    displayUpgradeMenuTimer -= deltaTime;
+                    playerStressLevel -= settings.relaxStressDecayRate * deltaTime;
+
+                    if(displayUpgradeMenuTimer <= 0f) {
+                        upgradeWindow.onCompleted += HideUpgradeWindow;
+                        upgradeWindow.Display(availableUpgradePoints);
+                        cursorHandler.PushState(CursorHandler.CursorState.Free, this);
+                        playerController.StateMachine.PushState<StateMenu>();
+                        upgradeMenuDisplayed = true;
+                        ChangeState(EAIDirectorState.Relax);
+                        relaxTimer = 0f;
+                    }
+                }
+                else {
+                    ChangeState(EAIDirectorState.Relax);
+                    relaxTimer = 0f;
                 }
             }
         }
@@ -228,6 +261,7 @@ namespace Murktid {
             playerStressLevel -= settings.relaxStressDecayRate * deltaTime;
 
             if(stressLevel <= 0f && !upgradeMenuDisplayed) {
+                enemiesSpawnedThisRound = 0;
                 ChangeState(EAIDirectorState.Buildup);
                 playerKillCounter = 0;
                 currentRound++;
@@ -241,6 +275,7 @@ namespace Murktid {
             availableUpgradePoints = upgradePoints;
             upgradeWindow.Hide();
             cursorHandler.ClearInstigator(this);
+            playerController.StateMachine.PushState<StateDefault>();
         }
     }
 }

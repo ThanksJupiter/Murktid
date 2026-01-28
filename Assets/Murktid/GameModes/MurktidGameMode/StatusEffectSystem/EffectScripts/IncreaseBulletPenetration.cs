@@ -6,7 +6,7 @@ namespace Murktid {
     public class IncreaseBulletPenetration : AbstractStatusEffect {
         public int baseMultiplierIncrease = 1;
 
-        private int multiplierIncrease = 1;
+        private int multiplierIncrease = 2;
 
         public override bool OnEffectRenewed(AbstractStatusEffect statusEffectReference) {
             multiplierIncrease += baseMultiplierIncrease;

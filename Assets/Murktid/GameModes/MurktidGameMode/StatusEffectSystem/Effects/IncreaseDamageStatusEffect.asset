@@ -16,4 +16,4 @@ MonoBehaviour:
   duration: -1
   name: Damage
   description: Increase all damage dealt
-  baseDamageIncrease: 5
+  baseDamageIncrease: 1

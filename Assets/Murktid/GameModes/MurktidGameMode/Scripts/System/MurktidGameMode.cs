@@ -29,7 +29,7 @@ namespace Murktid {
                     break;
             }
 
-            enemySystem = new EnemySystem(applicationData.cursorHandler);
+            enemySystem = new EnemySystem(applicationData.cursorHandler, playerController, playerController.Context.statusEffectSystem);
             enemySystem.Initialize();
 
             if(enemySystem != null) {

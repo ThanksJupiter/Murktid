@@ -39,5 +39,6 @@ namespace Murktid {
         public virtual float GetStatusEffectedMeleeDamage(float originalMeleeDamage) { return originalMeleeDamage; }
         public virtual float GetStatusEffectedDamageTaken(float originalDamageTaken) { return originalDamageTaken; }
         public virtual int GetStatusEffectedBulletPenetration(int originalPenetration) { return originalPenetration; }
+        public virtual float GetStatusEffectedExperienceGained(float originalExperienceGained) { return originalExperienceGained; }
     }
 }

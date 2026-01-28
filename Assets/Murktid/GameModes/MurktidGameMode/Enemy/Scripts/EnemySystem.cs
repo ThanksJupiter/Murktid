@@ -20,10 +20,14 @@ namespace Murktid {
 
         public PlayerAttackerSlotSystem slotSystem;
         public CursorHandler cursorHandler;
+        public PlayerController playerController;
+        public StatusEffectSystem statusEffectSystem;
 
 
-        public EnemySystem(CursorHandler cursorHandler) {
+        public EnemySystem(CursorHandler cursorHandler, PlayerController playerController, StatusEffectSystem statusEffectSystem) {
             this.cursorHandler = cursorHandler;
+            this.playerController = playerController;
+            this.statusEffectSystem = statusEffectSystem;
         }
 
         public void Initialize() {
@@ -33,10 +37,10 @@ namespace Murktid {
             }
 
             enemyReferencePrefab = enemySystemReference.enemyReferencePrefab;
-            spawnPoints = Object.FindObjectsByType<EnemySpawnPoint>(FindObjectsInactive.Exclude, FindObjectsSortMode.None).ToList();
+            spawnPoints = enemySystemReference.spawnPoints;
 
             aiDirectorReference = Object.FindFirstObjectByType<AIDirectorReference>();
-            aiDirector = new(aiDirectorReference, this, cursorHandler);
+            aiDirector = new(aiDirectorReference, this, cursorHandler, playerController, statusEffectSystem);
             aiDirector.Initialize();
 
             SpawnInitialEnemies();
@@ -76,8 +80,32 @@ namespace Murktid {
                 player = Object.FindFirstObjectByType<PlayerReference>();
             }
 
-            for(int i = 0; i < amount; i++) {
-                EnemySpawnPoint spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
+            for(int i = 0; i < spawnPoints.Count; i++) {
+                EnemySpawnPoint spawnPoint = spawnPoints[i];
+
+                if(!spawnPoint.isActive) {
+                    continue;
+                }
+
+                if(aggressive) {
+                    Vector3 directionToPlayer = player.transform.position - spawnPoint.transform.position;
+                    if(Physics.Raycast(spawnPoint.transform.position, directionToPlayer, out RaycastHit hit, enemySystemReference.obstacleMask) &&
+                        hit.transform.TryGetComponent(out PlayerReference playerReference)) {
+                        spawnPoint.isActive = false;
+                        continue;
+                    }
+                }
+
+                for(int j = 0; j < amount; j++) {
+                    SpawnEnemy(spawnPoint.transform.position, spawnPoint.transform.rotation, player);
+                }
+
+                break;
+            }
+
+            /*for(int i = 0; i < amount; i++) {
+                //EnemySpawnPoint spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
+                EnemySpawnPoint spawnPoint = spawnPoints[i % spawnPoints.Count];
 
                 Vector3 spawnPosition = new(
                     spawnPoint.transform.position.x + Random.Range(-spawnPoint.spawnRadius, spawnPoint.spawnRadius),
@@ -85,7 +113,7 @@ namespace Murktid {
                     spawnPoint.transform.position.z + Random.Range(-spawnPoint.spawnRadius, spawnPoint.spawnRadius));
 
                 SpawnEnemy(spawnPosition, spawnPoint.transform.rotation, player);
-            }
+            }*/
         }
 
         public void Tick(float deltaTime) {

@@ -74,7 +74,6 @@ namespace Murktid {
             // account for upgraded damage
             float damage = Context.statusEffectSystem.GetStatusEffectedRangedDamage(Context.playerEquipmentData.CurrentWeapon.config.ADSDamage);
             int maxHits = Context.statusEffectSystem.GetStatusEffectedBulletPenetration(Context.playerEquipmentData.CurrentWeapon.config.maxHits);
-            Debug.Log($"maxhits: {maxHits}");
 
             float randomSpeedModifier = Context.playerEquipmentData.CurrentWeapon.config.bulletVelocityRandomize;
 

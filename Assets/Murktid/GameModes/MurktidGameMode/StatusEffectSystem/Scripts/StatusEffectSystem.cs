@@ -152,5 +152,15 @@ namespace Murktid {
 
             return workingBulletPenetration;
         }
+
+        public float GetStatusEffectedExperienceGained(float originalExperienceGained) {
+            float workingExperienceGained = originalExperienceGained;
+
+            for(int i = effects.Count - 1; i >= 0; i--) {
+                workingExperienceGained = effects[i].GetStatusEffectedExperienceGained(workingExperienceGained);
+            }
+
+            return workingExperienceGained;
+        }
     }
 }

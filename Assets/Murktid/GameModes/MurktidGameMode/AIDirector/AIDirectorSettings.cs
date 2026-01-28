@@ -7,7 +7,6 @@ namespace Murktid {
         public int waveSpawnKillsThreshold = 30;
         public int minWaveCount = 3;
         public int maxWaveCount = 10;
-        public int maxEnemies = 10;
 
         public float minWaveSpawnDelay = 20f;
         public float maxWaveSpawnDelay = 30f;
@@ -15,12 +14,15 @@ namespace Murktid {
         public float minSpawnDelay = .1f;
         public float maxSpawnDelay = 2f;
 
+        [Header("Enemies spawned")]
+        public int baseMaxEnemies = 10;
+
         [Header("Player Stress Level")]
         public float stressLevelIncreasePerKill = 5f;
         public float stressDecayRate = .25f;
         public float relaxStressDecayRate = 10f;
 
-        public float roundMultiplier = .25f;
+        public float roundMultiplier = .1f;
 
         [Header("Player Experience")]
         public float baseRequiredExperienceToLevelUp = 100f;

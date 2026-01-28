@@ -8,6 +8,7 @@ namespace Murktid {
         public GameObject mesh;
         public int enemiesToSpawn = 1;
         public float spawnRadius = 2f;
+        public bool isActive = true;
 
         private void OnDrawGizmosSelected() {
             Gizmos.color = Color.yellow;

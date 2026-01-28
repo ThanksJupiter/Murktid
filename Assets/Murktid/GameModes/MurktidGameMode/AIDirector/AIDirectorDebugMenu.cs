@@ -18,7 +18,7 @@ namespace Murktid {
         }
 
         public void UpdateStressLevelText(float value) {
-            reference.stressLevel.text = value.ToString("0.0");
+            reference.stressLevel.text = value.ToString("0.00");
         }
 
         public void UpdateCurrentRoundText(int roundNo) {

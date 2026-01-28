@@ -15,12 +15,17 @@ MonoBehaviour:
   waveSpawnKillsThreshold: 20
   minWaveCount: 3
   maxWaveCount: 10
-  maxEnemies: 30
   minWaveSpawnDelay: 5
   maxWaveSpawnDelay: 12
-  minSpawnDelay: 0.1
-  maxSpawnDelay: 5
+  minSpawnDelay: 2
+  maxSpawnDelay: 6
+  baseMaxEnemies: 1
+  stressLevelIncreasePerKill: 5
   stressDecayRate: 1
   relaxStressDecayRate: 10
-  sustainPeakDuration: 4
+  roundMultiplier: 0.1
+  baseRequiredExperienceToLevelUp: 20
+  experienceRequiredMultiplier: 1.5
+  experienceGainedOnKill: 25
+  sustainPeakDuration: 5
   relaxDuration: 5
